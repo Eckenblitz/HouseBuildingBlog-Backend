@@ -1,0 +1,8 @@
+﻿################################################################################
+# Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
+################################################################################
+
+/HouseBuildingBlog/.vs/HouseBuildingBlog/v16
+/HouseBuildingBlog/HouseBuildingBlog/bin/Debug/netcoreapp3.1
+/HouseBuildingBlog/HouseBuildingBlog/obj/Debug/netcoreapp3.1
+/HouseBuildingBlog/HouseBuildingBlog/obj
