@@ -1,6 +1,12 @@
-﻿using MediatR;
+﻿using HouseBuildingBlog.Events.Commands;
+using HouseBuildingBlog.Events.Queries;
+using HouseBuildingBlog.Events.Queries.Contracts;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Controllers
 {
@@ -15,6 +21,36 @@ namespace HouseBuildingBlog.Controllers
 		{
 			_logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
 			_mediator = mediator ?? throw new System.ArgumentNullException(nameof(mediator));
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> CreateEvent([FromBody] Events.Commands.Contracts.EventDto dto)
+		{
+			return await _mediator.Send(new CreateEventCommand(dto));
+		}
+
+		[HttpGet("{id}")]
+		public async Task<Events.Queries.Contracts.EventDto> GetSingleEvent(Guid id)
+		{
+			return await _mediator.Send(new GetSingleEventQuery(id));
+		}
+
+		[HttpGet]
+		public async Task<IList<Events.Queries.Contracts.EventDto>> GetEvents([FromBody] QueryEventsDto dto)
+		{
+			return await _mediator.Send(new GetDocumentsQuery(dto));
+		}
+
+		[HttpPatch("{id}")]
+		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]Events.Commands.Contracts.EventDto dto)
+		{
+			return await _mediator.Send(new UpdateEventCommand(dto));
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteEvent(Guid id)
+		{
+			return await _mediator.Send(new DeleteEventCommand(id));
 		}
 	}
 }

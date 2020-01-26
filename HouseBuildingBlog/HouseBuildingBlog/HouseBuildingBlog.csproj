@@ -12,11 +12,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\Commands\Contracts\" />
-    <Folder Include="Events\Commands\" />
-    <Folder Include="Events\Queries\Contracts\" />
-  </ItemGroup>
-
 
 </Project>
