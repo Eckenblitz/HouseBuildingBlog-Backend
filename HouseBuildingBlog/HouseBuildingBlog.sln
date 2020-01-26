@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBuildingBlog", "HouseBuildingBlog\HouseBuildingBlog.csproj", "{C14D45B3-3AA4-4BE1-B7DE-F1ED694FCC58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseBuildingBlog", "HouseBuildingBlog\HouseBuildingBlog.csproj", "{C14D45B3-3AA4-4BE1-B7DE-F1ED694FCC58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseBuildingBlog.Domain", "HouseBuildingBlog.Domain\HouseBuildingBlog.Domain.csproj", "{5DD83404-AD19-45D0-8BC8-D10702AA2A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBuildingBlog.Persistence.MSSql", "HouseBuildingBlog.Persistence.MSSql\HouseBuildingBlog.Persistence.MSSql.csproj", "{7A7E2CBD-3919-469E-B143-5AE856762D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C14D45B3-3AA4-4BE1-B7DE-F1ED694FCC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C14D45B3-3AA4-4BE1-B7DE-F1ED694FCC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C14D45B3-3AA4-4BE1-B7DE-F1ED694FCC58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD83404-AD19-45D0-8BC8-D10702AA2A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD83404-AD19-45D0-8BC8-D10702AA2A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD83404-AD19-45D0-8BC8-D10702AA2A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD83404-AD19-45D0-8BC8-D10702AA2A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7E2CBD-3919-469E-B143-5AE856762D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7E2CBD-3919-469E-B143-5AE856762D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7E2CBD-3919-469E-B143-5AE856762D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7E2CBD-3919-469E-B143-5AE856762D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

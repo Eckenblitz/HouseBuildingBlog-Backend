@@ -6,3 +6,9 @@
 /HouseBuildingBlog/HouseBuildingBlog/bin/Debug/netcoreapp3.1
 /HouseBuildingBlog/HouseBuildingBlog/obj/Debug/netcoreapp3.1
 /HouseBuildingBlog/HouseBuildingBlog/obj
+/HouseBuildingBlog/.vs/HouseBuildingBlog/DesignTimeBuild
+/HouseBuildingBlog/HouseBuildingBlog.Domain/obj
+/HouseBuildingBlog/HouseBuildingBlog.Persistence.MSSql/bin/Debug/netcoreapp3.1
+/HouseBuildingBlog/HouseBuildingBlog.Persistence.MSSql/obj
+/HouseBuildingBlog/HouseBuildingBlog.Domain/bin/Debug/netcoreapp3.1
+/HouseBuildingBlog/.vs/HouseBuildingBlog/config
