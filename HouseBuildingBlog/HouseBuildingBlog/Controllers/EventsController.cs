@@ -1,6 +1,5 @@
 ﻿using HouseBuildingBlog.Events.Commands;
 using HouseBuildingBlog.Events.Queries;
-using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,15 +35,15 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IList<Events.Queries.Contracts.EventDto>> GetEvents([FromBody] QueryEventsDto dto)
+		public async Task<IList<Events.Queries.Contracts.SimpleEventDto>> GetEvents(IList<Guid> tags)
 		{
-			return await _mediator.Send(new GetDocumentsQuery(dto));
+			return await _mediator.Send(new GetDocumentsQuery(tags));
 		}
 
 		[HttpPatch("{id}")]
 		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]Events.Commands.Contracts.EventDto dto)
 		{
-			return await _mediator.Send(new UpdateEventCommand(dto));
+			return await _mediator.Send(new UpdateEventCommand(id, dto));
 		}
 
 		[HttpDelete("{id}")]

@@ -1,16 +1,17 @@
 ﻿using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
+using System;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetDocumentsQuery : IRequest<IList<EventDto>>
+	public class GetDocumentsQuery : IRequest<IList<SimpleEventDto>>
 	{
-		public QueryEventsDto Query { get; }
+		public IList<Guid> TagIds { get; }
 
-		public GetDocumentsQuery(QueryEventsDto query)
+		public GetDocumentsQuery(IList<Guid> tagIds)
 		{
-			Query = query;
+			TagIds = new List<Guid>(tagIds);
 		}
 	}
 }

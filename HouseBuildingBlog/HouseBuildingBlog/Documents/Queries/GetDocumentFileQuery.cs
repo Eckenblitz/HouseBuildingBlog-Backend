@@ -6,11 +6,11 @@ namespace HouseBuildingBlog.Documents.Queries
 {
 	public class GetDocumentFileQuery : IRequest<DocumentFileDto>
 	{
-		public Guid Id { get; }
+		public Guid DocumentId { get; }
 
-		public GetDocumentFileQuery(Guid id)
+		public GetDocumentFileQuery(Guid documentId)
 		{
-			Id = id;
+			DocumentId = documentId;
 		}
 	}
 }

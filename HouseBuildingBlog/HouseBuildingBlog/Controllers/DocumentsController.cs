@@ -1,6 +1,5 @@
 ﻿using HouseBuildingBlog.Documents.Commands;
 using HouseBuildingBlog.Documents.Queries;
-using HouseBuildingBlog.Documents.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,9 +53,9 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IList<Documents.Queries.Contracts.DocumentDto>> GetDocuments([FromBody]QueryDocumentsDto query)
+		public async Task<IList<Documents.Queries.Contracts.DocumentDto>> GetDocuments()
 		{
-			return await _mediator.Send(new GetDocumentsQuery(query));
+			return await _mediator.Send(new GetDocumentsQuery());
 		}
 	}
 }
