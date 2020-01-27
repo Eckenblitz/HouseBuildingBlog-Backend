@@ -1,6 +1,13 @@
-﻿namespace HouseBuildingBlog.Domain
+﻿using System;
+
+namespace HouseBuildingBlog.Domain
 {
-	public interface IContentBlock
-	{
-	}
+    public interface IContentBlock
+    {
+        Guid ContentId { get; }
+
+        ContentType Type { get; }
+
+        int Position { get; }
+    }
 }
