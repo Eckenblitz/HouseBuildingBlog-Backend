@@ -4,7 +4,7 @@ using System;
 
 namespace HouseBuildingBlog.Documents.Queries
 {
-	public class GetDocumentFileQuery : IRequest<DocumentFileDto>
+	public class GetDocumentFileQuery : IRequest<DocumentFileQueryDto>
 	{
 		public Guid DocumentId { get; }
 

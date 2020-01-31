@@ -6,9 +6,9 @@ namespace HouseBuildingBlog.Documents.Commands
 {
 	public class CreateDocumentCommand : IRequest<IActionResult>
 	{
-		public DocumentDto Data { get; }
+		public DocumentCommandDto Data { get; }
 
-		public CreateDocumentCommand(DocumentDto data)
+		public CreateDocumentCommand(DocumentCommandDto data)
 		{
 			this.Data = data;
 		}

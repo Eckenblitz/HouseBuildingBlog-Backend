@@ -3,12 +3,10 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence
 {
-    public interface IWriteRepository<TModel>
-    {
-        Task<TModel> Get(Guid id);
+	public interface IWriteRepository<TModel>
+	{
+		Task Save(TModel model);
 
-        Task Save(TModel model);
-
-        Task Delete(Guid id);
-    }
+		Task Delete(Guid id);
+	}
 }

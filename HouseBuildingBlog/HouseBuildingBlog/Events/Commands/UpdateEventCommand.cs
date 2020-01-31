@@ -9,9 +9,9 @@ namespace HouseBuildingBlog.Events.Commands
 	{
 		public Guid EventId { get; }
 
-		public EventDto Data { get; }
+		public EventCommandDto Data { get; }
 
-		public UpdateEventCommand(System.Guid eventId, EventDto data)
+		public UpdateEventCommand(System.Guid eventId, EventCommandDto data)
 		{
 			Data = data;
 			EventId = eventId;

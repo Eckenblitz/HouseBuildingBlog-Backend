@@ -23,25 +23,25 @@ namespace HouseBuildingBlog.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTag([FromBody] Tags.Commands.Contracts.TagDto dto)
+        public async Task<IActionResult> CreateTag([FromBody] Tags.Commands.Contracts.TagCommandDto dto)
         {
             return await _mediator.Send(new CreateTagCommand(dto));
         }
 
         [HttpGet]
-        public async Task<IList<Tags.Queries.Contracts.TagDto>> GetTags()
+        public async Task<IList<Tags.Queries.Contracts.TagQueryDto>> GetTags()
         {
             return await _mediator.Send(new GetTagsQuery());
         }
 
         [HttpGet("{id}")]
-        public async Task<Tags.Queries.Contracts.TagDto> GetSingleTag(Guid id)
+        public async Task<Tags.Queries.Contracts.TagQueryDto> GetSingleTag(Guid id)
         {
             return await _mediator.Send(new GetSingleTagQuery(id));
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateTag(Guid id, [FromBody] Tags.Commands.Contracts.TagDto dto)
+        public async Task<IActionResult> UpdateTag(Guid id, [FromBody] Tags.Commands.Contracts.TagCommandDto dto)
         {
             return await _mediator.Send(new UpdateTagCommand(id, dto));
         }

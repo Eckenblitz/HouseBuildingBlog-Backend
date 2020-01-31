@@ -4,7 +4,7 @@ using System;
 
 namespace HouseBuildingBlog.Tags.Queries
 {
-    public class GetSingleTagQuery : IRequest<TagDto>
+    public class GetSingleTagQuery : IRequest<TagQueryDto>
     {
         public Guid TagId { get; }
 

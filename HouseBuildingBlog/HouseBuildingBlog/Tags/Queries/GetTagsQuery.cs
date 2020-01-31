@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Tags.Queries
 {
-    public class GetTagsQuery : IRequest<IList<TagDto>>
+    public class GetTagsQuery : IRequest<IList<TagQueryDto>>
     {
     }
 }

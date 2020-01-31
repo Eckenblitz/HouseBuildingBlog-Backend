@@ -6,9 +6,9 @@ namespace HouseBuildingBlog.Events.Commands
 {
 	public class CreateEventCommand : IRequest<IActionResult>
 	{
-		public EventDto Data { get; }
+		public EventCommandDto Data { get; }
 
-		public CreateEventCommand(EventDto data)
+		public CreateEventCommand(EventCommandDto data)
 		{
 			this.Data = data;
 		}

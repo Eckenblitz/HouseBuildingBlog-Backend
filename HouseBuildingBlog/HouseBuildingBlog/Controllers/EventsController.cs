@@ -23,25 +23,26 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateEvent([FromBody] Events.Commands.Contracts.EventDto dto)
+		public async Task<IActionResult> CreateEvent([FromBody] Events.Commands.Contracts.EventCommandDto dto)
 		{
 			return await _mediator.Send(new CreateEventCommand(dto));
 		}
 
 		[HttpGet("{id}")]
-		public async Task<Events.Queries.Contracts.EventDto> GetSingleEvent(Guid id)
+		public async Task<Events.Queries.Contracts.EventQueryDto> GetSingleEvent(Guid id)
 		{
 			return await _mediator.Send(new GetSingleEventQuery(id));
 		}
 
 		[HttpGet]
-		public async Task<IList<Events.Queries.Contracts.SimpleEventDto>> GetEvents(IList<Guid> tags)
+		public async Task<IList<Events.Queries.Contracts.SimpleEventQueryDto>> GetEvents(IList<Guid> tags)
 		{
+#warning List<Guid> Tags wont work
 			return await _mediator.Send(new GetDocumentsQuery(tags));
 		}
 
 		[HttpPatch("{id}")]
-		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]Events.Commands.Contracts.EventDto dto)
+		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]Events.Commands.Contracts.EventCommandDto dto)
 		{
 			return await _mediator.Send(new UpdateEventCommand(id, dto));
 		}

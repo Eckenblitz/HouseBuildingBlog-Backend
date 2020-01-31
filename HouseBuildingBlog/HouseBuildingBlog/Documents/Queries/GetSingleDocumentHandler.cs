@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Documents.Queries
 {
-	public class GetSingleDocumentHandler : IRequestHandler<GetSingleDocumentQuery, DocumentDto>
+	public class GetSingleDocumentHandler : IRequestHandler<GetSingleDocumentQuery, DocumentQueryDto>
 	{
-		public Task<DocumentDto> Handle(GetSingleDocumentQuery request, CancellationToken cancellationToken)
+		public Task<DocumentQueryDto> Handle(GetSingleDocumentQuery request, CancellationToken cancellationToken)
 		{
 			throw new NotImplementedException();
 		}

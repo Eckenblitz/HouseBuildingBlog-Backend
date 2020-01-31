@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Documents.Commands.Contracts
 {
-	public class DocumentDto
+	public class DocumentCommandDto
 	{
 	}
 }

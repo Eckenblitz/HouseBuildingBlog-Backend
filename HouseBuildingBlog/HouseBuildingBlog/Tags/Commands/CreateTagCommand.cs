@@ -6,9 +6,9 @@ namespace HouseBuildingBlog.Tags.Commands
 {
     public class CreateTagCommand : IRequest<IActionResult>
     {
-        public TagDto Data { get; }
+        public TagCommandDto Data { get; }
 
-        public CreateTagCommand(TagDto data)
+        public CreateTagCommand(TagCommandDto data)
         {
             Data = data;
         }

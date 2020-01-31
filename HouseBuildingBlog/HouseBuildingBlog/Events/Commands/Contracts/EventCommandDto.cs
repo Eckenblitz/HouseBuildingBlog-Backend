@@ -2,7 +2,7 @@
 
 namespace HouseBuildingBlog.Events.Commands.Contracts
 {
-    public class EventDto
+    public class EventCommandDto
     {
         public string Title { get; set; }
 

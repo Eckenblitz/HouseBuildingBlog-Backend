@@ -4,7 +4,7 @@ using System;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetSingleEventQuery : IRequest<EventDto>
+	public class GetSingleEventQuery : IRequest<EventQueryDto>
 	{
 		public Guid EventId { get; }
 

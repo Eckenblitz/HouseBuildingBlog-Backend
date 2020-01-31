@@ -2,7 +2,7 @@
 
 namespace HouseBuildingBlog.Events.Queries.Contracts
 {
-	public class SimpleEventDto
+	public class SimpleEventQueryDto
 	{
 		public Guid EventId { get; set; }
 

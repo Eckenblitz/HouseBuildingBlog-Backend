@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Tags.Queries
 {
-    public class GetTagsHandler : IRequestHandler<GetTagsQuery, IList<TagDto>>
+    public class GetTagsHandler : IRequestHandler<GetTagsQuery, IList<TagQueryDto>>
     {
-        public Task<IList<TagDto>> Handle(GetTagsQuery request, CancellationToken cancellationToken)
+        public Task<IList<TagQueryDto>> Handle(GetTagsQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

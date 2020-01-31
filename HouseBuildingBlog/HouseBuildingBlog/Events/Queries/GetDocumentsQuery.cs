@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetDocumentsQuery : IRequest<IList<SimpleEventDto>>
+	public class GetDocumentsQuery : IRequest<IList<SimpleEventQueryDto>>
 	{
 		public IList<Guid> TagIds { get; }
 

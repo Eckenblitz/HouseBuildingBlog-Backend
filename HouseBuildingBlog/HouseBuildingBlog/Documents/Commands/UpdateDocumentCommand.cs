@@ -9,9 +9,9 @@ namespace HouseBuildingBlog.Documents.Commands
 	{
 		public Guid Id { get; }
 
-		public DocumentDto Data { get; }
+		public DocumentCommandDto Data { get; }
 
-		public UpdateDocumentCommand(Guid id, DocumentDto data)
+		public UpdateDocumentCommand(Guid id, DocumentCommandDto data)
 		{
 			this.Id = id;
 			this.Data = data;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Tags.Queries
 {
-    public class GetSingleTagHandler : IRequestHandler<GetSingleTagQuery, TagDto>
+    public class GetSingleTagHandler : IRequestHandler<GetSingleTagQuery, TagQueryDto>
     {
-        public Task<TagDto> Handle(GetSingleTagQuery request, CancellationToken cancellationToken)
+        public Task<TagQueryDto> Handle(GetSingleTagQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

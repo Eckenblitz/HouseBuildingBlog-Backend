@@ -23,25 +23,25 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateDocument([FromBody]Documents.Commands.Contracts.DocumentDto dto)
+		public async Task<IActionResult> CreateDocument([FromBody]Documents.Commands.Contracts.DocumentCommandDto dto)
 		{
 			return await _mediator.Send(new CreateDocumentCommand(dto));
 		}
 
 		[HttpGet("{id}")]
-		public async Task<Documents.Queries.Contracts.DocumentDto> GetSingleDocument(Guid id)
+		public async Task<Documents.Queries.Contracts.DocumentQueryDto> GetSingleDocument(Guid id)
 		{
 			return await _mediator.Send(new GetSingleDocumentQuery(id));
 		}
 
 		[HttpGet("{id}/File")]
-		public async Task<Documents.Queries.Contracts.DocumentFileDto> GetDocumentFile(Guid id)
+		public async Task<Documents.Queries.Contracts.DocumentFileQueryDto> GetDocumentFile(Guid id)
 		{
 			return await _mediator.Send(new GetDocumentFileQuery(id));
 		}
 
 		[HttpPatch("{id}")]
-		public async Task<IActionResult> UpdateDocument(Guid id, [FromBody]Documents.Commands.Contracts.DocumentDto dto)
+		public async Task<IActionResult> UpdateDocument(Guid id, [FromBody]Documents.Commands.Contracts.DocumentCommandDto dto)
 		{
 			return await _mediator.Send(new UpdateDocumentCommand(id, dto));
 		}
@@ -53,7 +53,7 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IList<Documents.Queries.Contracts.DocumentDto>> GetDocuments()
+		public async Task<IList<Documents.Queries.Contracts.DocumentQueryDto>> GetDocuments()
 		{
 			return await _mediator.Send(new GetDocumentsQuery());
 		}
