@@ -2,7 +2,7 @@
 
 namespace HouseBuildingBlog.Persistence
 {
-	interface ITagRepository : IWriteRepository<Tag>, IReadRepository<Tag>
+	public interface ITagRepository : IWriteRepository<Tag>, IReadRepository<Tag>
 	{
 	}
 }
