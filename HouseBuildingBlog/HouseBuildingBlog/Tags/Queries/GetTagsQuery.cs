@@ -1,10 +1,9 @@
-﻿using HouseBuildingBlog.Tags.Queries.Contracts;
-using MediatR;
-using System.Collections.Generic;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HouseBuildingBlog.Tags.Queries
 {
-    public class GetTagsQuery : IRequest<IList<TagQueryDto>>
-    {
-    }
+	public class GetTagsQuery : IRequest<IActionResult>
+	{
+	}
 }

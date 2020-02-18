@@ -1,11 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HouseBuildingBlog.Domain;
+using System;
 
 namespace HouseBuildingBlog.Tags.Queries.Contracts
 {
-    public class TagQueryDto
-    {
-    }
+	public class TagQueryDto
+	{
+		public Guid TagId { get; set; }
+
+		public string Title { get; set; }
+
+		public static TagQueryDto From(Tag tag)
+		{
+			return new TagQueryDto()
+			{
+				TagId = tag.TagId,
+				Title = tag.Title
+			};
+		}
+	}
 }

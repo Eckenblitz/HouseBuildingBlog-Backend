@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HouseBuildingBlog.Tags.Commands.Contracts
+﻿namespace HouseBuildingBlog.Tags.Commands.Contracts
 {
-    public class TagCommandDto
-    {
-    }
+	public class TagCommandDto
+	{
+		public string Title { get; set; }
+	}
 }
