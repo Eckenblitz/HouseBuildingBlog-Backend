@@ -1,10 +1,10 @@
-﻿using HouseBuildingBlog.Documents.Queries.Contracts;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace HouseBuildingBlog.Documents.Queries
 {
-	public class GetSingleDocumentQuery : IRequest<DocumentQueryDto>
+	public class GetSingleDocumentQuery : IRequest<IActionResult>
 	{
 		public Guid DocumentId { get; }
 

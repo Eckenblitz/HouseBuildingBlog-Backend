@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Controllers
@@ -29,13 +28,13 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<Documents.Queries.Contracts.DocumentQueryDto> GetSingleDocument(Guid id)
+		public async Task<IActionResult> GetSingleDocument(Guid id)
 		{
 			return await _mediator.Send(new GetSingleDocumentQuery(id));
 		}
 
 		[HttpGet("{id}/File")]
-		public async Task<Documents.Queries.Contracts.DocumentFileQueryDto> GetDocumentFile(Guid id)
+		public async Task<IActionResult> GetDocumentFile(Guid id)
 		{
 			return await _mediator.Send(new GetDocumentFileQuery(id));
 		}
@@ -53,7 +52,7 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IList<Documents.Queries.Contracts.DocumentQueryDto>> GetDocuments()
+		public async Task<IActionResult> GetDocuments()
 		{
 			return await _mediator.Send(new GetDocumentsQuery());
 		}

@@ -1,10 +1,9 @@
-﻿using HouseBuildingBlog.Documents.Queries.Contracts;
-using MediatR;
-using System.Collections.Generic;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HouseBuildingBlog.Documents.Queries
 {
-	public class GetDocumentsQuery : IRequest<IList<DocumentQueryDto>>
+	public class GetDocumentsQuery : IRequest<IActionResult>
 	{
 	}
 }

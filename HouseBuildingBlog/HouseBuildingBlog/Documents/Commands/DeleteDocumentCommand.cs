@@ -6,11 +6,11 @@ namespace HouseBuildingBlog.Documents.Commands
 {
 	public class DeleteDocumentCommand : IRequest<IActionResult>
 	{
-		public Guid Id { get; }
+		public Guid DocumentId { get; }
 
-		public DeleteDocumentCommand(Guid id)
+		public DeleteDocumentCommand(Guid documentId)
 		{
-			Id = id;
+			DocumentId = documentId;
 		}
 	}
 }

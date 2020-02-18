@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Documents.Commands.Contracts
 {
 	public class DocumentCommandDto
 	{
+		public Guid DocumentId { get; private set; }
+
+		public string Title { get; private set; }
+
+		public string Comment { get; private set; }
+
+		public DocumentFileCommandDto File { get; private set; }
 	}
 }

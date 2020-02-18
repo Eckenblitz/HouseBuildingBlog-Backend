@@ -7,13 +7,13 @@ namespace HouseBuildingBlog.Documents.Commands
 {
 	public class UpdateDocumentCommand : IRequest<IActionResult>
 	{
-		public Guid Id { get; }
+		public Guid DocumentId { get; }
 
 		public DocumentCommandDto Data { get; }
 
-		public UpdateDocumentCommand(Guid id, DocumentCommandDto data)
+		public UpdateDocumentCommand(Guid documentId, DocumentCommandDto data)
 		{
-			this.Id = id;
+			this.DocumentId = documentId;
 			this.Data = data;
 		}
 	}

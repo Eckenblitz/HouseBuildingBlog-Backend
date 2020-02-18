@@ -1,17 +1,29 @@
 ﻿using HouseBuildingBlog.Documents.Queries.Contracts;
+using HouseBuildingBlog.Persistence;
 using MediatR;
-using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Documents.Queries
 {
-	public class GetDocumentsHandler : IRequestHandler<GetDocumentsQuery, IList<DocumentQueryDto>>
+	public class GetDocumentsHandler : IRequestHandler<GetDocumentsQuery, IActionResult>
 	{
-		public Task<IList<DocumentQueryDto>> Handle(GetDocumentsQuery request, CancellationToken cancellationToken)
+		private readonly IDocumentRepository _repo;
+
+		public GetDocumentsHandler(IDocumentRepository repo)
 		{
-			throw new NotImplementedException();
+			_repo = repo;
+		}
+
+		public async Task<IActionResult> Handle(GetDocumentsQuery request, CancellationToken cancellationToken)
+		{
+			var queryResult = await _repo.Query(d => true);
+			IList<DocumentQueryDto> result = new List<DocumentQueryDto>(queryResult.Select(d => DocumentQueryDto.From(d)));
+
+			return new OkObjectResult(result);
 		}
 	}
 }

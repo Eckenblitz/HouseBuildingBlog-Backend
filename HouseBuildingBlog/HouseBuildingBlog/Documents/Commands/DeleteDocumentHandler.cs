@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using HouseBuildingBlog.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,17 @@ namespace HouseBuildingBlog.Documents.Commands
 {
 	public class DeleteDocumentHandler : IRequestHandler<DeleteDocumentCommand, IActionResult>
 	{
-		public Task<IActionResult> Handle(DeleteDocumentCommand request, CancellationToken cancellationToken)
+		private readonly IDocumentRepository _repo;
+
+		public DeleteDocumentHandler(IDocumentRepository repo)
 		{
-			throw new NotImplementedException();
+			_repo = repo;
+		}
+
+		public async Task<IActionResult> Handle(DeleteDocumentCommand request, CancellationToken cancellationToken)
+		{
+			await _repo.Delete(request.DocumentId);
+			return new OkResult();
 		}
 	}
 }
