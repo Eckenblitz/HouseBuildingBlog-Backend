@@ -14,26 +14,26 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=HouseBuildingBlog;Trusted_Connection=True;");
+				optionsBuilder.UseSqlServer(@"Server=.\HBB_SQLSERVER;Database=HouseBuildingBlog;Trusted_Connection=True;");
 			}
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Event>()
-				.ToTable("Events.Events")
+				.ToTable("Events")
 				.HasKey(e => e.EventId);
 
 			modelBuilder.Entity<Tag>()
-				.ToTable("Events.Tags")
+				.ToTable("Tags")
 				.HasKey(e => e.TagId);
 
 			modelBuilder.Entity<Document>()
-				.ToTable("Documents.Documents")
+				.ToTable("Documents")
 				.HasKey(e => e.DocumentId);
 
 			modelBuilder.Entity<Image>()
-				.ToTable("Documents.Images")
+				.ToTable("Images")
 				.HasKey(e => e.ImageId);
 		}
 	}

@@ -24,7 +24,7 @@ GO
 
 CREATE TABLE Documents.Documents (
 	DocumentId uniqueidentifier NOT NULL,
-	Title nvarchar(200),
+	Title nvarchar(200) NOT NULL,
 	Comment nvarchar(max),
 	FileName nvarchar(200) NOT NULL,
 	FilePath nvarchar(max) NOT NULL,

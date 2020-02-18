@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseBuildingBlog.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseBuildingBlog.Persistence", "HouseBuildingBlog.Persistence\HouseBuildingBlog.Persistence.csproj", "{F977765F-F3AD-4CA4-B79B-1018ADBD5CFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBuildingBlog.Persistence.MSSql", "HouseBuildingBlog.Persistence.MSSql\HouseBuildingBlog.Persistence.MSSql.csproj", "{C85EF13A-1589-4A12-9C41-B5178459A0BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseBuildingBlog.Persistence.MSSql", "HouseBuildingBlog.Persistence.MSSql\HouseBuildingBlog.Persistence.MSSql.csproj", "{C85EF13A-1589-4A12-9C41-B5178459A0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseBuildingBlog.Persistence.Mock", "HouseBuildingBlog.Persistence.Mock\HouseBuildingBlog.Persistence.Mock.csproj", "{35DF772F-FAC9-4579-9CE3-F0C6D7E41F8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C85EF13A-1589-4A12-9C41-B5178459A0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C85EF13A-1589-4A12-9C41-B5178459A0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C85EF13A-1589-4A12-9C41-B5178459A0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35DF772F-FAC9-4579-9CE3-F0C6D7E41F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DF772F-FAC9-4579-9CE3-F0C6D7E41F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35DF772F-FAC9-4579-9CE3-F0C6D7E41F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35DF772F-FAC9-4579-9CE3-F0C6D7E41F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
