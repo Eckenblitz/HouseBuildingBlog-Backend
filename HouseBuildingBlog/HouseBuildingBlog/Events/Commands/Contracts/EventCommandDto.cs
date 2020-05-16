@@ -9,6 +9,8 @@ namespace HouseBuildingBlog.Events.Commands.Contracts
 
 		public DateTime Date { get; set; }
 
+		public string Description { get; set; }
+
 		public IList<Guid> TagIds { get; set; }
 	}
 }

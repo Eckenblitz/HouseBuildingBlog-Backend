@@ -37,5 +37,10 @@ namespace HouseBuildingBlog.Domain
 		{
 			Description = description;
 		}
+
+		public void UpdateTags(IList<Guid> tagIds)
+		{
+			Tags = new List<Guid>(tagIds);
+		}
 	}
 }
