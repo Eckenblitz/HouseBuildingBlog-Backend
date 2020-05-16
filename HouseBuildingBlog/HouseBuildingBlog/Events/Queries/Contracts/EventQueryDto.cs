@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Documents.Queries.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Events.Queries.Contracts
@@ -15,9 +14,5 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 		public IList<Guid> Tags { get; set; }
 
 		public string Description { get; set; }
-
-		public IList<DocumentQueryDto> Documents { get; set; }
-
-		//public IList<ImageQueryDto> Images { get; set; }
 	}
 }

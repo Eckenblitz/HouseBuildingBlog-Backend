@@ -11,7 +11,7 @@ namespace HouseBuildingBlog.Domain
 
 		public DateTime Date { get; private set; }
 
-		public IList<Tag> Tags { get; private set; }
+		public IList<Guid> Tags { get; private set; }
 
 		public string Description { get; private set; }
 
@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Domain
 			EventId = eventId;
 			Title = title;
 			Date = date;
-			Tags = new List<Tag>();
+			Tags = new List<Guid>();
 		}
 
 		public void UpdateTitle(string title)

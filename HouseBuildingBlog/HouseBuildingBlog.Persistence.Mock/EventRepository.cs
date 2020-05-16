@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	public class EventRepository : IEventRepository
+	public class EventRepository : IReadRepository<Event>, IWriteRepository<Event>
 	{
 		private readonly IList<Event> _repo = new List<Event>();
 
@@ -19,7 +19,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			return Task.CompletedTask;
 		}
 
-		public Task<Event> Get(Guid id)
+		public Task<Event> GetById(Guid id)
 		{
 			var tag = _repo.SingleOrDefault(t => t.EventId.Equals(id));
 			return Task.FromResult(tag);

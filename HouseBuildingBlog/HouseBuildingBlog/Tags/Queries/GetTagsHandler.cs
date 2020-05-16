@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain;
+using HouseBuildingBlog.Persistence;
 using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace HouseBuildingBlog.Tags.Queries
 {
 	public class GetTagsHandler : IRequestHandler<GetTagsQuery, IActionResult>
 	{
-		private readonly ITagRepository _repo;
+		private readonly IReadRepository<Tag> _repo;
 
-		public GetTagsHandler(ITagRepository repo)
+		public GetTagsHandler(IReadRepository<Tag> repo)
 		{
 			_repo = repo;
 		}

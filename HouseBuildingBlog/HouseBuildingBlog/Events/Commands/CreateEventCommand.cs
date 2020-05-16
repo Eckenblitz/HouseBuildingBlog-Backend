@@ -10,7 +10,7 @@ namespace HouseBuildingBlog.Events.Commands
 
 		public CreateEventCommand(EventCommandDto data)
 		{
-			this.Data = data;
+			Data = data;
 		}
 	}
 }

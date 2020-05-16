@@ -1,10 +1,10 @@
-﻿using HouseBuildingBlog.Events.Queries.Contracts;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetSingleEventQuery : IRequest<EventQueryDto>
+	public class GetSingleEventQuery : IRequest<IActionResult>
 	{
 		public Guid EventId { get; }
 

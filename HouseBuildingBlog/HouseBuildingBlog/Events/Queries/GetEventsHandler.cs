@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetSingleEventHandler : IRequestHandler<GetSingleEventQuery, IActionResult>
+	public class GetEventsHandler : IRequestHandler<GetEventsQuery, IActionResult>
 	{
-		public Task<IActionResult> Handle(GetSingleEventQuery request, CancellationToken cancellationToken)
+		public Task<IActionResult> Handle(GetEventsQuery request, CancellationToken cancellationToken)
 		{
 			throw new NotImplementedException();
 		}
