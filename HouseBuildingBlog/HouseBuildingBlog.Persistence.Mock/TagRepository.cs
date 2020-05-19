@@ -35,7 +35,12 @@ namespace HouseBuildingBlog.Persistence.Mock
 		public Task Save(Tag model)
 		{
 			var tag = _repo.SingleOrDefault(t => t.TagId.Equals(model.TagId));
-			tag = model;
+
+			if (tag != null)
+				tag = model;
+			else
+				_repo.Add(tag);
+
 			return Task.CompletedTask;
 		}
 	}
