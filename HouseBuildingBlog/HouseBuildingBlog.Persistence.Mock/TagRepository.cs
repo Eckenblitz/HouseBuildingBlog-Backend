@@ -39,7 +39,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			if (tag != null)
 				tag = model;
 			else
-				_repo.Add(tag);
+				_repo.Add(model);
 
 			return Task.CompletedTask;
 		}

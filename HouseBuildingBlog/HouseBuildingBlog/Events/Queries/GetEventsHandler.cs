@@ -26,7 +26,7 @@ namespace HouseBuildingBlog.Events.Queries
 			if (request.TagIds.Count == 0)
 				events = await _readRepo.Query(e => true);
 			else
-				events = await _readRepo.Query(e => e.Tags.Intersect(request.TagIds).Count() > 1);
+				events = await _readRepo.Query(e => e.Tags.Intersect(request.TagIds).Count() > 0);
 
 
 			return new OkObjectResult(events.Select(e => SimpleEventQueryDto.CreateFrom(e)));

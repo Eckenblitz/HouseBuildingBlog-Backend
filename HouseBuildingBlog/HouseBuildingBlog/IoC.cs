@@ -9,10 +9,12 @@ namespace HouseBuildingBlog
 	{
 		public static void RegisterMockRepositories(this IServiceCollection services)
 		{
-			services.AddSingleton<IReadRepository<Tag>, TagRepository>();
-			services.AddSingleton<IWriteRepository<Tag>, TagRepository>();
-			services.AddSingleton<IReadRepository<Event>, EventRepository>();
-			services.AddSingleton<IWriteRepository<Event>, EventRepository>();
+			var tagRepo = new TagRepository();
+			var eventRepo = new EventRepository();
+			services.AddSingleton(typeof(IReadRepository<Tag>),tagRepo);
+			services.AddSingleton(typeof(IWriteRepository<Tag>), tagRepo);
+			services.AddSingleton(typeof(IReadRepository<Event>), eventRepo);
+			services.AddSingleton(typeof(IWriteRepository<Event>), eventRepo);
 		}
 	}
 }
