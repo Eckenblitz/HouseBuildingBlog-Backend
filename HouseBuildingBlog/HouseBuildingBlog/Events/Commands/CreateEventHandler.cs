@@ -3,6 +3,7 @@ using HouseBuildingBlog.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,19 +11,25 @@ namespace HouseBuildingBlog.Events.Commands
 {
 	public class CreateEventHandler : IRequestHandler<CreateEventCommand, IActionResult>
 	{
-		private readonly IWriteRepository<Event> _writeRepo;
+		private readonly IWriteRepository<IEvent> _writeRepo;
+		private readonly IReadRepository<ITag> _tagReadRepo;
 
-		public CreateEventHandler(IWriteRepository<Event> writeRepo)
+		public CreateEventHandler(IWriteRepository<IEvent> writeRepo, IReadRepository<ITag> tagReadRepo)
 		{
 			_writeRepo = writeRepo;
+			_tagReadRepo = tagReadRepo;
 		}
 
 		public async Task<IActionResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
 		{
 			var @event = new Event(Guid.NewGuid(), request.Data.Title, request.Data.Date);
 			@event.UpdateDescription(request.Data.Description);
+
 			if (request.Data.TagIds != null)
-				@event.UpdateTags(request.Data.TagIds);
+			{
+				var tags = await _tagReadRepo.Query(tag => request.Data.TagIds.Contains(tag.TagId));
+				@event.UpdateTags(tags);
+			}
 
 			await _writeRepo.Save(@event);
 

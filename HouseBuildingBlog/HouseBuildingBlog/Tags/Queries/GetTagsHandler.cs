@@ -11,9 +11,9 @@ namespace HouseBuildingBlog.Tags.Queries
 {
 	public class GetTagsHandler : IRequestHandler<GetTagsQuery, IActionResult>
 	{
-		private readonly IReadRepository<Tag> _repo;
+		private readonly IReadRepository<ITag> _repo;
 
-		public GetTagsHandler(IReadRepository<Tag> repo)
+		public GetTagsHandler(IReadRepository<ITag> repo)
 		{
 			_repo = repo;
 		}

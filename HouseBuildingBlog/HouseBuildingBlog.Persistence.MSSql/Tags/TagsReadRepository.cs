@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Tags
 {
-	public class TagsReadRepository : IReadRepository<Tag>
+	public class TagsReadRepository : IReadRepository<ITag>
 	{
 		DatabaseContext _DBContext;
 
@@ -15,7 +15,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 			_DBContext = dBContext;
 		}
 
-		public async Task<Tag> GetById(Guid id)
+		public async Task<ITag> GetById(Guid id)
 		{
 			var model = await _DBContext.FindAsync<TagDBModel>(id);
 
@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 			return null;
 		}
 
-		public Task<IList<Tag>> Query(Func<Tag, bool> query)
+		public Task<IList<ITag>> Query(Func<ITag, bool> query)
 		{
 			throw new NotImplementedException();
 		}

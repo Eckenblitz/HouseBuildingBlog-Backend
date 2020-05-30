@@ -18,10 +18,10 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer($"Server=VERITAS\\HBB_SQLSERVER;Database=HouseBuildingBlog;Trusted_Connection=True"));
 
-			services.AddTransient<IReadRepository<Event>, EventsReadRepository>();
-			services.AddTransient<IWriteRepository<Event>, EventsWriteRepository>();
-			services.AddTransient<IReadRepository<Tag>, TagsReadRepository>();
-			services.AddTransient<IWriteRepository<Tag>, TagsWriteRepository>();
+			services.AddTransient<IReadRepository<IEvent>, EventsReadRepository>();
+			services.AddTransient<IWriteRepository<IEvent>, EventsWriteRepository>();
+			services.AddTransient<IReadRepository<ITag>, TagsReadRepository>();
+			services.AddTransient<IWriteRepository<ITag>, TagsWriteRepository>();
 		}
 	}
 }

@@ -9,10 +9,10 @@ namespace HouseBuildingBlog.Tags.Commands
 {
 	public class DeleteTagHandler : IRequestHandler<DeleteTagCommand, IActionResult>
 	{
-		private readonly IWriteRepository<Tag> _writeRepo;
-		private readonly IReadRepository<Tag> _readRepo;
+		private readonly IWriteRepository<ITag> _writeRepo;
+		private readonly IReadRepository<ITag> _readRepo;
 
-		public DeleteTagHandler(IWriteRepository<Tag> writeRepo, IReadRepository<Tag> readRepo)
+		public DeleteTagHandler(IWriteRepository<ITag> writeRepo, IReadRepository<ITag> readRepo)
 		{
 			_writeRepo = writeRepo;
 			_readRepo = readRepo;

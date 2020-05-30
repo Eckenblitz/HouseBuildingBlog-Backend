@@ -9,10 +9,10 @@ namespace HouseBuildingBlog.Events.Commands
 {
 	public class DeleteEventHandler : IRequestHandler<DeleteEventCommand, IActionResult>
 	{
-		private readonly IWriteRepository<Event> _writeRepo;
-		private readonly IReadRepository<Event> _readRepo;
+		private readonly IWriteRepository<IEvent> _writeRepo;
+		private readonly IReadRepository<IEvent> _readRepo;
 
-		public DeleteEventHandler(IWriteRepository<Event> writeRepo, IReadRepository<Event> readRepo)
+		public DeleteEventHandler(IWriteRepository<IEvent> writeRepo, IReadRepository<IEvent> readRepo)
 		{
 			_writeRepo = writeRepo;
 			_readRepo = readRepo;

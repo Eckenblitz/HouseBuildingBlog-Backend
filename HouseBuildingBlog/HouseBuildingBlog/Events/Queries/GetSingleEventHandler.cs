@@ -10,9 +10,9 @@ namespace HouseBuildingBlog.Events.Queries
 {
 	public class GetSingleEventHandler : IRequestHandler<GetSingleEventQuery, IActionResult>
 	{
-		private readonly IReadRepository<Event> _readRepo;
+		private readonly IReadRepository<IEvent> _readRepo;
 
-		public GetSingleEventHandler(IReadRepository<Event> readRepo)
+		public GetSingleEventHandler(IReadRepository<IEvent> readRepo)
 		{
 			_readRepo = readRepo;
 		}

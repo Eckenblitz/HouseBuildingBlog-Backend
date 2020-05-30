@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
-	public class EventDBModel
+	public class EventDBModel : IEvent
 	{
 		public Guid EventId { get; set; }
 
@@ -14,7 +14,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Description { get; set; }
 
-		public ICollection<TagDBModel> Tags { get; set; }
+		public ICollection<ITag> Tags { get; set; }
+
+		public ICollection<EventTags> EventTags { get; set; }
 
 		public Event ConvertToDomain()
 		{

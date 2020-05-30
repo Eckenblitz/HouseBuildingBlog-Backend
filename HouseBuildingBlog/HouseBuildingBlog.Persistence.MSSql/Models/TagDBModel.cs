@@ -3,7 +3,7 @@ using System;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
-	public class TagDBModel
+	public class TagDBModel : ITag
 	{
 		public Guid TagId { get; private set; }
 

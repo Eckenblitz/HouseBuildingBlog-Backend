@@ -10,9 +10,9 @@ namespace HouseBuildingBlog.Tags.Commands
 {
 	public class CreateTagHandler : IRequestHandler<CreateTagCommand, IActionResult>
 	{
-		private readonly IWriteRepository<Tag> _repo;
+		private readonly IWriteRepository<ITag> _repo;
 
-		public CreateTagHandler(IWriteRepository<Tag> repo)
+		public CreateTagHandler(IWriteRepository<ITag> repo)
 		{
 			_repo = repo;
 		}

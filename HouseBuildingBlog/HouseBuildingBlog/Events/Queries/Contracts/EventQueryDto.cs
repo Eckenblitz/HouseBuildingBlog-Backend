@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HouseBuildingBlog.Events.Queries.Contracts
 {
@@ -12,11 +13,11 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 
 		public DateTime Date { get; set; }
 
-		public IList<Guid> Tags { get; set; }
+		public IEnumerable<Guid> Tags { get; set; }
 
 		public string Description { get; set; }
 
-		public static EventQueryDto CreateFrom(Event @event)
+		public static EventQueryDto CreateFrom(IEvent @event)
 		{
 			return new EventQueryDto()
 			{
@@ -24,7 +25,7 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 				Date = @event.Date,
 				Description = @event.Description,
 				Title = @event.Title,
-				Tags = @event.Tags
+				Tags = @event.Tags.Select(t => t.TagId)
 			};
 		}
 	}

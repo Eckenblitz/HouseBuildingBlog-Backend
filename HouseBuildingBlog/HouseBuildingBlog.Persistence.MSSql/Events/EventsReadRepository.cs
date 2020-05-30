@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Events
 {
-	public class EventsReadRepository : IReadRepository<Event>
+	public class EventsReadRepository : IReadRepository<IEvent>
 	{
 		DatabaseContext _DBContext;
 
@@ -15,7 +15,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			_DBContext = dBContext;
 		}
 
-		public async Task<Event> GetById(Guid id)
+		public async Task<IEvent> GetById(Guid id)
 		{
 			var model = await _DBContext.FindAsync<EventDBModel>(id);
 
@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			return null;
 		}
 
-		public async Task<IList<Event>> Query(Func<Event, bool> query)
+		public async Task<IList<IEvent>> Query(Func<IEvent, bool> query)
 		{
 			throw new NotImplementedException();
 			//return await _DBContext.Query<EventDBModel>().Where();

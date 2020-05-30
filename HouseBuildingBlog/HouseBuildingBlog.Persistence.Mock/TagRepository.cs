@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	public class TagRepository : IReadRepository<Tag>, IWriteRepository<Tag>
+	public class TagRepository : IReadRepository<ITag>, IWriteRepository<ITag>
 	{
-		private readonly IList<Tag> _repo = new List<Tag>();
+		private readonly IList<ITag> _repo = new List<ITag>();
 
 		public Task Delete(Guid id)
 		{
@@ -19,20 +19,20 @@ namespace HouseBuildingBlog.Persistence.Mock
 			return Task.CompletedTask;
 		}
 
-		public Task<Tag> GetById(Guid id)
+		public Task<ITag> GetById(Guid id)
 		{
 			var tag = _repo.SingleOrDefault(t => t.TagId.Equals(id));
 			return Task.FromResult(tag);
 		}
 
-		public Task<IList<Tag>> Query(Func<Tag, bool> query)
+		public Task<IList<ITag>> Query(Func<ITag, bool> query)
 		{
 			var queryResult = _repo.Where(t => query(t));
-			IList<Tag> result = new List<Tag>(queryResult);
+			IList<ITag> result = new List<ITag>(queryResult);
 			return Task.FromResult(result);
 		}
 
-		public Task Save(Tag model)
+		public Task Save(ITag model)
 		{
 			var tag = _repo.SingleOrDefault(t => t.TagId.Equals(model.TagId));
 

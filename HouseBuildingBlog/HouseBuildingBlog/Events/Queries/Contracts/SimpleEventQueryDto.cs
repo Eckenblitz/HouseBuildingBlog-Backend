@@ -11,7 +11,7 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 
 		public DateTime Date { get; set; }
 
-		public static SimpleEventQueryDto CreateFrom(Event @event)
+		public static SimpleEventQueryDto CreateFrom(IEvent @event)
 		{
 			return new SimpleEventQueryDto()
 			{

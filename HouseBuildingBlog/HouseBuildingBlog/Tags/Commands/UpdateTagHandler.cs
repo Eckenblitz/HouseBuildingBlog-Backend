@@ -9,10 +9,10 @@ namespace HouseBuildingBlog.Tags.Commands
 {
 	public class UpdateTagHandler : IRequestHandler<UpdateTagCommand, IActionResult>
 	{
-		private readonly IWriteRepository<Tag> _writeRepo;
-		private readonly IReadRepository<Tag> _readRepo;
+		private readonly IWriteRepository<ITag> _writeRepo;
+		private readonly IReadRepository<ITag> _readRepo;
 
-		public UpdateTagHandler(IWriteRepository<Tag> writeRepo, IReadRepository<Tag> readRepo)
+		public UpdateTagHandler(IWriteRepository<ITag> writeRepo, IReadRepository<ITag> readRepo)
 		{
 			_writeRepo = writeRepo;
 			_readRepo = readRepo;
@@ -25,8 +25,10 @@ namespace HouseBuildingBlog.Tags.Commands
 			if (tag == null)
 				return new NotFoundResult();
 
-			tag.UpdateTitle(request.Title);
-			await _writeRepo.Save(tag);
+			var toUpdate = new Tag(tag);
+
+			toUpdate.UpdateTitle(request.Title);
+			await _writeRepo.Save(toUpdate);
 
 			return new OkResult();
 		}
