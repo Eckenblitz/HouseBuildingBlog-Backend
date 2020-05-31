@@ -27,12 +27,16 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				.HasKey(e => e.EventId);
 			modelBuilder.Entity<EventDBModel>()
 				.HasMany(e => e.EventTags);
+			modelBuilder.Entity<EventDBModel>()
+				.Ignore(e => e.Tags);
 
 			modelBuilder.Entity<EventTags>()
-				.ToTable("Events", "AssignedTags")
+				.ToTable("AssignedTags", "Events")
 				.HasKey(et => new { et.EventId, et.TagId });
-			//modelBuilder.Entity<EventTags>()
-			//.has
+			modelBuilder.Entity<EventTags>()
+				.HasOne(et => et.Event)
+				.WithMany(e => e.EventTags)
+				.HasForeignKey(et => et.EventId);
 
 			modelBuilder.Entity<TagDBModel>()
 				.ToTable("Tags", "Events")

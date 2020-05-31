@@ -9,9 +9,17 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Title { get; private set; }
 
-		public Tag ConvertToDomain()
+		public TagDBModel() { }
+
+		public TagDBModel(ITag tag)
 		{
-			return new Tag(TagId, Title);
+			Update(tag);
+		}
+
+		public void Update(ITag tag)
+		{
+			TagId = tag.TagId;
+			Title = tag.Title;
 		}
 	}
 }

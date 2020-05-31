@@ -8,7 +8,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 {
 	public class TagsReadRepository : IReadRepository<ITag>
 	{
-		DatabaseContext _DBContext;
+		private readonly DatabaseContext _DBContext;
 
 		public TagsReadRepository(DatabaseContext dBContext)
 		{
@@ -17,12 +17,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		public async Task<ITag> GetById(Guid id)
 		{
-			var model = await _DBContext.FindAsync<TagDBModel>(id);
-
-			if (model != null)
-				return model.ConvertToDomain();
-
-			return null;
+			return await _DBContext.FindAsync<TagDBModel>(id);
 		}
 
 		public Task<IList<ITag>> Query(Func<ITag, bool> query)
