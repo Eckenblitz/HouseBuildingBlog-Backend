@@ -26,7 +26,9 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				.ToTable("Events", "Events")
 				.HasKey(e => e.EventId);
 			modelBuilder.Entity<EventDBModel>()
-				.HasMany(e => e.EventTags);
+				.HasMany(e => e.EventTags)
+				.WithOne(et => et.Event)
+				.OnDelete(DeleteBehavior.Cascade);
 			modelBuilder.Entity<EventDBModel>()
 				.Ignore(e => e.Tags);
 
@@ -36,7 +38,8 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			modelBuilder.Entity<EventTags>()
 				.HasOne(et => et.Event)
 				.WithMany(e => e.EventTags)
-				.HasForeignKey(et => et.EventId);
+				.HasForeignKey(et => et.EventId)
+				.OnDelete(DeleteBehavior.Cascade);
 
 			modelBuilder.Entity<TagDBModel>()
 				.ToTable("Tags", "Events")

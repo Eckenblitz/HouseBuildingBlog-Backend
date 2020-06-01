@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Domain.Tags;
 using HouseBuildingBlog.Persistence.MSSql.Events;
 using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,14 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			//services.AddDbContext<DatabaseContext>(options =>
 			//options.UseSqlServer($"Server={sqlConfig.Server};Database={sqlConfig.DatabaseName};Trusted_Connection={sqlConfig.TrustedConnection}"));
 			services.AddDbContext<DatabaseContext>(options =>
-				options.UseSqlServer($"Server=VERITAS\\HBB_SQLSERVER;Database=HouseBuildingBlog;Trusted_Connection=True"));
+				options.UseSqlServer($"Server=localhost\\SQLEXPRESS;Database=HouseBuildingBlog;Trusted_Connection=True"));
+			//localhost\SQLEXPRESS
+			//Server=VERITAS\\HBB_SQLSERVER
 
-			services.AddTransient<IReadRepository<IEvent>, EventsReadRepository>();
-			services.AddTransient<IWriteRepository<IEvent>, EventsWriteRepository>();
-			services.AddTransient<IReadRepository<ITag>, TagsReadRepository>();
-			services.AddTransient<IWriteRepository<ITag>, TagsWriteRepository>();
+			services.AddTransient<IWriteEventsAggregate, WriteEventsAggregate>();
+			services.AddTransient<IReadEventsAggregate, ReadEventsAggregate>();
+			services.AddTransient<IWriteTagsAggregate, WriteTagsAggregate>();
+			services.AddTransient<IReadTagsAggregate, ReadTagsAggregate>();
 		}
 	}
 }

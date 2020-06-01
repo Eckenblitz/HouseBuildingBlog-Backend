@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
-using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,20 +9,20 @@ namespace HouseBuildingBlog.Tags.Commands
 {
 	public class CreateTagHandler : IRequestHandler<CreateTagCommand, IActionResult>
 	{
-		private readonly IWriteRepository<ITag> _repo;
+		private readonly IWriteTagsAggregate _writeTagsAggregate;
 
-		public CreateTagHandler(IWriteRepository<ITag> repo)
+		public CreateTagHandler(IWriteTagsAggregate writeTagsAggregate)
 		{
-			_repo = repo;
+			_writeTagsAggregate = writeTagsAggregate;
 		}
 
 		public async Task<IActionResult> Handle(CreateTagCommand request, CancellationToken cancellationToken)
 		{
 			var tag = new Tag(Guid.NewGuid(), request.Title);
 
-			await _repo.Save(tag);
+			var tagId = await _writeTagsAggregate.CreateTagAsync(tag);
 
-			return new CreatedResult(string.Empty, new { tag.TagId });
+			return new CreatedResult(string.Empty, new { tagId });
 		}
 	}
 }

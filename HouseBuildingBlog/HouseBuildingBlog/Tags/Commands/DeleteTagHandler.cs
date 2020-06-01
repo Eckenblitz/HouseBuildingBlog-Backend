@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
-using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -9,23 +8,19 @@ namespace HouseBuildingBlog.Tags.Commands
 {
 	public class DeleteTagHandler : IRequestHandler<DeleteTagCommand, IActionResult>
 	{
-		private readonly IWriteRepository<ITag> _writeRepo;
-		private readonly IReadRepository<ITag> _readRepo;
+		private readonly IWriteTagsAggregate _writeTagsAggregate;
 
-		public DeleteTagHandler(IWriteRepository<ITag> writeRepo, IReadRepository<ITag> readRepo)
+		public DeleteTagHandler(IWriteTagsAggregate writeTagsAggregate)
 		{
-			_writeRepo = writeRepo;
-			_readRepo = readRepo;
+			_writeTagsAggregate = writeTagsAggregate;
 		}
 
 		public async Task<IActionResult> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
 		{
-			var tag = await _readRepo.GetById(request.TagId);
+			var tag = await _writeTagsAggregate.DeleteTagAsync(request.TagId);
 
 			if (tag == null)
 				return new NotFoundResult();
-
-			await _writeRepo.Delete(tag.TagId);
 
 			return new OkResult();
 		}

@@ -1,9 +1,9 @@
-﻿using HouseBuildingBlog.Domain;
-using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,29 +11,22 @@ namespace HouseBuildingBlog.Events.Commands
 {
 	public class CreateEventHandler : IRequestHandler<CreateEventCommand, IActionResult>
 	{
-		private readonly IWriteRepository<IEvent> _writeRepo;
-		private readonly IReadRepository<ITag> _tagReadRepo;
+		private readonly IWriteEventsAggregate _writeEventsAggregate;
 
-		public CreateEventHandler(IWriteRepository<IEvent> writeRepo, IReadRepository<ITag> tagReadRepo)
+		public CreateEventHandler(IWriteEventsAggregate writeEventsAggregate)
 		{
-			_writeRepo = writeRepo;
-			_tagReadRepo = tagReadRepo;
+			_writeEventsAggregate = writeEventsAggregate;
 		}
 
 		public async Task<IActionResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
 		{
 			var @event = new Event(Guid.NewGuid(), request.Data.Title, request.Data.Date);
 			@event.UpdateDescription(request.Data.Description);
+			@event.UpdateTags(request.Data.TagIds.Select(t => new Tag(t, string.Empty)));
 
-			if (request.Data.TagIds != null)
-			{
-				var tags = await _tagReadRepo.Query(tag => request.Data.TagIds.Contains(tag.TagId));
-				@event.UpdateTags(tags);
-			}
+			var eventId = await _writeEventsAggregate.CreateEventAsync(@event);
 
-			await _writeRepo.Save(@event);
-
-			return new CreatedResult(string.Empty, new { @event.EventId });
+			return new CreatedResult(string.Empty, new { eventId });
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;

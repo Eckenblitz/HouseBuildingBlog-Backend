@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Domain.Tags;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HouseBuildingBlog.Persistence.Mock

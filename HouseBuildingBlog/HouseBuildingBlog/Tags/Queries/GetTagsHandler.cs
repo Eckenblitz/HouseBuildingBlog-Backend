@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
-using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain.Tags;
 using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +10,17 @@ namespace HouseBuildingBlog.Tags.Queries
 {
 	public class GetTagsHandler : IRequestHandler<GetTagsQuery, IActionResult>
 	{
-		private readonly IReadRepository<ITag> _repo;
+		private readonly IReadTagsAggregate _readTagsAggregate;
 
-		public GetTagsHandler(IReadRepository<ITag> repo)
+		public GetTagsHandler(IReadTagsAggregate readTagsAggregate)
 		{
-			_repo = repo;
+			_readTagsAggregate = readTagsAggregate;
 		}
 
 		public async Task<IActionResult> Handle(GetTagsQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _repo.Query(t => true);
-			return new OkObjectResult(result.Select(t => new TagQueryDto() { TagId = t.TagId, Title = t.Title }));
+			var tags = await _readTagsAggregate.GetAllAsync();
+			return new OkObjectResult(tags.Select(t => new TagQueryDto() { TagId = t.TagId, Title = t.Title }));
 		}
 	}
 }

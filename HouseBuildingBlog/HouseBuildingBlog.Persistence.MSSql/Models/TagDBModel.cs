@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Tags;
 using System;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models

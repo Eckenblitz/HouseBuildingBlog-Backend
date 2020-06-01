@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
 using System;
 
 namespace HouseBuildingBlog.Events.Queries.Contracts

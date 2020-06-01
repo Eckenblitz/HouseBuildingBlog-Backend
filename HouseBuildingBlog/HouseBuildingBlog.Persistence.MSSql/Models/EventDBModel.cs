@@ -1,6 +1,8 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Domain.Tags;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
@@ -14,16 +16,26 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Description { get; set; }
 
-		public ICollection<ITag> Tags { get; set; }
+		public IEnumerable<ITag> Tags => EventTags?.Select(et => et.Tag);
 
 		public ICollection<EventTags> EventTags { get; set; }
 
-		public Event ConvertToDomain()
-		{
-			var @event = new Event(EventId, Title, Date);
-			@event.UpdateDescription(Description);
+		public EventDBModel() { }
 
-			return @event;
+		public EventDBModel(IEvent newEvent)
+		{
+			EventId = newEvent.EventId == Guid.Empty ? Guid.NewGuid() : newEvent.EventId;
+			Update(newEvent);
+		}
+
+		public void Update(IEvent @event)
+		{
+			Title = @event.Title;
+			Date = @event.Date;
+			Description = @event.Description;
+			EventTags = new List<EventTags>();
+			foreach (var tag in @event.Tags)
+				EventTags.Add(new EventTags() { EventId = EventId, TagId = tag.TagId });
 		}
 	}
 }

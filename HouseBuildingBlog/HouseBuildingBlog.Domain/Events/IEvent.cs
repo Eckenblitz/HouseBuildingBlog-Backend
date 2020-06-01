@@ -1,7 +1,8 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Tags;
+using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Domain
+namespace HouseBuildingBlog.Domain.Events
 {
 	public interface IEvent
 	{
@@ -11,7 +12,7 @@ namespace HouseBuildingBlog.Domain
 
 		DateTime Date { get; }
 
-		ICollection<ITag> Tags { get; }
+		IEnumerable<ITag> Tags { get; }
 
 		string Description { get; }
 	}

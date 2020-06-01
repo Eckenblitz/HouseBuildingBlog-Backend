@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
+﻿using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 				Date = @event.Date,
 				Description = @event.Description,
 				Title = @event.Title,
-				Tags = @event.Tags.Select(t => t.TagId)
+				Tags = @event.Tags != null ? @event.Tags.Select(t => t.TagId) : null //TODO vllt wieder ändern
 			};
 		}
 	}

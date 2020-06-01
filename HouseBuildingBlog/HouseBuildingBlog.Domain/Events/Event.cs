@@ -1,7 +1,8 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Tags;
+using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Domain
+namespace HouseBuildingBlog.Domain.Events
 {
 	public class Event : IEvent
 	{
@@ -11,7 +12,7 @@ namespace HouseBuildingBlog.Domain
 
 		public DateTime Date { get; private set; }
 
-		public ICollection<ITag> Tags { get; private set; }
+		public IEnumerable<ITag> Tags { get; private set; }
 
 		public string Description { get; private set; }
 
@@ -47,7 +48,7 @@ namespace HouseBuildingBlog.Domain
 			Description = description;
 		}
 
-		public void UpdateTags(IList<ITag> tagIds)
+		public void UpdateTags(IEnumerable<ITag> tagIds)
 		{
 			Tags = new List<ITag>(tagIds);
 		}

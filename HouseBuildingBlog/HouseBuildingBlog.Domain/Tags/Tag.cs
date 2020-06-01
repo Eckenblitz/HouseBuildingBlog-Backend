@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HouseBuildingBlog.Domain
+namespace HouseBuildingBlog.Domain.Tags
 {
 	public class Tag : ITag
 	{

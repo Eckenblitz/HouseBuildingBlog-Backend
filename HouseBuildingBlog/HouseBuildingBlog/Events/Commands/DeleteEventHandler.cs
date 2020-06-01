@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain;
-using HouseBuildingBlog.Persistence;
+﻿using HouseBuildingBlog.Domain.Events;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -9,25 +8,21 @@ namespace HouseBuildingBlog.Events.Commands
 {
 	public class DeleteEventHandler : IRequestHandler<DeleteEventCommand, IActionResult>
 	{
-		private readonly IWriteRepository<IEvent> _writeRepo;
-		private readonly IReadRepository<IEvent> _readRepo;
+		private readonly IWriteEventsAggregate _writeEventsAggregate;
 
-		public DeleteEventHandler(IWriteRepository<IEvent> writeRepo, IReadRepository<IEvent> readRepo)
+		public DeleteEventHandler(IWriteEventsAggregate writeEventsAggregate)
 		{
-			_writeRepo = writeRepo;
-			_readRepo = readRepo;
+			_writeEventsAggregate = writeEventsAggregate;
 		}
 
 		public async Task<IActionResult> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
 		{
-			var @event = await _readRepo.GetById(request.EventId);
+			var @event = await _writeEventsAggregate.DeleteEventAsync(request.EventId);
 
 			if (@event == null)
 				return new NotFoundResult();
 
-			await _writeRepo.Delete(@event.EventId);
-
-			return new OkResult();
+			return new OkObjectResult(@event);
 		}
 	}
 }
