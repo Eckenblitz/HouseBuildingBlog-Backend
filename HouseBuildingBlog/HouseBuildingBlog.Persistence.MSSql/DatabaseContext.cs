@@ -7,6 +7,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 	{
 		public DbSet<EventDBModel> Events { get; set; }
 		public DbSet<TagDBModel> Tags { get; set; }
+		public DbSet<EventTags> AssignedEventTags { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
 		{
@@ -22,28 +23,44 @@ namespace HouseBuildingBlog.Persistence.MSSql
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<EventDBModel>()
-				.ToTable("Events", "Events")
-				.HasKey(e => e.EventId);
-			modelBuilder.Entity<EventDBModel>()
-				.HasMany(e => e.EventTags)
-				.WithOne(et => et.Event)
-				.OnDelete(DeleteBehavior.Cascade);
-			modelBuilder.Entity<EventDBModel>()
-				.Ignore(e => e.Tags);
+			modelBuilder.Entity<EventDBModel>(e =>
+			{
+				e.ToTable("Events", "Events");
+				e.HasKey(e => e.EventId);
 
-			modelBuilder.Entity<EventTags>()
-				.ToTable("AssignedTags", "Events")
-				.HasKey(et => new { et.EventId, et.TagId });
-			modelBuilder.Entity<EventTags>()
-				.HasOne(et => et.Event)
-				.WithMany(e => e.EventTags)
-				.HasForeignKey(et => et.EventId)
-				.OnDelete(DeleteBehavior.Cascade);
+				e.Ignore(e => e.Tags);
+				e.Property(e => e.EventId).ValueGeneratedNever();
+				e.Property(e => e.Title).IsRequired();
+			});
 
-			modelBuilder.Entity<TagDBModel>()
-				.ToTable("Tags", "Events")
-				.HasKey(e => e.TagId);
+			modelBuilder.Entity<EventTags>(e =>
+			{
+				e.ToTable("AssignedTags", "Events");
+				e.HasKey(et => new { et.EventId, et.TagId });
+
+				e.HasOne(et => et.Event)
+					.WithMany(e => e.EventTags)
+					.HasForeignKey(et => et.EventId)
+					.OnDelete(DeleteBehavior.ClientSetNull)
+					.HasConstraintName("FK_AssignedTags_Events");
+
+				e.HasOne(et => et.Tag)
+					.WithMany(t => t.AssignedEvents)
+					.HasForeignKey(et => et.TagId)
+					.OnDelete(DeleteBehavior.ClientSetNull)
+					.HasConstraintName("FK_AssignedTags_Tags");
+			});
+
+			modelBuilder.Entity<TagDBModel>(e =>
+			{
+				e.ToTable("Tags", "Events");
+				e.HasKey(e => e.TagId);
+
+				e.Property(e => e.TagId).ValueGeneratedNever();
+				e.Property(e => e.Title)
+					.IsRequired()
+					.HasMaxLength(200);
+			});
 		}
 	}
 }

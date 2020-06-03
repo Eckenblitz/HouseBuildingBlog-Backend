@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
 using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
@@ -8,6 +9,8 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 		public Guid TagId { get; private set; }
 
 		public string Title { get; private set; }
+
+		public ICollection<EventTags> AssignedEvents { get; set; }
 
 		public TagDBModel() { }
 
