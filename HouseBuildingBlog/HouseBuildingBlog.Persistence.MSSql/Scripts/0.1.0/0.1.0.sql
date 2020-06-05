@@ -24,7 +24,7 @@ CREATE TABLE Events.AssignedTags (
 	EventId uniqueidentifier NOT NULL,
 	TagId uniqueidentifier NOT NULL,
 	CONSTRAINT PK_AssignedTags PRIMARY KEY (EventId, TagId),
-	CONSTRAINT FK_AssignedTags_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId),
-	CONSTRAINT FK_AssignedTags_Tags FOREIGN KEY (TagId) REFERENCES Events.Tags (TagId)
+	CONSTRAINT FK_AssignedTags_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId) ON DELETE CASCADE,
+	CONSTRAINT FK_AssignedTags_Tags FOREIGN KEY (TagId) REFERENCES Events.Tags (TagId) ON DELETE CASCADE
 )
 GO

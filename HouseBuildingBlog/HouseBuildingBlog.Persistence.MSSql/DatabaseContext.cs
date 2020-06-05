@@ -7,7 +7,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 	{
 		public DbSet<EventDBModel> Events { get; set; }
 		public DbSet<TagDBModel> Tags { get; set; }
-		public DbSet<EventTags> AssignedEventTags { get; set; }
+		public DbSet<AssignedTags> AssignedEventTags { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
 		{
@@ -33,7 +33,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.Property(e => e.Title).IsRequired();
 			});
 
-			modelBuilder.Entity<EventTags>(e =>
+			modelBuilder.Entity<AssignedTags>(e =>
 			{
 				e.ToTable("AssignedTags", "Events");
 				e.HasKey(et => new { et.EventId, et.TagId });
@@ -41,13 +41,13 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.HasOne(et => et.Event)
 					.WithMany(e => e.EventTags)
 					.HasForeignKey(et => et.EventId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
+					.OnDelete(DeleteBehavior.Cascade)
 					.HasConstraintName("FK_AssignedTags_Events");
 
 				e.HasOne(et => et.Tag)
 					.WithMany(t => t.AssignedEvents)
 					.HasForeignKey(et => et.TagId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
+					.OnDelete(DeleteBehavior.Cascade)
 					.HasConstraintName("FK_AssignedTags_Tags");
 			});
 

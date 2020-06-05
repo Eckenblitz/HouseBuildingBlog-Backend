@@ -2,7 +2,7 @@
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
-	public class EventTags
+	public class AssignedTags
 	{
 		public Guid EventId { get; set; }
 

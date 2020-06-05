@@ -10,7 +10,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Title { get; private set; }
 
-		public ICollection<EventTags> AssignedEvents { get; set; }
+		public ICollection<AssignedTags> AssignedEvents { get; set; }
 
 		public TagDBModel() { }
 
