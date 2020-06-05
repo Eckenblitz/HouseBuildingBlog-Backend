@@ -8,10 +8,8 @@ namespace HouseBuildingBlog.Persistence.Mock
 	{
 		public static void RegisterMockRepositories(this IServiceCollection services)
 		{
-			var tagRepo = new TagRepository();
-			var eventRepo = new EventRepository();
-			services.AddSingleton(tagRepo);
-			services.AddSingleton(eventRepo);
+			services.AddSingleton(new TagRepository());
+			services.AddSingleton(new EventRepository());
 
 			services.AddTransient<IWriteEventsAggregate, WriteEventsAggregateMock>();
 			services.AddTransient<IReadEventsAggregate, ReadEventsAggregateMock>();
