@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Persistence.Mock.Repositories;
 using System;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			if (existingEvent != null)
 				await _eventRepository.Save(@event);
 
-			return existingEvent;
+			return @event;
 		}
 	}
 }

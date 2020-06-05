@@ -1,14 +1,15 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Persistence.Mock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Persistence.Mock
+namespace HouseBuildingBlog.Persistence.Mock.Repositories
 {
 	public class TagRepository
 	{
-		private readonly IList<ITag> _repo = new List<ITag>();
+		private readonly IList<TagModelMock> _repo = new List<TagModelMock>();
 
 		public Task Delete(Guid id)
 		{
@@ -21,7 +22,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 
 		public Task<ITag> GetById(Guid id)
 		{
-			var tag = _repo.SingleOrDefault(t => t.TagId.Equals(id));
+			ITag tag = _repo.SingleOrDefault(t => t.TagId.Equals(id));
 			return Task.FromResult(tag);
 		}
 
@@ -37,9 +38,9 @@ namespace HouseBuildingBlog.Persistence.Mock
 			var tag = _repo.SingleOrDefault(t => t.TagId.Equals(model.TagId));
 
 			if (tag != null)
-				tag = model;
+				tag.Update(model);
 			else
-				_repo.Add(model);
+				_repo.Add(new TagModelMock(model));
 
 			return Task.CompletedTask;
 		}

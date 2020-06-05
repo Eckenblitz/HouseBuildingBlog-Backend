@@ -1,14 +1,15 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Persistence.Mock.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Persistence.Mock
+namespace HouseBuildingBlog.Persistence.Mock.Repositories
 {
 	public class EventRepository
 	{
-		private readonly IList<IEvent> _repo = new List<IEvent>();
+		private readonly IList<EventModelMock> _repo = new List<EventModelMock>();
 
 		public Task Delete(Guid id)
 		{
@@ -21,7 +22,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 
 		public Task<IEvent> GetById(Guid id)
 		{
-			var tag = _repo.SingleOrDefault(t => t.EventId.Equals(id));
+			IEvent tag = _repo.SingleOrDefault(t => t.EventId.Equals(id));
 			return Task.FromResult(tag);
 		}
 
@@ -34,11 +35,12 @@ namespace HouseBuildingBlog.Persistence.Mock
 
 		public Task Save(IEvent model)
 		{
-			var tag = _repo.SingleOrDefault(t => t.EventId.Equals(model.EventId));
-			if (tag != null)
-				tag = model;
+			var @event = _repo.SingleOrDefault(t => t.EventId.Equals(model.EventId));
+			if (@event != null)
+				@event.Update(model);
 			else
-				_repo.Add(model);
+				_repo.Add(new EventModelMock(model));
+
 			return Task.CompletedTask;
 		}
 	}

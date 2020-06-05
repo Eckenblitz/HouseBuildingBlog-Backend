@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Persistence.Mock.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HouseBuildingBlog.Persistence.Mock
