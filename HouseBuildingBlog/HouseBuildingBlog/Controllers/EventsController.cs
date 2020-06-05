@@ -38,9 +38,12 @@ namespace HouseBuildingBlog.Controllers
 
 		[HttpGet]
 		[ProducesResponseType(typeof(IList<SimpleEventQueryDto>), StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetEvents([FromQuery]IList<Guid> tagsIds)
+		public async Task<IActionResult> GetEvents([FromQuery]IList<Guid> tagIds)
 		{
-			return await _mediator.Send(new GetEventsQuery(tagsIds));
+			if (tagIds.Count > 0)
+				return await _mediator.Send(new GetFilteredEventsQuery(tagIds));
+			else
+				return await _mediator.Send(new GetAllEventsQuery());
 		}
 
 		[HttpPatch("{id}")]

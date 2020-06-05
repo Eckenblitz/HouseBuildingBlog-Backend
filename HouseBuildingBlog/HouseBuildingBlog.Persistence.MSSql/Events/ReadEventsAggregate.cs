@@ -23,6 +23,13 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			return await _DBContext.Events.FindAsync(eventId);
 		}
 
+		protected override async Task<IEnumerable<IEvent>> GetAll()
+		{
+			return await _DBContext.Events
+				.Include(e => e.EventTags)
+				.ToListAsync();
+		}
+
 		protected override async Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds)
 		{
 			return await _DBContext.Set<EventDBModel>()

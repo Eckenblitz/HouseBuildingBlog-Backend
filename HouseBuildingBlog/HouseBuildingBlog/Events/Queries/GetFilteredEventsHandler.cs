@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Events.Queries
 {
-	public class GetEventsHandler : IRequestHandler<GetEventsQuery, IActionResult>
+	public class GetFilteredEventsHandler : IRequestHandler<GetFilteredEventsQuery, IActionResult>
 	{
 		public readonly IReadEventsAggregate _readEventsAggregate;
 
-		public GetEventsHandler(IReadEventsAggregate readEventsAggregate)
+		public GetFilteredEventsHandler(IReadEventsAggregate readEventsAggregate)
 		{
 			_readEventsAggregate = readEventsAggregate;
 		}
 
-		public async Task<IActionResult> Handle(GetEventsQuery request, CancellationToken cancellationToken)
+		public async Task<IActionResult> Handle(GetFilteredEventsQuery request, CancellationToken cancellationToken)
 		{
-			var events = await _readEventsAggregate.GetEventsByTagsAsync(request.TagIds);
+			var events = await _readEventsAggregate.FilterByTags(request.TagIds);
 			return new OkObjectResult(events.Select(e => SimpleEventQueryDto.CreateFrom(e)));
 		}
 	}

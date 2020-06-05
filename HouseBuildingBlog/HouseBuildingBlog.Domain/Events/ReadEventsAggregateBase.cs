@@ -15,9 +15,16 @@ namespace HouseBuildingBlog.Domain.Events
 
 		protected abstract Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds);
 
-		public Task<IEnumerable<IEvent>> GetEventsByTagsAsync(IEnumerable<Guid> tagIds)
+		public Task<IEnumerable<IEvent>> FilterByTags(IEnumerable<Guid> tagIds)
 		{
 			return GetEventsByTags(tagIds);
+		}
+
+		protected abstract Task<IEnumerable<IEvent>> GetAll();
+
+		public Task<IEnumerable<IEvent>> GetAllAsync()
+		{
+			return GetAll();
 		}
 	}
 }

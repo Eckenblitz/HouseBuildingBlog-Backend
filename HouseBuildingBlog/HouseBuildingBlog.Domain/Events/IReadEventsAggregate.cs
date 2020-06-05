@@ -8,6 +8,8 @@ namespace HouseBuildingBlog.Domain.Events
 	{
 		Task<IEvent> GetAsync(Guid eventId);
 
-		Task<IEnumerable<IEvent>> GetEventsByTagsAsync(IEnumerable<Guid> tagIds);
+		Task<IEnumerable<IEvent>> GetAllAsync();
+
+		Task<IEnumerable<IEvent>> FilterByTags(IEnumerable<Guid> tagIds);
 	}
 }

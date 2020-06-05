@@ -21,6 +21,11 @@ namespace HouseBuildingBlog.Persistence.Mock
 			return await _eventRepository.GetById(eventId);
 		}
 
+		protected override async Task<IEnumerable<IEvent>> GetAll()
+		{
+			return await _eventRepository.Query(e => true);
+		}
+
 		protected override async Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds)
 		{
 			var tagIdList = tagIds.ToList();
