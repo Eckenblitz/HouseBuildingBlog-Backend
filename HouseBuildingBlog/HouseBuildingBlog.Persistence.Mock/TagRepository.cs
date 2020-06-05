@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	public class TagRepository : IReadRepository<ITag>, IWriteRepository<ITag>
+	public class TagRepository
 	{
 		private readonly IList<ITag> _repo = new List<ITag>();
 

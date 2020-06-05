@@ -10,10 +10,13 @@ namespace HouseBuildingBlog.Persistence.Mock
 		{
 			var tagRepo = new TagRepository();
 			var eventRepo = new EventRepository();
-			services.AddSingleton(typeof(IReadRepository<ITag>), tagRepo);
-			services.AddSingleton(typeof(IWriteRepository<ITag>), tagRepo);
-			services.AddSingleton(typeof(IReadRepository<IEvent>), eventRepo);
-			services.AddSingleton(typeof(IWriteRepository<IEvent>), eventRepo);
+			services.AddSingleton(tagRepo);
+			services.AddSingleton(eventRepo);
+
+			services.AddTransient<IWriteEventsAggregate, WriteEventsAggregateMock>();
+			services.AddTransient<IReadEventsAggregate, ReadEventsAggregateMock>();
+			services.AddTransient<IWriteTagsAggregate, WriteTagsAggregateMock>();
+			services.AddTransient<IReadTagsAggregate, ReadTagsAggregateMock>();
 		}
 	}
 }

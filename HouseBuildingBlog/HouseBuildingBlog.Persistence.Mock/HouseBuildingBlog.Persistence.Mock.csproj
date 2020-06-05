@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HouseBuildingBlog.Domain\HouseBuildingBlog.Domain.csproj" />
-    <ProjectReference Include="..\HouseBuildingBlog.Persistence\HouseBuildingBlog.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

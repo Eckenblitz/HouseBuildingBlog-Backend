@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	public class EventRepository : IReadRepository<IEvent>, IWriteRepository<IEvent>
+	public class EventRepository
 	{
 		private readonly IList<IEvent> _repo = new List<IEvent>();
 
