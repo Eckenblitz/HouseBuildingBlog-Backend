@@ -1,9 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +20,7 @@ namespace HouseBuildingBlog.Events.Commands
 		{
 			var @event = new Event(Guid.NewGuid(), request.Data.Title, request.Data.Date);
 			@event.UpdateDescription(request.Data.Description);
-			@event.UpdateTags(request.Data.TagIds.Select(t => new Tag(t, string.Empty)));
+			@event.UpdateTags(request.Data.TagIds);
 
 			var createdEvent = await _writeEventsAggregate.CreateEventAsync(@event);
 

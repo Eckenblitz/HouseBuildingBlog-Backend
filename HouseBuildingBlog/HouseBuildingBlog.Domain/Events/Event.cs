@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HouseBuildingBlog.Domain.Events
 {
@@ -48,9 +49,12 @@ namespace HouseBuildingBlog.Domain.Events
 			Description = description;
 		}
 
-		public void UpdateTags(IEnumerable<ITag> tagIds)
+		public void UpdateTags(IEnumerable<Guid> tagIds)
 		{
-			Tags = new List<ITag>(tagIds);
+			if (tagIds?.Count() > 0)
+				Tags = new List<ITag>(tagIds.Select(t => new Tag(t, string.Empty)));
+			else
+				Tags = new List<ITag>();
 		}
 	}
 }
