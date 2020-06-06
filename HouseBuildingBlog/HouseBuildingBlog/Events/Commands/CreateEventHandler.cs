@@ -24,9 +24,9 @@ namespace HouseBuildingBlog.Events.Commands
 			@event.UpdateDescription(request.Data.Description);
 			@event.UpdateTags(request.Data.TagIds.Select(t => new Tag(t, string.Empty)));
 
-			var eventId = await _writeEventsAggregate.CreateEventAsync(@event);
+			var createdEvent = await _writeEventsAggregate.CreateEventAsync(@event);
 
-			return new CreatedResult(string.Empty, new { eventId });
+			return new CreatedResult(string.Empty, createdEvent);
 		}
 	}
 }

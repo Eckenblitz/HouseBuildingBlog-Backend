@@ -20,9 +20,9 @@ namespace HouseBuildingBlog.Tags.Commands
 		{
 			var tag = new Tag(Guid.NewGuid(), request.Title);
 
-			var tagId = await _writeTagsAggregate.CreateTagAsync(tag);
+			var createdTag = await _writeTagsAggregate.CreateTagAsync(tag);
 
-			return new CreatedResult(string.Empty, new { tagId });
+			return new CreatedResult(string.Empty, createdTag);
 		}
 	}
 }
