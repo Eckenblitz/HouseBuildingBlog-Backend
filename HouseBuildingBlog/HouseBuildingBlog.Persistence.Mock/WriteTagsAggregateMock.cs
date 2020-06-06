@@ -18,7 +18,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			_eventRepository = eventRepository;
 		}
 
-		protected override async Task<Guid> CreateTag(ITag tag)
+		protected override async Task<ITag> CreateTag(ITag tag)
 		{
 			var existingTag = await _tagRepository.GetById(tag.TagId);
 			if (existingTag != null)
@@ -26,7 +26,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 
 			await _tagRepository.Save(tag);
 
-			return tag.TagId;
+			return tag;
 		}
 
 		protected override async Task<ITag> DeleteTag(Guid tagId)

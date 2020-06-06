@@ -14,14 +14,14 @@ namespace HouseBuildingBlog.Persistence.Mock
 			_eventRepository = eventRepository;
 		}
 
-		protected override async Task<Guid> CreateEvent(IEvent newEvent)
+		protected override async Task<IEvent> CreateEvent(IEvent newEvent)
 		{
 			var existingEvent = await _eventRepository.GetById(newEvent.EventId);
 			if (existingEvent != null)
 				throw new InvalidOperationException("event already exist");
 
 			await _eventRepository.Save(newEvent);
-			return newEvent.EventId;
+			return newEvent;
 		}
 
 		protected override async Task<IEvent> DeleteEvent(Guid eventId)

@@ -5,7 +5,7 @@ namespace HouseBuildingBlog.Domain.Events
 {
 	public interface IWriteEventsAggregate
 	{
-		Task<Guid> CreateEventAsync(IEvent newEvent);
+		Task<IEvent> CreateEventAsync(IEvent newEvent);
 
 		Task<IEvent> UpdateEventAsync(IEvent @event);
 

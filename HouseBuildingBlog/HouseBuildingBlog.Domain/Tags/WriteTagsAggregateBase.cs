@@ -6,9 +6,9 @@ namespace HouseBuildingBlog.Domain.Tags
 {
 	public abstract class WriteTagsAggregateBase : IWriteTagsAggregate
 	{
-		protected abstract Task<Guid> CreateTag(ITag tag);
+		protected abstract Task<ITag> CreateTag(ITag tag);
 
-		public Task<Guid> CreateTagAsync(ITag tag)
+		public Task<ITag> CreateTagAsync(ITag tag)
 		{
 			var validationErrors = TagValidator.Validate(tag);
 			if (validationErrors.Count > 0)

@@ -14,13 +14,13 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 			_DBContext = dBContext;
 		}
 
-		protected override async Task<Guid> CreateTag(ITag tag)
+		protected override async Task<ITag> CreateTag(ITag tag)
 		{
 			var newTag = new TagDBModel(tag);
 			_DBContext.Add(newTag);
 			await _DBContext.SaveChangesAsync();
 
-			return newTag.TagId;
+			return newTag;
 		}
 
 		protected override async Task<ITag> DeleteTag(Guid tagId)

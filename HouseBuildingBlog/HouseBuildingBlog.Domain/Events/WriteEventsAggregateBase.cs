@@ -6,9 +6,9 @@ namespace HouseBuildingBlog.Domain.Events
 {
 	public abstract class WriteEventsAggregateBase : IWriteEventsAggregate
 	{
-		protected abstract Task<Guid> CreateEvent(IEvent newEvent);
+		protected abstract Task<IEvent> CreateEvent(IEvent newEvent);
 
-		public Task<Guid> CreateEventAsync(IEvent newEvent)
+		public Task<IEvent> CreateEventAsync(IEvent newEvent)
 		{
 			var validationErrors = EventValidator.Validate(newEvent);
 			if (validationErrors.Count > 0)

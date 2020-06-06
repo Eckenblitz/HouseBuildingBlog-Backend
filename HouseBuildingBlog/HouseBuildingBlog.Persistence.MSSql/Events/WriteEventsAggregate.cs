@@ -14,13 +14,13 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			_DBContext = dBContext;
 		}
 
-		protected override async Task<Guid> CreateEvent(IEvent newEvent)
+		protected override async Task<IEvent> CreateEvent(IEvent newEvent)
 		{
 			var @event = new EventDBModel(newEvent);
 			_DBContext.Add(@event);
 			await _DBContext.SaveChangesAsync();
 
-			return newEvent.EventId;
+			return newEvent;
 		}
 
 		protected override async Task<IEvent> DeleteEvent(Guid eventId)
