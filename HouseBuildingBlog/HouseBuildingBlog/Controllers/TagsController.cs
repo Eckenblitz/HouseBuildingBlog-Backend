@@ -1,10 +1,12 @@
 ﻿using HouseBuildingBlog.Tags.Commands;
 using HouseBuildingBlog.Tags.Commands.Contracts;
 using HouseBuildingBlog.Tags.Queries;
+using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Controllers
@@ -21,21 +23,21 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpPost]
-		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(typeof(TagQueryDto), StatusCodes.Status201Created)]
 		public async Task<IActionResult> CreateTag([FromBody] TagCommandDto data)
 		{
 			return await _mediator.Send(new CreateTagCommand(data.Title));
 		}
 
 		[HttpGet]
-		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(IEnumerable<TagQueryDto>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetTags()
 		{
 			return await _mediator.Send(new GetTagsQuery());
 		}
 
 		[HttpPatch("{id}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(TagQueryDto), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> UpdateTag(Guid id, [FromBody] TagCommandDto data)
 		{
@@ -43,7 +45,7 @@ namespace HouseBuildingBlog.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(TagQueryDto), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> DeleteTag(Guid id)
 		{
