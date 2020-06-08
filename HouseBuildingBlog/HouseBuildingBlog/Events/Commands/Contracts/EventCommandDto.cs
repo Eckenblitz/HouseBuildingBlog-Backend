@@ -15,6 +15,8 @@ namespace HouseBuildingBlog.Events.Commands.Contracts
 
 		public IList<Guid> TagIds { get; set; }
 
+		public EventCommandDto() { }
+
 		public EventCommandDto(IEvent @event)
 		{
 			Title = @event.Title;
