@@ -13,7 +13,7 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 
 		public DateTime Date { get; set; }
 
-		public IEnumerable<Guid> Tags { get; set; }
+		public IEnumerable<Guid> TagIds { get; set; }
 
 		public string Description { get; set; }
 
@@ -23,8 +23,7 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 			Date = @event.Date;
 			Description = @event.Description;
 			Title = @event.Title;
-			Tags = @event.Tags != null ? @event.Tags.Select(t => t.TagId) : null;
-
+			TagIds = @event.Tags != null ? @event.Tags.Select(t => t.TagId) : null;
 		}
 	}
 }
