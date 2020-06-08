@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Tags.Queries
 		public async Task<IActionResult> Handle(GetTagsQuery request, CancellationToken cancellationToken)
 		{
 			var tags = await _readTagsAggregate.GetAllAsync();
-			return new OkObjectResult(tags.Select(t => new TagQueryDto() { TagId = t.TagId, Title = t.Title }));
+			return new OkObjectResult(tags.Select(t => new TagQueryDto(t)));
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace HouseBuildingBlog.Events.Commands
 			if (@event == null)
 				return new NotFoundResult();
 
-			return new OkObjectResult(@event);
+			return new OkObjectResult(new EventQueryDto(@event));
 		}
 	}
 }

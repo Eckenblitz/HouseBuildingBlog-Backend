@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,7 @@ namespace HouseBuildingBlog.Tags.Commands
 
 			var createdTag = await _writeTagsAggregate.CreateTagAsync(tag);
 
-			return new CreatedResult(string.Empty, createdTag);
+			return new CreatedResult(string.Empty, new TagQueryDto(createdTag));
 		}
 	}
 }

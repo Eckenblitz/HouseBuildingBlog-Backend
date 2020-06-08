@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -24,7 +25,7 @@ namespace HouseBuildingBlog.Tags.Commands
 			if (updatedTag == null)
 				return new NotFoundResult();
 
-			return new OkObjectResult(updatedTag);
+			return new OkObjectResult(new TagQueryDto(updatedTag));
 		}
 	}
 }

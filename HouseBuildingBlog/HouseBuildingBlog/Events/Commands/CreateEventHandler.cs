@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +25,7 @@ namespace HouseBuildingBlog.Events.Commands
 
 			var createdEvent = await _writeEventsAggregate.CreateEventAsync(@event);
 
-			return new CreatedResult(string.Empty, createdEvent);
+			return new CreatedResult(string.Empty, new EventQueryDto(createdEvent));
 		}
 	}
 }

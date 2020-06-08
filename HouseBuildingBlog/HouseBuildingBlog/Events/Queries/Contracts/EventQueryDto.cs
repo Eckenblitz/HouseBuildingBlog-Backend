@@ -17,16 +17,14 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 
 		public string Description { get; set; }
 
-		public static EventQueryDto CreateFrom(IEvent @event)
+		public EventQueryDto(IEvent @event)
 		{
-			return new EventQueryDto()
-			{
-				EventId = @event.EventId,
-				Date = @event.Date,
-				Description = @event.Description,
-				Title = @event.Title,
-				Tags = @event.Tags != null ? @event.Tags.Select(t => t.TagId) : null //TODO vllt wieder ändern
-			};
+			EventId = @event.EventId;
+			Date = @event.Date;
+			Description = @event.Description;
+			Title = @event.Title;
+			Tags = @event.Tags != null ? @event.Tags.Select(t => t.TagId) : null;
+
 		}
 	}
 }

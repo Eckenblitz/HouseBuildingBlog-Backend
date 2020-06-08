@@ -9,13 +9,12 @@ namespace HouseBuildingBlog.Tags.Queries.Contracts
 
 		public string Title { get; set; }
 
-		public static TagQueryDto From(Tag tag)
+		public TagQueryDto(ITag tag)
 		{
-			return new TagQueryDto()
-			{
-				TagId = tag.TagId,
-				Title = tag.Title
-			};
+
+			TagId = tag.TagId;
+			Title = tag.Title;
+
 		}
 	}
 }

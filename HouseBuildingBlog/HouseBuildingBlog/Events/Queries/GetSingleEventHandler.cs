@@ -23,7 +23,7 @@ namespace HouseBuildingBlog.Events.Queries
 			if (@event == null)
 				return new NotFoundResult();
 
-			return new OkObjectResult(EventQueryDto.CreateFrom(@event));
+			return new OkObjectResult(new EventQueryDto(@event));
 		}
 	}
 }
