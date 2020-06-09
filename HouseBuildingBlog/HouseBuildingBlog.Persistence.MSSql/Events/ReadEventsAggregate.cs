@@ -1,5 +1,4 @@
 ﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Persistence.MSSql.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,8 +18,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		protected override async Task<IEvent> Get(Guid eventId)
 		{
-			//ToDo include reference (Tags)!!!!!!
-			return await _DBContext.Events.FindAsync(eventId);
+			return await _DBContext.Events
+				.Include(e => e.EventTags)
+				.SingleOrDefaultAsync(e => e.EventId.Equals(eventId));
 		}
 
 		protected override async Task<IEnumerable<IEvent>> GetAll()
@@ -32,7 +32,8 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		protected override async Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds)
 		{
-			return await _DBContext.Set<EventDBModel>()
+			return await _DBContext.Events
+				.Include(e => e.EventTags)
 				.Where(e => e.EventTags.Any(et => tagIds.Contains(et.TagId)))
 				.ToListAsync();
 		}
