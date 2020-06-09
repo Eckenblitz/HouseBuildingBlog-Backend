@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Tags.Models;
 using HouseBuildingBlog.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,7 @@ namespace HouseBuildingBlog.Tags.Commands
 
 		public async Task<IActionResult> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
 		{
-			var tag = new Tag(request.TagId, request.Title);
-
-			var updatedTag = await _writeTagsAggregate.UpdateTagAsync(tag);
+			var updatedTag = await _writeTagsAggregate.UpdateTagAsync(new Tag(request));
 
 			if (updatedTag == null)
 				return new NotFoundResult();

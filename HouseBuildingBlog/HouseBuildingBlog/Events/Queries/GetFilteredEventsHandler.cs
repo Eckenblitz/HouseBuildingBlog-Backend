@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Events.Queries
 		public async Task<IActionResult> Handle(GetFilteredEventsQuery request, CancellationToken cancellationToken)
 		{
 			var events = await _readEventsAggregate.FilterByTags(request.TagIds);
-			return new OkObjectResult(events.Select(e => SimpleEventQueryDto.CreateFrom(e)));
+			return new OkObjectResult(events.Select(e => new SimpleEventQueryDto(e)));
 		}
 	}
 }

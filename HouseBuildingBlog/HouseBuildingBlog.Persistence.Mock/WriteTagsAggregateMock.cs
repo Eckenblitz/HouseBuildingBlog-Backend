@@ -35,7 +35,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			if (existingTag != null)
 			{
 				await _tagRepository.Delete(tagId);
-				var eventsWithTag = await _eventRepository.Query(e => e.Tags.Any(t => t.TagId.Equals(tagId)));
+				var eventsWithTag = await _eventRepository.Query(e => e.TagIds.Any(t => t.Equals(tagId)));
 				foreach (var @event in eventsWithTag)
 				{
 					var eventMock = new EventModelMock(@event);

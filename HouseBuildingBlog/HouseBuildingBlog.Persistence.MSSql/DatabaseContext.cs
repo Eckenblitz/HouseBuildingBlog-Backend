@@ -28,7 +28,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.ToTable("Events", "Events");
 				e.HasKey(e => e.EventId);
 
-				e.Ignore(e => e.Tags);
+				e.Ignore(e => e.TagIds);
 				e.Property(e => e.EventId).ValueGeneratedNever();
 				e.Property(e => e.Title).IsRequired();
 			});

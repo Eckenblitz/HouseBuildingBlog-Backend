@@ -11,10 +11,8 @@ namespace HouseBuildingBlog.Tags.Queries.Contracts
 
 		public TagQueryDto(ITag tag)
 		{
-
 			TagId = tag.TagId;
 			Title = tag.Title;
-
 		}
 	}
 }

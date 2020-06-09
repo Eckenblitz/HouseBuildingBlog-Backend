@@ -29,7 +29,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 		protected override async Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds)
 		{
 			var tagIdList = tagIds.ToList();
-			return await _eventRepository.Query(e => e.Tags.Select(t => t.TagId).Intersect(tagIds).Count() > 0);
+			return await _eventRepository.Query(e => e.TagIds.Intersect(tagIds).Count() > 0);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HouseBuildingBlog.Events.Commands.Contracts
 {
@@ -22,7 +21,7 @@ namespace HouseBuildingBlog.Events.Commands.Contracts
 			Title = @event.Title;
 			Date = @event.Date;
 			Description = @event.Description;
-			TagIds = @event.Tags != null ? new List<Guid>(@event.Tags.Select(t => t.TagId)) : null;
+			TagIds = @event.TagIds != null ? new List<Guid>(@event.TagIds) : null;
 		}
 	}
 }

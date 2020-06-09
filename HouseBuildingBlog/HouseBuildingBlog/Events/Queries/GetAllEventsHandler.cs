@@ -1,6 +1,8 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +19,8 @@ namespace HouseBuildingBlog.Events.Queries
 
 		public async Task<IActionResult> Handle(GetAllEventsQuery request, CancellationToken cancellationToken)
 		{
-			return new OkObjectResult(await _readEventsAggregate.GetAllAsync());
+			var events = await _readEventsAggregate.GetAllAsync();
+			return new OkObjectResult(events.Select(e => new SimpleEventQueryDto(e)));
 		}
 	}
 }

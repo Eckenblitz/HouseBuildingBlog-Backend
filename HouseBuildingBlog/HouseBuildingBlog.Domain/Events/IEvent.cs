@@ -12,7 +12,7 @@ namespace HouseBuildingBlog.Domain.Events
 
 		DateTime Date { get; }
 
-		IEnumerable<ITag> Tags { get; }
+		IEnumerable<Guid> TagIds { get; }
 
 		string Description { get; }
 	}

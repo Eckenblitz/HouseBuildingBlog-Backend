@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Events.Models;
 using HouseBuildingBlog.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,7 @@ namespace HouseBuildingBlog.Events.Commands
 
 		public async Task<IActionResult> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
 		{
-			var @event = new Event(request.EventId, request.Data.Title, request.Data.Date);
-			@event.UpdateDescription(request.Data.Description);
-			@event.UpdateTags(request.Data.TagIds);
-
-			var updatedEvent = await _writeEventsAggregate.UpdateEventAsync(@event);
+			var updatedEvent = await _writeEventsAggregate.UpdateEventAsync(new Event(request));
 
 			if (updatedEvent == null)
 				return new NotFoundResult();

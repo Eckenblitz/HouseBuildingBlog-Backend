@@ -11,14 +11,11 @@ namespace HouseBuildingBlog.Events.Queries.Contracts
 
 		public DateTime Date { get; set; }
 
-		public static SimpleEventQueryDto CreateFrom(IEvent @event)
+		public SimpleEventQueryDto(IEvent @event)
 		{
-			return new SimpleEventQueryDto()
-			{
-				EventId = @event.EventId,
-				Date = @event.Date,
-				Title = @event.Title
-			};
+			EventId = @event.EventId;
+			Date = @event.Date;
+			Title = @event.Title;
 		}
 	}
 }
