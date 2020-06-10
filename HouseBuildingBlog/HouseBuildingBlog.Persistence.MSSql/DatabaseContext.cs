@@ -27,7 +27,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			{
 				e.ToTable("Events", "Events");
 				e.HasKey(e => e.EventId);
-
+				e.Ignore(e => e.TagIds);
 				e.Property(e => e.EventId).ValueGeneratedNever();
 				e.Property(e => e.Title).IsRequired();
 			});
@@ -38,7 +38,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.HasKey(et => new { et.EventId, et.TagId });
 
 				e.HasOne(et => et.Event)
-					.WithMany(e => e.EventTags)
+					.WithMany(e => e.AssignedTags)
 					.HasForeignKey(et => et.EventId)
 					.OnDelete(DeleteBehavior.Cascade)
 					.HasConstraintName("FK_AssignedTags_Events");

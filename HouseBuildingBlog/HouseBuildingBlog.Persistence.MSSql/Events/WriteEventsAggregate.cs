@@ -18,7 +18,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		{
 			var @event = new EventModel(newEvent);
 
-
 			_DBContext.Add(@event);
 			await _DBContext.SaveChangesAsync();
 

@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
@@ -14,9 +15,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Description { get; set; }
 
-		public IEnumerable<Guid> TagIds { get; set; }
+		public IEnumerable<Guid> TagIds => AssignedTags.Select(et => et.TagId);
 
-		public ICollection<AssignedTagsModel> EventTags { get; set; }
+		public ICollection<AssignedTagsModel> AssignedTags { get; set; }
 
 		public EventModel() { }
 
@@ -31,9 +32,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 			Title = @event.Title;
 			Date = @event.Date;
 			Description = @event.Description;
-			EventTags = new List<AssignedTagsModel>();
+			AssignedTags = new List<AssignedTagsModel>();
 			foreach (var tag in @event.TagIds)
-				EventTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tag });
+				AssignedTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tag });
 		}
 	}
 }

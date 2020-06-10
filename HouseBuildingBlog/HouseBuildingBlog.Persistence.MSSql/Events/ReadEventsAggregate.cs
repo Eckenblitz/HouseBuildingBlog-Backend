@@ -19,22 +19,22 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		protected override async Task<IEvent> Get(Guid eventId)
 		{
 			return await _DBContext.Events
-				.Include(e => e.EventTags)
+				.Include(e => e.AssignedTags)
 				.SingleOrDefaultAsync(e => e.EventId.Equals(eventId));
 		}
 
 		protected override async Task<IEnumerable<IEvent>> GetAll()
 		{
 			return await _DBContext.Events
-				.Include(e => e.EventTags)
+				.Include(e => e.AssignedTags)
 				.ToListAsync();
 		}
 
 		protected override async Task<IEnumerable<IEvent>> GetEventsByTags(IEnumerable<Guid> tagIds)
 		{
 			return await _DBContext.Events
-				.Include(e => e.EventTags)
-				.Where(e => e.EventTags.Any(et => tagIds.Contains(et.TagId)))
+				.Include(e => e.AssignedTags)
+				.Where(e => e.AssignedTags.Any(et => tagIds.Contains(et.TagId)))
 				.ToListAsync();
 		}
 	}
