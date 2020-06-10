@@ -1,11 +1,10 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
-	public class EventDBModel : IEvent
+	public class EventModel : IEvent
 	{
 		public Guid EventId { get; set; }
 
@@ -15,13 +14,13 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Description { get; set; }
 
-		public IEnumerable<Guid> TagIds => EventTags?.Select(et => et.Tag.TagId);
+		public IEnumerable<Guid> TagIds { get; set; }
 
-		public ICollection<AssignedTags> EventTags { get; set; }
+		public ICollection<AssignedTagsModel> EventTags { get; set; }
 
-		public EventDBModel() { }
+		public EventModel() { }
 
-		public EventDBModel(IEvent newEvent)
+		public EventModel(IEvent newEvent)
 		{
 			EventId = newEvent.EventId == Guid.Empty ? Guid.NewGuid() : newEvent.EventId;
 			Update(newEvent);
@@ -32,9 +31,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 			Title = @event.Title;
 			Date = @event.Date;
 			Description = @event.Description;
-			EventTags = new List<AssignedTags>();
+			EventTags = new List<AssignedTagsModel>();
 			foreach (var tag in @event.TagIds)
-				EventTags.Add(new AssignedTags() { EventId = EventId, TagId = tag });
+				EventTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tag });
 		}
 	}
 }

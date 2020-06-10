@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Models
 {
-	public class TagDBModel : ITag
+	public class TagModel : ITag
 	{
 		public Guid TagId { get; private set; }
 
 		public string Title { get; private set; }
 
-		public ICollection<AssignedTags> AssignedEvents { get; set; }
+		public ICollection<AssignedTagsModel> AssignedEvents { get; set; }
 
-		public TagDBModel() { }
+		public TagModel() { }
 
-		public TagDBModel(ITag tag)
+		public TagModel(ITag tag)
 		{
 			Update(tag);
 		}

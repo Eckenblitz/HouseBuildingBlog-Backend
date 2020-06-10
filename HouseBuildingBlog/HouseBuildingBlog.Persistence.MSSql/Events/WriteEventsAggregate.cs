@@ -16,7 +16,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		protected override async Task<IEvent> CreateEvent(IEvent newEvent)
 		{
-			var @event = new EventDBModel(newEvent);
+			var @event = new EventModel(newEvent);
+
+
 			_DBContext.Add(@event);
 			await _DBContext.SaveChangesAsync();
 
@@ -25,7 +27,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		protected override async Task<IEvent> DeleteEvent(Guid eventId)
 		{
-			var @event = await _DBContext.FindAsync<EventDBModel>(eventId);
+			var @event = await _DBContext.FindAsync<EventModel>(eventId);
 			if (@event != null)
 			{
 				_DBContext.Remove(@event);
@@ -36,7 +38,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		protected override async Task<IEvent> UpdateEvent(IEvent @event)
 		{
-			var toUpdate = await _DBContext.FindAsync<EventDBModel>(@event.EventId);
+			var toUpdate = await _DBContext.FindAsync<EventModel>(@event.EventId);
 			if (toUpdate != null)
 			{
 				toUpdate.Update(@event);

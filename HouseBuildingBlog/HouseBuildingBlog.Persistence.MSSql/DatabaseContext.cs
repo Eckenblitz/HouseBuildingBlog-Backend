@@ -5,9 +5,9 @@ namespace HouseBuildingBlog.Persistence.MSSql
 {
 	public class DatabaseContext : DbContext
 	{
-		public DbSet<EventDBModel> Events { get; set; }
-		public DbSet<TagDBModel> Tags { get; set; }
-		public DbSet<AssignedTags> AssignedEventTags { get; set; }
+		public DbSet<EventModel> Events { get; set; }
+		public DbSet<TagModel> Tags { get; set; }
+		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
 		{
@@ -23,17 +23,16 @@ namespace HouseBuildingBlog.Persistence.MSSql
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<EventDBModel>(e =>
+			modelBuilder.Entity<EventModel>(e =>
 			{
 				e.ToTable("Events", "Events");
 				e.HasKey(e => e.EventId);
 
-				e.Ignore(e => e.TagIds);
 				e.Property(e => e.EventId).ValueGeneratedNever();
 				e.Property(e => e.Title).IsRequired();
 			});
 
-			modelBuilder.Entity<AssignedTags>(e =>
+			modelBuilder.Entity<AssignedTagsModel>(e =>
 			{
 				e.ToTable("AssignedTags", "Events");
 				e.HasKey(et => new { et.EventId, et.TagId });
@@ -51,7 +50,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 					.HasConstraintName("FK_AssignedTags_Tags");
 			});
 
-			modelBuilder.Entity<TagDBModel>(e =>
+			modelBuilder.Entity<TagModel>(e =>
 			{
 				e.ToTable("Tags", "Events");
 				e.HasKey(e => e.TagId);

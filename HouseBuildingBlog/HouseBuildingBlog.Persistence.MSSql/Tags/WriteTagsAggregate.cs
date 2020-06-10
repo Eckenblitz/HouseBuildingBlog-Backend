@@ -16,7 +16,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		protected override async Task<ITag> CreateTag(ITag tag)
 		{
-			var newTag = new TagDBModel(tag);
+			var newTag = new TagModel(tag);
 			_DBContext.Add(newTag);
 			await _DBContext.SaveChangesAsync();
 
@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		protected override async Task<ITag> DeleteTag(Guid tagId)
 		{
-			var tag = await _DBContext.FindAsync<TagDBModel>(tagId);
+			var tag = await _DBContext.FindAsync<TagModel>(tagId);
 
 			if (tag != null)
 			{
@@ -38,7 +38,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		protected override async Task<ITag> UpdateTag(ITag tag)
 		{
-			var toUpdate = await _DBContext.FindAsync<TagDBModel>(tag.TagId);
+			var toUpdate = await _DBContext.FindAsync<TagModel>(tag.TagId);
 
 			if (toUpdate != null)
 			{

@@ -18,7 +18,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		protected override async Task<ITag> Get(Guid tagId)
 		{
-			return await _DBContext.FindAsync<TagDBModel>(tagId);
+			return await _DBContext.FindAsync<TagModel>(tagId);
 		}
 
 		protected override async Task<IEnumerable<ITag>> GetAll()
