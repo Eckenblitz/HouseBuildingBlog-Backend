@@ -24,15 +24,29 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 		public EventModel(IEvent newEvent)
 		{
 			EventId = newEvent.EventId == Guid.Empty ? Guid.NewGuid() : newEvent.EventId;
+			AssignedTags = new List<AssignedTagsModel>();
 			Update(newEvent);
 		}
 
-		public void Update(IEvent @event)
+		public void Update(IEvent update)
 		{
-			Title = @event.Title;
-			Date = @event.Date;
-			Description = @event.Description;
-			AssignedTags = new List<AssignedTagsModel>();
+			Title = update.Title;
+			Date = update.Date;
+			Description = update.Description;
+			UpdateTags(update);
+		}
+
+		private void UpdateTags(IEvent update)
+		{
+			var assignedTags = new List<AssignedTagsModel>(AssignedTags);
+
+			//Create
+			foreach (var tagId in update.TagIds.Except(assignedTags.Select(at => at.TagId)))
+				AssignedTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tagId });
+
+			//Delete
+			foreach (var assignedTag in assignedTags.Where(at => !update.TagIds.Contains(at.TagId)))
+				AssignedTags.Remove(assignedTag);
 		}
 	}
 }

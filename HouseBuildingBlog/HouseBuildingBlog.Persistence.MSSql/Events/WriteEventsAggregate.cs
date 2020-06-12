@@ -2,8 +2,6 @@
 using HouseBuildingBlog.Persistence.MSSql.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Events
@@ -21,7 +19,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		{
 			var @event = new EventModel(newEvent);
 			_DBContext.Add(@event);
-			UpdateAssignedTags(@event.EventId, newEvent.TagIds);
 			await _DBContext.SaveChangesAsync();
 
 			return newEvent;
@@ -49,24 +46,10 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			{
 				toUpdate.Update(@event);
 				_DBContext.Events.Update(toUpdate);
-				UpdateAssignedTags(toUpdate.EventId, @event.TagIds);
 				await _DBContext.SaveChangesAsync();
 				return toUpdate;
 			}
 			return toUpdate;
-		}
-
-		private void UpdateAssignedTags(Guid eventId, IEnumerable<Guid> tagIds)
-		{
-			var assignedTags = _DBContext.AssignedEventTags.Where(at => at.EventId.Equals(eventId));
-
-			//Create
-			foreach (var tagId in tagIds.Except(assignedTags.Select(at => at.TagId)))
-				_DBContext.Add(new AssignedTagsModel() { EventId = eventId, TagId = tagId });
-
-			//Delete
-			foreach (var assignedTag in assignedTags.Where(at => !tagIds.Contains(at.TagId)))
-				_DBContext.AssignedEventTags.Remove(assignedTag);
 		}
 	}
 }
