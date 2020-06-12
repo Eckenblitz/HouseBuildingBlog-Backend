@@ -15,7 +15,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Description { get; set; }
 
-		public IEnumerable<Guid> TagIds => AssignedTags.Select(et => et.TagId);
+		public IEnumerable<Guid> TagIds => AssignedTags?.Select(et => et.TagId);
 
 		public ICollection<AssignedTagsModel> AssignedTags { get; set; }
 
@@ -33,8 +33,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 			Date = @event.Date;
 			Description = @event.Description;
 			AssignedTags = new List<AssignedTagsModel>();
-			foreach (var tag in @event.TagIds)
-				AssignedTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tag });
 		}
 	}
 }
