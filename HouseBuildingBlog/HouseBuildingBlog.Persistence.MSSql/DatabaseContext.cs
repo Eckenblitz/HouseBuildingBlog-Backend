@@ -9,16 +9,19 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		public DbSet<TagModel> Tags { get; set; }
 		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
 
-		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+		private MSSQLConfig _config;
+
+		public DatabaseContext(DbContextOptions<DatabaseContext> options, MSSQLConfig config) : base(options)
 		{
+			_config = config;
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			/*if (!optionsBuilder.IsConfigured)
+			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer(@"Server=.\HBB_SQLSERVER;Database=HouseBuildingBlog;Trusted_Connection=True;");
-			}*/
+				optionsBuilder.UseSqlServer($"Server={_config.Server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection}");
+			}
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
