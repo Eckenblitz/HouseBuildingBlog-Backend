@@ -1,7 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using System;
 
-namespace HouseBuildingBlog.Events.Queries.Contracts
+namespace HouseBuildingBlog.Api.Events.Queries.Contracts
 {
 	public class SimpleEventQueryDto
 	{

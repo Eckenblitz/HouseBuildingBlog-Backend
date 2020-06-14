@@ -1,9 +1,9 @@
-﻿using HouseBuildingBlog.Events.Commands.Contracts;
+﻿using HouseBuildingBlog.Api.Events.Commands.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace HouseBuildingBlog.Events.Commands
+namespace HouseBuildingBlog.Api.Events.Commands
 {
 	public class UpdateEventCommand : IRequest<IActionResult>
 	{
@@ -11,7 +11,7 @@ namespace HouseBuildingBlog.Events.Commands
 
 		public EventCommandDto Data { get; }
 
-		public UpdateEventCommand(System.Guid eventId, EventCommandDto data)
+		public UpdateEventCommand(Guid eventId, EventCommandDto data)
 		{
 			Data = data;
 			EventId = eventId;

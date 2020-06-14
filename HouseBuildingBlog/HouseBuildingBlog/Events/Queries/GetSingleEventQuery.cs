@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace HouseBuildingBlog.Events.Queries
+namespace HouseBuildingBlog.Api.Events.Queries
 {
 	public class GetSingleEventQuery : IRequest<IActionResult>
 	{

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Events.Queries
+namespace HouseBuildingBlog.Api.Events.Queries
 {
 	public class GetFilteredEventsQuery : IRequest<IActionResult>
 	{

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseBuildingBlog.Tags.Commands
+namespace HouseBuildingBlog.Api.Tags.Commands
 {
 	public class CreateTagCommand : IRequest<IActionResult>
 	{

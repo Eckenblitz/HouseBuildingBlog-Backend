@@ -1,7 +1,7 @@
-﻿using HouseBuildingBlog.Tags.Commands;
-using HouseBuildingBlog.Tags.Commands.Contracts;
-using HouseBuildingBlog.Tags.Queries;
-using HouseBuildingBlog.Tags.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Tags.Commands;
+using HouseBuildingBlog.Api.Tags.Commands.Contracts;
+using HouseBuildingBlog.Api.Tags.Queries;
+using HouseBuildingBlog.Api.Tags.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Controllers
+namespace HouseBuildingBlog.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
@@ -19,7 +19,7 @@ namespace HouseBuildingBlog.Controllers
 
 		public TagsController(IMediator mediator)
 		{
-			_mediator = mediator ?? throw new System.ArgumentNullException(nameof(mediator));
+			_mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 		}
 
 		[HttpPost]

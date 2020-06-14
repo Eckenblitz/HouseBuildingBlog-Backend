@@ -1,11 +1,11 @@
-﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Events.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Events.Queries.Contracts;
+using HouseBuildingBlog.Domain.Events;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Events.Commands
+namespace HouseBuildingBlog.Api.Events.Commands
 {
 	public class DeleteEventHandler : IRequestHandler<DeleteEventCommand, IActionResult>
 	{

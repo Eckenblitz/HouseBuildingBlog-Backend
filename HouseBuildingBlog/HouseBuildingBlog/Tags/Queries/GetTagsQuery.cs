@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseBuildingBlog.Tags.Queries
+namespace HouseBuildingBlog.Api.Tags.Queries
 {
 	public class GetTagsQuery : IRequest<IActionResult>
 	{

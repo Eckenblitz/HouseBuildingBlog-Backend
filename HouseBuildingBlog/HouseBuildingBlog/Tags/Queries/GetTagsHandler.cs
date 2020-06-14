@@ -1,12 +1,12 @@
-﻿using HouseBuildingBlog.Domain.Tags;
-using HouseBuildingBlog.Tags.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Tags.Queries.Contracts;
+using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Tags.Queries
+namespace HouseBuildingBlog.Api.Tags.Queries
 {
 	public class GetTagsHandler : IRequestHandler<GetTagsQuery, IActionResult>
 	{

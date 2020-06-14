@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace HouseBuildingBlog.Tags.Commands
+namespace HouseBuildingBlog.Api.Tags.Commands
 {
 	public class UpdateTagCommand : IRequest<IActionResult>
 	{

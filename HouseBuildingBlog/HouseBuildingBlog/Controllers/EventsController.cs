@@ -1,6 +1,7 @@
-﻿using HouseBuildingBlog.Events.Commands;
-using HouseBuildingBlog.Events.Queries;
-using HouseBuildingBlog.Events.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Events.Commands;
+using HouseBuildingBlog.Api.Events.Commands.Contracts;
+using HouseBuildingBlog.Api.Events.Queries;
+using HouseBuildingBlog.Api.Events.Queries.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Controllers
+namespace HouseBuildingBlog.Api.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
@@ -18,12 +19,12 @@ namespace HouseBuildingBlog.Controllers
 
 		public EventsController(IMediator mediator)
 		{
-			_mediator = mediator ?? throw new System.ArgumentNullException(nameof(mediator));
+			_mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 		}
 
 		[HttpPost]
 		[ProducesResponseType(typeof(EventQueryDto), StatusCodes.Status201Created)]
-		public async Task<IActionResult> CreateEvent([FromBody] Events.Commands.Contracts.EventCommandDto dto)
+		public async Task<IActionResult> CreateEvent([FromBody] EventCommandDto dto)
 		{
 			return await _mediator.Send(new CreateEventCommand(dto));
 		}
@@ -49,7 +50,7 @@ namespace HouseBuildingBlog.Controllers
 		[HttpPatch("{id}")]
 		[ProducesResponseType(typeof(EventQueryDto), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]Events.Commands.Contracts.EventCommandDto dto)
+		public async Task<IActionResult> UpdateEvent(Guid id, [FromBody]EventCommandDto dto)
 		{
 			return await _mediator.Send(new UpdateEventCommand(id, dto));
 		}

@@ -1,8 +1,8 @@
-﻿using HouseBuildingBlog.Domain.Tags;
-using HouseBuildingBlog.Tags.Commands;
+﻿using HouseBuildingBlog.Api.Tags.Commands;
+using HouseBuildingBlog.Domain.Tags;
 using System;
 
-namespace HouseBuildingBlog.Tags.Models
+namespace HouseBuildingBlog.Api.Tags.Models
 {
 	public class Tag : ITag
 	{

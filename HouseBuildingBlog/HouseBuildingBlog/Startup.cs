@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace HouseBuildingBlog
+namespace HouseBuildingBlog.Api
 {
 	public class Startup
 	{

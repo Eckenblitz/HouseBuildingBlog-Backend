@@ -1,8 +1,8 @@
-﻿using HouseBuildingBlog.Events.Commands.Contracts;
+﻿using HouseBuildingBlog.Api.Events.Commands.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseBuildingBlog.Events.Commands
+namespace HouseBuildingBlog.Api.Events.Commands
 {
 	public class CreateEventCommand : IRequest<IActionResult>
 	{

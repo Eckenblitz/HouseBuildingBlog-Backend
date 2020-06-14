@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Events.Commands.Contracts
+namespace HouseBuildingBlog.Api.Events.Commands.Contracts
 {
 	public class EventCommandDto
 	{

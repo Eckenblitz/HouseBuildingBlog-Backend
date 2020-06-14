@@ -1,10 +1,10 @@
-﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Events.Commands;
+﻿using HouseBuildingBlog.Api.Events.Commands;
+using HouseBuildingBlog.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HouseBuildingBlog.Events.Models
+namespace HouseBuildingBlog.Api.Events.Models
 {
 	public class Event : IEvent
 	{

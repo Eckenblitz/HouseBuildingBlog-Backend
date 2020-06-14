@@ -1,11 +1,11 @@
-﻿using HouseBuildingBlog.Domain.Tags;
-using HouseBuildingBlog.Tags.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Tags.Queries.Contracts;
+using HouseBuildingBlog.Domain.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Tags.Commands
+namespace HouseBuildingBlog.Api.Tags.Commands
 {
 	public class DeleteTagHandler : IRequestHandler<DeleteTagCommand, IActionResult>
 	{

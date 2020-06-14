@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Events.Queries.Contracts
+namespace HouseBuildingBlog.Api.Events.Queries.Contracts
 {
 	public class EventQueryDto
 	{

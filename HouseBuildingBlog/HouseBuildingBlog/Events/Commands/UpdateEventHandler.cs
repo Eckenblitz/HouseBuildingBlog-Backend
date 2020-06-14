@@ -1,12 +1,12 @@
-﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Events.Models;
-using HouseBuildingBlog.Events.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Events.Models;
+using HouseBuildingBlog.Api.Events.Queries.Contracts;
+using HouseBuildingBlog.Domain.Events;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HouseBuildingBlog.Events.Commands
+namespace HouseBuildingBlog.Api.Events.Commands
 {
 	public class UpdateEventHandler : IRequestHandler<UpdateEventCommand, IActionResult>
 	{

@@ -1,7 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
 using System;
 
-namespace HouseBuildingBlog.Tags.Queries.Contracts
+namespace HouseBuildingBlog.Api.Tags.Queries.Contracts
 {
 	public class TagQueryDto
 	{

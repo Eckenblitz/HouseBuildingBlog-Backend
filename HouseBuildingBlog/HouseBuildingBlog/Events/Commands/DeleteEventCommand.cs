@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace HouseBuildingBlog.Events.Commands
+namespace HouseBuildingBlog.Api.Events.Commands
 {
 	public class DeleteEventCommand : IRequest<IActionResult>
 	{
@@ -10,7 +10,7 @@ namespace HouseBuildingBlog.Events.Commands
 
 		public DeleteEventCommand(Guid eventId)
 		{
-			this.EventId = eventId;
+			EventId = eventId;
 		}
 	}
 }

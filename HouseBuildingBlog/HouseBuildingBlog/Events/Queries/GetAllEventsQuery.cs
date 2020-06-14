@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseBuildingBlog.Events.Queries
+namespace HouseBuildingBlog.Api.Events.Queries
 {
 	public class GetAllEventsQuery : IRequest<IActionResult>
 	{

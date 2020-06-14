@@ -1,4 +1,4 @@
-﻿namespace HouseBuildingBlog.Tags.Commands.Contracts
+﻿namespace HouseBuildingBlog.Api.Tags.Commands.Contracts
 {
 	public class TagCommandDto
 	{
