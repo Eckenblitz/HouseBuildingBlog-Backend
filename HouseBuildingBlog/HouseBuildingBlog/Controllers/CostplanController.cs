@@ -1,61 +1,57 @@
-﻿using MediatR;
+﻿using HouseBuildingBlog.Api.Costplan.Commands;
+using HouseBuildingBlog.Api.Costplan.Commands.Contracts;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class CostplanController : ControllerBase
-	{
-		private readonly IMediator _mediator;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CostplanController : ControllerBase
+    {
+        private readonly IMediator _mediator;
 
-		public CostplanController(IMediator mediator)
-		{
-			_mediator = mediator;
-		}
+        public CostplanController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-		[HttpGet]
-		public async Task<IActionResult> GetCostplan()
-		{
-			throw new NotImplementedException();
-		}
+        [HttpGet]
+        public async Task<IActionResult> GetCostplan()
+        {
+            throw new NotImplementedException();
+        }
 
-		[HttpPost("Categories")]
-		public async Task<IActionResult> CreateCategory()
-		{
-			throw new NotImplementedException();
-		}
+        [HttpPost("Items")]
+        public async Task<IActionResult> CreateItem([FromBody] CostplanItemCommandDto commandDto)
+        {
+            return await _mediator.Send(new CreateCostplanItemCommand(commandDto));
+        }
 
-		[HttpPatch("Categories/{id}")]
-		public async Task<IActionResult> UpdateCategory(Guid id)
-		{
-			throw new NotImplementedException();
-		}
+        [HttpPatch("Items/{id}")]
+        public async Task<IActionResult> UpdateItem(Guid id)
+        {
+            throw new NotImplementedException();
+        }
 
-		[HttpPatch("Categories/{id}/Position")]
-		public async Task<IActionResult> MoveCategory(Guid id)
-		{
-			throw new NotImplementedException();
-		}
+        [HttpPut("Items/{id}/Documents/{documentId}")]
+        public async Task<IActionResult> AssignDocument(Guid id, Guid documentId)
+        {
+            throw new NotImplementedException();
+        }
 
-		[HttpPut("Categories/{id}/Documents/{documentId}")]
-		public async Task<IActionResult> AssignDocument(Guid id, Guid documentId)
-		{
-			throw new NotImplementedException();
-		}
+        [HttpDelete("Items/{id}/Documents/{documentId}")]
+        public async Task<IActionResult> RemoveDocument(Guid id, Guid documentId)
+        {
+            throw new NotImplementedException();
+        }
 
-		[HttpDelete("Categories/{id}/Documents/{documentId}")]
-		public async Task<IActionResult> RemoveDocumen(Guid id, Guid documentId)
-		{
-			throw new NotImplementedException();
-		}
-
-		[HttpDelete("Categories/{id}")]
-		public async Task<IActionResult> DeleteCategory(Guid id)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        [HttpDelete("Items/{id}")]
+        public async Task<IActionResult> DeleteItem(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
