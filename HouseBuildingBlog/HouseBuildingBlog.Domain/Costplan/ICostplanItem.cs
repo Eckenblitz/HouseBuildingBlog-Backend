@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Costplan
 {
@@ -12,7 +11,5 @@ namespace HouseBuildingBlog.Domain.Costplan
         decimal EstimatedCost { get; }
 
         int Number { get; }
-
-        IList<Guid> AssignedDocumentIds { get; }
     }
 }
