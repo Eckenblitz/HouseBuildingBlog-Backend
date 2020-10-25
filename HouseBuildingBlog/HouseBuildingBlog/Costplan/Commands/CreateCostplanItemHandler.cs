@@ -24,7 +24,7 @@ namespace HouseBuildingBlog.Api.Costplan.Commands
             try
             {
                 var item = new CostplanItem(Guid.NewGuid(), request.Data);
-                var newItem = await _writeCostplanAggregate.CreateCostplanItem(item);
+                var newItem = await _writeCostplanAggregate.CreateCostplanItemAsync(item);
 
                 return new CreatedResult(string.Empty, new CostplanItemQueryDto(newItem));
             }
