@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Api.Events.Models;
 using HouseBuildingBlog.Api.Events.Queries.Contracts;
 using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Domain.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -19,9 +20,16 @@ namespace HouseBuildingBlog.Api.Events.Commands
 
 		public async Task<IActionResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
 		{
-			var createdEvent = await _writeEventsAggregate.CreateEventAsync(new Event(request));
+			try
+			{
+				var createdEvent = await _writeEventsAggregate.CreateEventAsync(new Event(request));
+				return new CreatedResult(string.Empty, new EventQueryDto(createdEvent));
+			}
+			catch (ValidationException)
+			{
+				return new BadRequestResult();
+			}
 
-			return new CreatedResult(string.Empty, new EventQueryDto(createdEvent));
 		}
 	}
 }

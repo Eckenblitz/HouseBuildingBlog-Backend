@@ -1,4 +1,4 @@
-using HouseBuildingBlog.Persistence.MSSql;
+using HouseBuildingBlog.Persistence.Mock;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +31,8 @@ namespace HouseBuildingBlog.Api
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 			});
 
-			//services.RegisterMockRepositories();
-			services.RegisterMSSQLRepositories(Configuration);
+			services.RegisterMockRepositories();
+			//services.RegisterMSSQLRepositories(Configuration);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

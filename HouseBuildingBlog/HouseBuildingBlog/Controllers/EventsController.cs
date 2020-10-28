@@ -55,6 +55,12 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new UpdateEventCommand(id, dto));
 		}
 
+		[HttpGet("{id}/Documents")]
+		public async Task<IActionResult> GetDocuments(Guid id)
+		{
+			return await _mediator.Send(new GetDocumentsQuery(id));
+		}
+
 		[HttpDelete("{id}")]
 		[ProducesResponseType(typeof(EventQueryDto), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -62,5 +68,8 @@ namespace HouseBuildingBlog.Api.Controllers
 		{
 			return await _mediator.Send(new DeleteEventCommand(id));
 		}
+
+
+
 	}
 }

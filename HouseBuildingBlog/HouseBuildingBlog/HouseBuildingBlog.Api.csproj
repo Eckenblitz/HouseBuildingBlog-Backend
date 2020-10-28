@@ -21,8 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Documents\Commands\" />
-    <Folder Include="Documents\Queries\" />
     <Folder Include="Pictures\Commands\" />
     <Folder Include="Pictures\Models\" />
     <Folder Include="Pictures\Queries\" />

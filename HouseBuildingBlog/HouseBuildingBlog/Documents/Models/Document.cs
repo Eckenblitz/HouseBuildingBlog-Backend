@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HouseBuildingBlog.Api.Documents.Commands;
 using HouseBuildingBlog.Domain.Documents;
+using System;
 
 namespace HouseBuildingBlog.Api.Documents.Models
 {
@@ -16,13 +14,40 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public string FileAdress { get; private set; }
 
+		public float Price { get; private set; }
+
+		public Guid EventId { get; private set; }
+
 		public Document() { }
 
-		public Document(IDocument doc) {
+		public Document(IDocument doc)
+		{
 			this.DocumentId = doc.DocumentId;
 			this.Title = doc.Title;
 			this.Comment = doc.Comment;
 			this.FileAdress = doc.FileAdress;
+			this.Price = doc.Price;
+			this.EventId = doc.EventId;
+		}
+
+		public Document(CreateDocumentCommand command)
+		{
+			this.DocumentId = Guid.NewGuid();
+			this.Title = command.Data.Title;
+			this.Comment = command.Data.Comment;
+			this.FileAdress = command.Data.FileAdress;
+			this.Price = command.Data.Price;
+			this.EventId = command.Data.EventId;
+		}
+
+		public Document(UpdateDocumentCommand command)
+		{
+			this.DocumentId = command.Id;
+			this.Title = command.Data.Title;
+			this.Comment = command.Data.Comment;
+			this.FileAdress = command.Data.FileAdress;
+			this.Price = command.Data.Price;
+			this.EventId = command.Data.EventId;
 		}
 	}
 }
