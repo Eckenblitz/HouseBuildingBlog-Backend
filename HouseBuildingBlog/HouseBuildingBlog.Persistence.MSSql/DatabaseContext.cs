@@ -8,6 +8,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		public DbSet<EventModel> Events { get; set; }
 		public DbSet<TagModel> Tags { get; set; }
 		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
+		public DbSet<CostplanItemModel> CostplanItems { get; set; }
 
 		private MSSQLConfig _config;
 
@@ -62,6 +63,16 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.Property(e => e.Title)
 					.IsRequired()
 					.HasMaxLength(200);
+			});
+
+			modelBuilder.Entity<CostplanItemModel>(entity =>
+			{
+				entity.ToTable("CostplanItems", "Costplan");
+				entity.HasKey(e => e.CostplanItemId);
+				entity.Property(e => e.Name)
+					.IsRequired();
+				entity.Property(e => e.Number)
+					.IsRequired();
 			});
 		}
 	}
