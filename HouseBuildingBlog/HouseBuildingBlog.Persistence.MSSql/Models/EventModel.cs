@@ -19,6 +19,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public ICollection<AssignedTagsModel> AssignedTags { get; set; }
 
+		public ICollection<DocumentModel> Documents { get; set; }
 		public EventModel() { }
 
 		public EventModel(IEvent newEvent)

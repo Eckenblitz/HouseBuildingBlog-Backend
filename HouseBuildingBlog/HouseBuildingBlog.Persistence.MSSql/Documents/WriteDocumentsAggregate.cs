@@ -1,24 +1,51 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	class WriteDocumentsAggregate : WriteDocumentsAggregateBase
+	public class WriteDocumentsAggregate : WriteDocumentsAggregateBase
 	{
-		protected override Task<IDocument> CreateDocument(IDocument newDocument)
+		private readonly DatabaseContext _DBContext;
+
+		public WriteDocumentsAggregate(DatabaseContext dBContext)
 		{
-			throw new NotImplementedException();
+			_DBContext = dBContext;
+		}
+		protected override async Task<IDocument> CreateDocument(IDocument newDocument)
+		{
+			var document = new DocumentModel(newDocument);
+			_DBContext.Add(document);
+			await _DBContext.SaveChangesAsync();
+
+			return newDocument;
 		}
 
-		protected override Task<IDocument> DeleteDocument(Guid documentId)
+		protected override async Task<IDocument> DeleteDocument(Guid documentId)
 		{
-			throw new NotImplementedException();
+			var document = await _DBContext.Documents
+				.SingleOrDefaultAsync(e => e.DocumentId.Equals(documentId));
+			if (document != null)
+			{
+				_DBContext.Remove(document);
+				await _DBContext.SaveChangesAsync();
+			}
+			return document;
 		}
 
-		protected override Task<IDocument> UpdateDocument(IDocument document)
+		protected override async Task<IDocument> UpdateDocument(IDocument document)
 		{
-			throw new NotImplementedException();
+			var toUpdate = await _DBContext.Documents
+				.SingleOrDefaultAsync(e => e.DocumentId.Equals(document.DocumentId));
+			if (toUpdate != null)
+			{
+				toUpdate.Update(document);
+				_DBContext.Documents.Update(toUpdate);
+				await _DBContext.SaveChangesAsync();
+			}
+			return toUpdate;
 		}
 	}
 }

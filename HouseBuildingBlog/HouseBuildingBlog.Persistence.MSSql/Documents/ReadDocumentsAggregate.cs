@@ -1,25 +1,37 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	class ReadDocumentsAggregate : ReadDocumentsAggregateBase
+	public class ReadDocumentsAggregate : ReadDocumentsAggregateBase
 	{
-		protected override Task<IDocument> Get(Guid id)
+		private readonly DatabaseContext _DBContext;
+
+		public ReadDocumentsAggregate(DatabaseContext dBContext)
 		{
-			throw new NotImplementedException();
+			_DBContext = dBContext;
+		}
+		protected override async Task<IDocument> Get(Guid id)
+		{
+			return await _DBContext.Documents
+				.SingleOrDefaultAsync(e => e.DocumentId.Equals(id));
 		}
 
-		protected override Task<IEnumerable<IDocument>> GetAll()
+		protected override async Task<IEnumerable<IDocument>> GetAll()
 		{
-			throw new NotImplementedException();
+			return await _DBContext.Documents
+				.ToListAsync();
 		}
 
-		protected override Task<IEnumerable<IDocument>> GetByEventId(Guid eventId)
+		protected override async Task<IEnumerable<IDocument>> GetByEventId(Guid eventId)
 		{
-			throw new NotImplementedException();
+			return await _DBContext.Documents
+				.Where(e => e.EventId.Equals(eventId))
+				.ToListAsync();
 		}
 	}
 }

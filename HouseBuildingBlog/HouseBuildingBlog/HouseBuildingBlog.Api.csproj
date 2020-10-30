@@ -20,11 +20,5 @@
     <ProjectReference Include="..\HouseBuildingBlog.Persistence.MSSql\HouseBuildingBlog.Persistence.MSSql.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pictures\Commands\" />
-    <Folder Include="Pictures\Models\" />
-    <Folder Include="Pictures\Queries\" />
-  </ItemGroup>
-
 
 </Project>
