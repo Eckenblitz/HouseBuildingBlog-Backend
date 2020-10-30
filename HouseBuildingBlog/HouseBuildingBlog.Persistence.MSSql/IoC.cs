@@ -1,5 +1,7 @@
-﻿using HouseBuildingBlog.Domain.Events;
+﻿using HouseBuildingBlog.Domain.Costplan;
+using HouseBuildingBlog.Domain.Events;
 using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Persistence.MSSql.Costplan;
 using HouseBuildingBlog.Persistence.MSSql.Events;
 using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			services.AddTransient<IReadEventsAggregate, ReadEventsAggregate>();
 			services.AddTransient<IWriteTagsAggregate, WriteTagsAggregate>();
 			services.AddTransient<IReadTagsAggregate, ReadTagsAggregate>();
+			services.AddTransient<IWriteCostplanAggregate, WriteCostplanAggregate>();
 		}
 	}
 }
