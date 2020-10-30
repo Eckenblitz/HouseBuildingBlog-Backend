@@ -1,5 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Costplan;
 using HouseBuildingBlog.Persistence.MSSql.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Costplan
@@ -20,6 +22,18 @@ namespace HouseBuildingBlog.Persistence.MSSql.Costplan
 			await _DBContext.SaveChangesAsync();
 
 			return item;
+		}
+
+		protected async override Task<ICostplanItem> DeleteCostplanItem(Guid costplanItemId)
+		{
+			var existingItem = await _DBContext.CostplanItems
+				.SingleOrDefaultAsync(e => e.CostplanItemId.Equals(costplanItemId));
+			if (existingItem != null)
+			{
+				_DBContext.Remove(existingItem);
+				await _DBContext.SaveChangesAsync();
+			}
+			return existingItem;
 		}
 	}
 }
