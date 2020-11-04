@@ -11,8 +11,8 @@ namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 
 		public string FileAdress { get; set; }
 
-		public float Price { get; set; }
-		public Guid EventId { get; set; }
+		public decimal Price { get; set; }
+		public Nullable<Guid> EventId { get; set; }
 
 
 		public DocumentCommandDto() { }

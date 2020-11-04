@@ -14,9 +14,9 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public string FileAdress { get; private set; }
 
-		public float Price { get; private set; }
+		public decimal Price { get; private set; }
 
-		public Guid EventId { get; private set; }
+		public Nullable<Guid> EventId { get; private set; }
 
 		public Document() { }
 

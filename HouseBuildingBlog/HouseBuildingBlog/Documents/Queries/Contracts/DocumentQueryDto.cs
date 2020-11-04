@@ -9,9 +9,9 @@ namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 		public string Title { get; set; }
 		public string Comment { get; set; }
 		public string FileAdress { get; set; }
-		public float Price { get; set; }
+		public decimal Price { get; set; }
 
-		public Guid EventId { get; set; }
+		public Nullable<Guid> EventId { get; set; }
 
 		public DocumentQueryDto(IDocument doc)
 		{

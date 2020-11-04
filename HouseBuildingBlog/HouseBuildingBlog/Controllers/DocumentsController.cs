@@ -40,7 +40,7 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new GetSingleDocumentQuery(id));
 		}
 
-		[HttpGet("{EventId}")]
+		[HttpGet("{EventId}/Event")]
 		public async Task<IActionResult> GetDocumentByEventId(Guid eventId)
 		{
 			return await _mediator.Send(new GetDocumentByEventIdQuery(eventId));

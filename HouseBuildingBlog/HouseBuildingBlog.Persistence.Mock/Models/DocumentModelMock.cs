@@ -13,8 +13,8 @@ namespace HouseBuildingBlog.Persistence.Mock.Models
 
 		public string FileAdress { get; set; }
 
-		public float Price { get; set; }
-		public Guid EventId { get; set; }
+		public decimal Price { get; set; }
+		public Nullable<Guid> EventId { get; set; }
 
 		public DocumentModelMock(IDocument document)
 		{
