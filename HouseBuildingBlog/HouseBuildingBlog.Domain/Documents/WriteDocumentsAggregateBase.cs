@@ -32,5 +32,13 @@ namespace HouseBuildingBlog.Domain.Documents
 				throw new ValidationException(validationError);
 			return UpdateDocument(document);
 		}
+
+
+		protected abstract Task<IDocument> UpdateFile(Guid documentId, IFile file);
+		public Task<IDocument> UpdateFileAsync(Guid documentId, IFile file)
+		{
+			//ToDo: Validation
+			return UpdateFile(documentId, file);
+		}
 	}
 }

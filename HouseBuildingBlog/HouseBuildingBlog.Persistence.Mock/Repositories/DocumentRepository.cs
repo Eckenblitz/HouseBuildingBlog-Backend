@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock.Repositories
 {
-	class DocumentRepository
+	public class DocumentRepository
 	{
 		private readonly IList<DocumentModelMock> _repo = new List<DocumentModelMock>();
 
@@ -31,16 +31,16 @@ namespace HouseBuildingBlog.Persistence.Mock.Repositories
 			return Task.CompletedTask;
 		}
 
-		public Task<IDocument> GetById(Guid id)
+		public Task<DocumentModelMock> GetById(Guid id)
 		{
-			IDocument doc = _repo.SingleOrDefault(doc => doc.DocumentId.Equals(id));
+			DocumentModelMock doc = _repo.SingleOrDefault(doc => doc.DocumentId.Equals(id));
 			return Task.FromResult(doc);
 		}
 
-		public Task<IList<IDocument>> Query(Func<IDocument, bool> query)
+		public Task<IList<DocumentModelMock>> Query(Func<IDocument, bool> query)
 		{
 			var searchResult = _repo.Where(t => query(t));
-			IList<IDocument> documentList = new List<IDocument>(searchResult);
+			IList<DocumentModelMock> documentList = new List<DocumentModelMock>(searchResult);
 			return Task.FromResult(documentList);
 		}
 	}

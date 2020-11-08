@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	class WriteDocumentsAggregateMock : WriteDocumentsAggregateBase
+	public class WriteDocumentsAggregateMock : WriteDocumentsAggregateBase
 	{
 		public readonly DocumentRepository _repo;
 
@@ -38,6 +38,17 @@ namespace HouseBuildingBlog.Persistence.Mock
 			if (existingDoc != null)
 				await _repo.Save(document);
 			return document;
+		}
+
+		protected override async Task<IDocument> UpdateFile(Guid documentId, IFile file)
+		{
+			var existingDocument = await _repo.GetById(documentId);
+			if (existingDocument != null)
+			{
+				existingDocument.UpdateFile(file);
+				await _repo.Save(existingDocument);
+			}
+			return existingDocument;
 		}
 	}
 }
