@@ -1,3 +1,4 @@
+using HouseBuildingBlog.Api.Services;
 using HouseBuildingBlog.Persistence.MSSql;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,8 @@ namespace HouseBuildingBlog.Api
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 			});
+
+			services.AddTransient<ITransformDocumentFileService, TransformDocumentFileService>();
 
 			//services.RegisterMockRepositories();
 			services.RegisterMSSQLRepositories(Configuration);
