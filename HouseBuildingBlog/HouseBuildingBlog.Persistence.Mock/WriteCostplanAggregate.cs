@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Costplan;
 using HouseBuildingBlog.Persistence.Mock.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
@@ -12,6 +13,11 @@ namespace HouseBuildingBlog.Persistence.Mock
 		public WriteCostplanAggregate(CostplanRepository repo)
 		{
 			_repo = repo;
+		}
+
+		protected override Task SaveChanges()
+		{
+			throw new NotImplementedException();
 		}
 
 		protected override async Task<ICostplanItem> CreateCostplanItem(ICostplanItem newItem)

@@ -31,9 +31,9 @@ namespace HouseBuildingBlog.Api.Controllers
 		}
 
 		[HttpPatch("Items/{id}")]
-		public async Task<IActionResult> UpdateItem(Guid id)
+		public async Task<IActionResult> UpdateItem(Guid id, [FromBody] CostplanItemCommandDto commandDto)
 		{
-			throw new NotImplementedException();
+			return await _mediator.Send(new UpdateCostplanItemCommand(id, commandDto));
 		}
 
 		[HttpPut("Items/{id}/Documents/{documentId}")]

@@ -15,13 +15,17 @@ namespace HouseBuildingBlog.Persistence.MSSql.Costplan
 			_DBContext = dBContext;
 		}
 
-		protected override async Task<ICostplanItem> CreateCostplanItem(ICostplanItem newItem)
+		protected override async Task SaveChanges()
 		{
-			var item = new CostplanItemModel(newItem);
-			_DBContext.Add(item);
 			await _DBContext.SaveChangesAsync();
+		}
 
-			return item;
+		protected override Task<ICostplanItem> CreateCostplanItem(ICostplanItem newItem)
+		{
+			ICostplanItem item = new CostplanItemModel(newItem);
+			_DBContext.Add(item);
+
+			return Task.FromResult(item);
 		}
 
 		protected async override Task<ICostplanItem> DeleteCostplanItem(Guid costplanItemId)
@@ -31,7 +35,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Costplan
 			if (existingItem != null)
 			{
 				_DBContext.Remove(existingItem);
-				await _DBContext.SaveChangesAsync();
 			}
 			return existingItem;
 		}
