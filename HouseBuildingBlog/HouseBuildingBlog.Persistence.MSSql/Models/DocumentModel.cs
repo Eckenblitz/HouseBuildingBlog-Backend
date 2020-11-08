@@ -11,7 +11,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 			DocumentId = newDocument.DocumentId;
 			Title = newDocument.Title;
 			Comment = newDocument.Comment;
-			FileAdress = newDocument.FileAdress;
 			Price = newDocument.Price;
 			EventId = newDocument.EventId;
 		}
@@ -26,13 +25,15 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 		public decimal Price { get; set; }
 
 		public Nullable<Guid> EventId { get; set; }
+
 		public EventModel Event { get; set; }
+
+		public IFile File { get; private set; }
 
 		public void Update(IDocument document)
 		{
 			Title = document.Title;
 			Comment = document.Comment;
-			FileAdress = document.FileAdress;
 			Price = document.Price;
 			EventId = document.EventId;
 		}

@@ -2,6 +2,7 @@
 
 namespace HouseBuildingBlog.Domain.Documents
 {
+	//ToDo: rename to DocumentFile
 	public interface IFile
 	{
 		public Guid DocumentId { get; }

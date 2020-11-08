@@ -11,11 +11,11 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public byte[] BinaryData { get; private set; }
 
-		public File(IFile file)
+		public File(Guid documentId, string fileName, byte[] binaryData)
 		{
-			DocumentId = file.DocumentId;
-			FileName = file.FileName;
-			BinaryData = file.BinaryData;
+			DocumentId = documentId;
+			FileName = fileName;
+			BinaryData = binaryData;
 		}
 	}
 }

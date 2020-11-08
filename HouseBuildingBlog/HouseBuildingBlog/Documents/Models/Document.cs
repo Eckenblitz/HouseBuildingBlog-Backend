@@ -12,8 +12,6 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public string Comment { get; private set; }
 
-		public string FileAdress { get; private set; }
-
 		public decimal Price { get; private set; }
 
 		public Nullable<Guid> EventId { get; private set; }
@@ -37,7 +35,6 @@ namespace HouseBuildingBlog.Api.Documents.Models
 			this.DocumentId = Guid.NewGuid();
 			this.Title = command.Data.Title;
 			this.Comment = command.Data.Comment;
-			this.FileAdress = command.Data.FileAdress;
 			this.Price = command.Data.Price;
 			this.EventId = command.Data.EventId;
 		}
@@ -47,7 +44,6 @@ namespace HouseBuildingBlog.Api.Documents.Models
 			this.DocumentId = command.Id;
 			this.Title = command.Data.Title;
 			this.Comment = command.Data.Comment;
-			this.FileAdress = command.Data.FileAdress;
 			this.Price = command.Data.Price;
 			this.EventId = command.Data.EventId;
 		}

@@ -8,7 +8,6 @@ namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 		public Guid DocumentId { get; set; }
 		public string Title { get; set; }
 		public string Comment { get; set; }
-		public string FileAdress { get; set; }
 		public decimal Price { get; set; }
 
 		public Nullable<Guid> EventId { get; set; }
@@ -18,7 +17,6 @@ namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 			DocumentId = doc.DocumentId;
 			Title = doc.Title;
 			Comment = doc.Comment;
-			FileAdress = doc.FileAdress;
 			Price = doc.Price;
 			EventId = doc.EventId;
 		}
