@@ -3,16 +3,19 @@ using System;
 
 namespace HouseBuildingBlog.Api.Documents.Models
 {
-	public class File
+	public class File : IFile
 	{
 		public Guid DocumentId { get; private set; }
 
-		public byte[] FileByteStream { get; private set; }
+		public string FileName { get; private set; }
+
+		public byte[] BinaryData { get; private set; }
 
 		public File(IFile file)
 		{
 			DocumentId = file.DocumentId;
-			FileByteStream = file.FileByteStream;
+			FileName = file.FileName;
+			BinaryData = file.BinaryData;
 		}
 	}
 }

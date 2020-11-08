@@ -7,8 +7,8 @@ namespace HouseBuildingBlog.Domain.Documents
 		Guid DocumentId { get; }
 		string Title { get; }
 		string Comment { get; }
-		string FileAdress { get; }
 		decimal Price { get; }
 		Nullable<Guid> EventId { get; }
+		IFile File { get; }
 	}
 }

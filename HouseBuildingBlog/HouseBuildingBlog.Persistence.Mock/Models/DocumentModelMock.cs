@@ -3,7 +3,7 @@ using System;
 
 namespace HouseBuildingBlog.Persistence.Mock.Models
 {
-	class DocumentModelMock : IDocument
+	public class DocumentModelMock : IDocument
 	{
 		public Guid DocumentId { get; set; }
 
@@ -11,17 +11,14 @@ namespace HouseBuildingBlog.Persistence.Mock.Models
 
 		public string Comment { get; set; }
 
-		public string FileAdress { get; set; }
-
 		public decimal Price { get; set; }
 		public Nullable<Guid> EventId { get; set; }
-
+		public IFile File { get; set; }
 		public DocumentModelMock(IDocument document)
 		{
 			DocumentId = document.DocumentId;
 			Title = document.Title;
 			Comment = document.Comment;
-			FileAdress = document.FileAdress;
 			Price = document.Price;
 			EventId = document.EventId;
 		}
@@ -30,9 +27,13 @@ namespace HouseBuildingBlog.Persistence.Mock.Models
 		{
 			Title = document.Title;
 			Comment = document.Comment;
-			FileAdress = document.FileAdress;
 			Price = document.Price;
 			EventId = document.EventId;
+		}
+
+		public void UpdateFile(IFile file)
+		{
+			File = file;
 		}
 	}
 }

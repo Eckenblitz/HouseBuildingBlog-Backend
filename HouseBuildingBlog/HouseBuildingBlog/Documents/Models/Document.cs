@@ -18,6 +18,8 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public Nullable<Guid> EventId { get; private set; }
 
+		public IFile File { get; private set; }
+
 		public Document() { }
 
 		public Document(IDocument doc)
@@ -25,9 +27,9 @@ namespace HouseBuildingBlog.Api.Documents.Models
 			this.DocumentId = doc.DocumentId;
 			this.Title = doc.Title;
 			this.Comment = doc.Comment;
-			this.FileAdress = doc.FileAdress;
 			this.Price = doc.Price;
 			this.EventId = doc.EventId;
+			File = doc.File;
 		}
 
 		public Document(CreateDocumentCommand command)

@@ -6,6 +6,8 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		public Guid DocumentId { get; }
 
-		public byte[] FileByteStream { get; }
+		public string FileName { get; }
+
+		public byte[] BinaryData { get; }
 	}
 }
