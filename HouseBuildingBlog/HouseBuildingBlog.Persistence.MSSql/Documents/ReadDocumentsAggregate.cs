@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	public class ReadDocumentsAggregate : ReadDocumentsAggregateBase
+	public class ReadDocumentsAggregate : Domain.Documents.ReadDocumentsAggregate
 	{
 		private readonly DatabaseContext _DBContext;
 

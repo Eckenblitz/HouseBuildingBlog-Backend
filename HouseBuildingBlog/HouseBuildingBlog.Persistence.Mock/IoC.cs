@@ -18,8 +18,8 @@ namespace HouseBuildingBlog.Persistence.Mock
 			services.AddTransient<IReadEventsAggregate, ReadEventsAggregateMock>();
 			services.AddTransient<IWriteTagsAggregate, WriteTagsAggregateMock>();
 			services.AddTransient<IReadTagsAggregate, ReadTagsAggregateMock>();
-			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregateMock>();
-			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregateMock>();
+			services.AddTransient<IWriteDocumentsAggregate, CachedWriteDocumentsRepository>();
+			services.AddTransient<IReadDocumentsAggregate, CachedReadDocumentsRepository>();
 		}
 	}
 }

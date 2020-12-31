@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	class ReadDocumentsAggregateMock : ReadDocumentsAggregateBase
+	class CachedReadDocumentsRepository : IReadDocumentsRepository
 	{
 		public readonly DocumentRepository _repo;
 
-		public ReadDocumentsAggregateMock(DocumentRepository repo)
+		public CachedReadDocumentsRepository(DocumentRepository repo)
 		{
 			_repo = repo;
 		}
 
-		protected override async Task<IDocument> Get(Guid id)
+		public async Task<IDocument> GetAsync(Guid id)
 		{
 			return await _repo.GetById(id);
 		}
 
-		protected override async Task<IEnumerable<IDocument>> GetAll()
+		public async Task<IEnumerable<IDocument>> GetAllAsync()
 		{
 			return await _repo.Query(e => true);
 		}

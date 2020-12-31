@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.Mock
 {
-	public class WriteDocumentsAggregateMock : WriteDocumentsAggregateBase
+	public class CachedWriteDocumentsRepository : IWriteDocumentsRepository
 	{
 		public readonly DocumentRepository _repo;
 
-		public WriteDocumentsAggregateMock(DocumentRepository repo)
+		public CachedWriteDocumentsRepository(DocumentRepository repo)
 		{
 			_repo = repo;
 		}
 
-		protected override async Task<IDocument> CreateDocument(IDocument newDocument)
+		public async Task<IDocument> CreateDocumentAsync(IDocument newDocument)
 		{
 			var docExists = await _repo.GetById(newDocument.DocumentId);
 			if (docExists != null)
@@ -24,7 +24,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			return newDocument;
 		}
 
-		protected override async Task<IDocument> DeleteDocument(Guid documentId)
+		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
 			var docExists = await _repo.GetById(documentId);
 			if (docExists != null)
@@ -32,7 +32,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			return docExists;
 		}
 
-		protected override async Task<IDocument> UpdateDocument(IDocument document)
+		public async Task<IDocument> UpdateDocumentAsync(IDocument document)
 		{
 			var existingDoc = await _repo.GetById(document.DocumentId);
 			if (existingDoc != null)

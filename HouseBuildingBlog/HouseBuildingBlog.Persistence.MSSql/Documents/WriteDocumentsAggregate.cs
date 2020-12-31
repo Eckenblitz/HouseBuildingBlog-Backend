@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	public class WriteDocumentsAggregate : WriteDocumentsAggregateBase
+	public class WriteDocumentsAggregate : Domain.Documents.WriteDocumentsAggregate
 	{
 		private readonly DatabaseContext _DBContext;
 
