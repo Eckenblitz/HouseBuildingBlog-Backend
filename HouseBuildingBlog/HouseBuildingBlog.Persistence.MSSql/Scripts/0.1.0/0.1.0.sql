@@ -28,6 +28,3 @@ CREATE TABLE Events.AssignedTags (
 	CONSTRAINT FK_AssignedTags_Tags FOREIGN KEY (TagId) REFERENCES Events.Tags (TagId) ON DELETE CASCADE
 )
 GO
-
-UPDATE Info.DatabaseVersion SET Major = 0, Minor = 1, Patch = 0
-GO

@@ -10,7 +10,6 @@ namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 		public string Comment { get; set; }
 
 		public decimal Price { get; set; }
-
 		public Nullable<Guid> EventId { get; set; }
 
 
