@@ -24,10 +24,5 @@ namespace HouseBuildingBlog.Persistence.Mock
 		{
 			return await _repo.Query(e => true);
 		}
-
-		protected override async Task<IEnumerable<IDocument>> GetByEventId(Guid eventId)
-		{
-			return await _repo.Query(d => d.EventId.Equals(eventId));
-		}
 	}
 }

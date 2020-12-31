@@ -9,8 +9,5 @@ namespace HouseBuildingBlog.Domain.Documents
 		Task<IEnumerable<IDocument>> GetAllAsync();
 
 		Task<IDocument> GetAsync(Guid id);
-
-		Task<IEnumerable<IDocument>> GetByEventIdAsync(Guid eventId);
-
 	}
 }

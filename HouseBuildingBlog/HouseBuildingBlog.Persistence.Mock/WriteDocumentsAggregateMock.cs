@@ -39,16 +39,5 @@ namespace HouseBuildingBlog.Persistence.Mock
 				await _repo.Save(document);
 			return document;
 		}
-
-		protected override async Task<IDocument> UpdateFile(Guid documentId, IFile file)
-		{
-			var existingDocument = await _repo.GetById(documentId);
-			if (existingDocument != null)
-			{
-				existingDocument.UpdateFile(file);
-				await _repo.Save(existingDocument);
-			}
-			return existingDocument;
-		}
 	}
 }

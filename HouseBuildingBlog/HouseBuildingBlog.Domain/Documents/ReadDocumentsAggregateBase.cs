@@ -17,11 +17,5 @@ namespace HouseBuildingBlog.Domain.Documents
 		{
 			return Get(id);
 		}
-
-		protected abstract Task<IEnumerable<IDocument>> GetByEventId(Guid eventId);
-		public Task<IEnumerable<IDocument>> GetByEventIdAsync(Guid eventId)
-		{
-			return GetByEventIdAsync(eventId);
-		}
 	}
 }

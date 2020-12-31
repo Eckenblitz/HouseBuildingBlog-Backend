@@ -12,8 +12,9 @@ namespace HouseBuildingBlog.Persistence.Mock.Models
 		public string Comment { get; set; }
 
 		public decimal Price { get; set; }
+
 		public Nullable<Guid> EventId { get; set; }
-		public IFile File { get; set; }
+
 		public DocumentModelMock(IDocument document)
 		{
 			DocumentId = document.DocumentId;
@@ -29,11 +30,6 @@ namespace HouseBuildingBlog.Persistence.Mock.Models
 			Comment = document.Comment;
 			Price = document.Price;
 			EventId = document.EventId;
-		}
-
-		public void UpdateFile(IFile file)
-		{
-			File = file;
 		}
 	}
 }

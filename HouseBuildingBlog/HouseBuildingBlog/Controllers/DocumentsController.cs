@@ -40,14 +40,8 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new GetSingleDocumentQuery(id));
 		}
 
-		[HttpGet("{EventId}/Event")]
-		public async Task<IActionResult> GetDocumentByEventId(Guid eventId)
-		{
-			return await _mediator.Send(new GetDocumentByEventIdQuery(eventId));
-		}
-
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateDocument(Guid id, [FromBody]DocumentCommandDto dto)
+		public async Task<IActionResult> UpdateDocument(Guid id, [FromBody] DocumentCommandDto dto)
 		{
 			return await _mediator.Send(new UpdateDocumentCommand(id, dto));
 		}
@@ -58,21 +52,5 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new DeleteDocumentCommand(id));
 
 		}
-
-		/*[HttpPut("{id}/File")]
-		public async Task<IActionResult> UploadFile()
-		{
-			//File + id
-			//return await _mediator.Send(new UploadFileCommand(id));
-		}*/
-
-		[HttpGet("{id}/File")]
-		public async Task<IActionResult> DownloadFile(Guid id)
-		{
-			return await _mediator.Send(new DownloadFileQuery(id));
-		}
-
-
-
 	}
 }

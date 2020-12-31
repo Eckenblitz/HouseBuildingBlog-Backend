@@ -9,6 +9,5 @@ namespace HouseBuildingBlog.Domain.Documents
 		string Comment { get; }
 		decimal Price { get; }
 		Nullable<Guid> EventId { get; }
-		IFile File { get; }
 	}
 }

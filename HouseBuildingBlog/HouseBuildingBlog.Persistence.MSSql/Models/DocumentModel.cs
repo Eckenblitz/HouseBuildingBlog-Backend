@@ -18,17 +18,14 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 		public Guid DocumentId { get; }
 
 		public string Title { get; set; }
-		public string Comment { get; set; }
 
-		public string FileAdress { get; set; }
+		public string Comment { get; set; }
 
 		public decimal Price { get; set; }
 
 		public Nullable<Guid> EventId { get; set; }
 
 		public EventModel Event { get; set; }
-
-		public IFile File { get; private set; }
 
 		public void Update(IDocument document)
 		{

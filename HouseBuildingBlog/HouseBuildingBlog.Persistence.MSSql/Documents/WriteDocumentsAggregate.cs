@@ -47,10 +47,5 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			}
 			return toUpdate;
 		}
-
-		protected override Task<IDocument> UpdateFile(Guid documentId, IFile file)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

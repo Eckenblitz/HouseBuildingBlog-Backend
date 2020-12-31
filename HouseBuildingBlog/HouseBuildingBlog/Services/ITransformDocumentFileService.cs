@@ -1,12 +1,9 @@
-﻿using HouseBuildingBlog.Domain.Documents;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Threading.Tasks;
-
-namespace HouseBuildingBlog.Api.Services
+﻿namespace HouseBuildingBlog.Api.Services
 {
+	//ToDo: implement again
+	/*
 	public interface ITransformDocumentFileService
 	{
 		Task<IFile> TransformAsync(Guid documentId, IFormFile file);
-	}
+	}*/
 }

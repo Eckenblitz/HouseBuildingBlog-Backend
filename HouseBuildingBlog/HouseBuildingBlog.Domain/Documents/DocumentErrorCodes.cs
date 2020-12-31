@@ -1,6 +1,6 @@
 ﻿namespace HouseBuildingBlog.Domain.Documents
 {
-	class DocumentErrorCodes
+	public class DocumentErrorCodes
 	{
 		public const string DocumentWasNotGiven = "D001";
 

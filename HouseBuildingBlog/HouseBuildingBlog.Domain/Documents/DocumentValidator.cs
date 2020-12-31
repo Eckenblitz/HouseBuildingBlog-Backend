@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
-	class DocumentValidator
+	public class DocumentValidator
 	{
 		public static ICollection<ValidationError> Validate(IDocument document)
 		{
@@ -19,7 +19,5 @@ namespace HouseBuildingBlog.Domain.Documents
 			}
 			return validationError;
 		}
-
-
 	}
 }

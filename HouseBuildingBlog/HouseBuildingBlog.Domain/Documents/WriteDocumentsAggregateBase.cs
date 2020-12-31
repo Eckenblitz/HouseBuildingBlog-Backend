@@ -6,7 +6,6 @@ namespace HouseBuildingBlog.Domain.Documents
 {
 	public abstract class WriteDocumentsAggregateBase : IWriteDocumentsAggregate
 	{
-
 		protected abstract Task<IDocument> CreateDocument(IDocument newDocument);
 		public Task<IDocument> CreateDocumentAsync(IDocument newDocument)
 		{
@@ -31,14 +30,6 @@ namespace HouseBuildingBlog.Domain.Documents
 			if (validationError.Count > 0)
 				throw new ValidationException(validationError);
 			return UpdateDocument(document);
-		}
-
-
-		protected abstract Task<IDocument> UpdateFile(Guid documentId, IFile file);
-		public Task<IDocument> UpdateFileAsync(Guid documentId, IFile file)
-		{
-			//ToDo: Validation
-			return UpdateFile(documentId, file);
 		}
 	}
 }

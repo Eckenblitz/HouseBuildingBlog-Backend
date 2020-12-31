@@ -10,16 +10,18 @@ namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 		public string Comment { get; set; }
 
 		public decimal Price { get; set; }
-		public Nullable<Guid> EventId { get; set; }
+
+		public Guid? EventId { get; set; }
 
 
 		public DocumentCommandDto() { }
 
 		public DocumentCommandDto(IDocument doc)
 		{
-			this.Title = doc.Title;
-			this.Comment = doc.Comment;
-			this.Price = doc.Price;
+			Title = doc.Title;
+			Comment = doc.Comment;
+			Price = doc.Price;
+			EventId = doc.EventId;
 		}
 	}
 }

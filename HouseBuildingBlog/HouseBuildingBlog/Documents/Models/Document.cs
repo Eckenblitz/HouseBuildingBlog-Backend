@@ -16,36 +16,33 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public Nullable<Guid> EventId { get; private set; }
 
-		public IFile File { get; private set; }
-
 		public Document() { }
 
 		public Document(IDocument doc)
 		{
-			this.DocumentId = doc.DocumentId;
-			this.Title = doc.Title;
-			this.Comment = doc.Comment;
-			this.Price = doc.Price;
-			this.EventId = doc.EventId;
-			File = doc.File;
+			DocumentId = doc.DocumentId;
+			Title = doc.Title;
+			Comment = doc.Comment;
+			Price = doc.Price;
+			EventId = doc.EventId;
 		}
 
 		public Document(CreateDocumentCommand command)
 		{
-			this.DocumentId = Guid.NewGuid();
-			this.Title = command.Data.Title;
-			this.Comment = command.Data.Comment;
-			this.Price = command.Data.Price;
-			this.EventId = command.Data.EventId;
+			DocumentId = Guid.NewGuid();
+			Title = command.Data.Title;
+			Comment = command.Data.Comment;
+			Price = command.Data.Price;
+			EventId = command.Data.EventId;
 		}
 
 		public Document(UpdateDocumentCommand command)
 		{
-			this.DocumentId = command.Id;
-			this.Title = command.Data.Title;
-			this.Comment = command.Data.Comment;
-			this.Price = command.Data.Price;
-			this.EventId = command.Data.EventId;
+			DocumentId = command.Id;
+			Title = command.Data.Title;
+			Comment = command.Data.Comment;
+			Price = command.Data.Price;
+			EventId = command.Data.EventId;
 		}
 	}
 }

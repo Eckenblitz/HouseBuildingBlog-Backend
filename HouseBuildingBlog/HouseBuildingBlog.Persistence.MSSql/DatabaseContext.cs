@@ -71,7 +71,6 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				entitiy.ToTable("Documents", "Documents");
 				entitiy.HasKey(e => e.DocumentId);
 				entitiy.Property(e => e.Title).IsRequired();
-				entitiy.Property(e => e.FileAdress).IsRequired();
 				entitiy.HasOne(et => et.Event)
 					.WithMany(a => a.Documents)
 					.HasForeignKey(a => a.EventId)

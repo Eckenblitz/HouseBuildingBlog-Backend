@@ -1,11 +1,7 @@
-﻿using HouseBuildingBlog.Domain.Documents;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-
-namespace HouseBuildingBlog.Api.Services
+﻿namespace HouseBuildingBlog.Api.Services
 {
+	//ToDo: implement again
+	/*
 	public class TransformDocumentFileService : ITransformDocumentFileService
 	{
 		public async Task<IFile> TransformAsync(Guid documentId, IFormFile file)
@@ -25,5 +21,5 @@ namespace HouseBuildingBlog.Api.Services
 			//ToDo: think about empty file handling
 			throw new InvalidOperationException();
 		}
-	}
+	}*/
 }

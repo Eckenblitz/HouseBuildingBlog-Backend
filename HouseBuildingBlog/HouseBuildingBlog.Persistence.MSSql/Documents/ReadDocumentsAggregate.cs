@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
@@ -24,13 +23,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		protected override async Task<IEnumerable<IDocument>> GetAll()
 		{
 			return await _DBContext.Documents
-				.ToListAsync();
-		}
-
-		protected override async Task<IEnumerable<IDocument>> GetByEventId(Guid eventId)
-		{
-			return await _DBContext.Documents
-				.Where(e => e.EventId.Equals(eventId))
 				.ToListAsync();
 		}
 	}
