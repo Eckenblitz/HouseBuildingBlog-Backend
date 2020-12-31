@@ -17,3 +17,17 @@
 /HouseBuildingBlog/HouseBuildingBlog.Persistence.Mock/obj/Debug/netcoreapp3.1
 /HouseBuildingBlog/HouseBuildingBlog.Persistence.Mock/bin/Debug/netcoreapp3.1
 /HouseBuildingBlog/HouseBuildingBlog.Persistence.Mock/obj
+
+# User-specific files
+*.suo
+*.user
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio temp something
+.vs/
