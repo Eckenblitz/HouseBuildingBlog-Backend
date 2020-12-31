@@ -15,3 +15,6 @@ CREATE TABLE Documents.Documents (
 	CONSTRAINT FK_Documents_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId)
 )
 GO
+
+UPDATE Info.DatabaseVersion SET Major = 0, Minor = 2, Patch = 0
+GO
