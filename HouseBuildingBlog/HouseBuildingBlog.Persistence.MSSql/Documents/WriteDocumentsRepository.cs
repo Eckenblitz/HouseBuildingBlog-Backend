@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	public class WriteDocumentsAggregate : Domain.Documents.WriteDocumentsAggregate
+	public class WriteDocumentsRepository : IWriteDocumentsRepository
 	{
 		private readonly DatabaseContext _DBContext;
 
-		public WriteDocumentsAggregate(DatabaseContext dBContext)
+		public WriteDocumentsRepository(DatabaseContext dBContext)
 		{
 			_DBContext = dBContext;
 		}
-		protected override async Task<IDocument> CreateDocument(IDocument newDocument)
+
+		public async Task<IDocument> GetByIdAsync(Guid documentId)
+		{
+			return await _DBContext.Documents
+				.SingleOrDefaultAsync(e => e.DocumentId.Equals(documentId));
+		}
+
+		public async Task<IDocument> CreateDocumentAsync(IDocument newDocument)
 		{
 			var document = new DocumentModel(newDocument);
 			_DBContext.Add(document);
@@ -23,7 +30,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			return newDocument;
 		}
 
-		protected override async Task<IDocument> DeleteDocument(Guid documentId)
+		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
 			var document = await _DBContext.Documents
 				.SingleOrDefaultAsync(e => e.DocumentId.Equals(documentId));
@@ -35,7 +42,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			return document;
 		}
 
-		protected override async Task<IDocument> UpdateDocument(IDocument document)
+		public async Task<IDocument> UpdateDocumentAsync(IDocument document)
 		{
 			var toUpdate = await _DBContext.Documents
 				.SingleOrDefaultAsync(e => e.DocumentId.Equals(document.DocumentId));

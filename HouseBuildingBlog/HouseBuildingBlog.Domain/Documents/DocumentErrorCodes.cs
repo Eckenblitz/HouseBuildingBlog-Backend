@@ -2,7 +2,7 @@
 {
 	public class DocumentErrorCodes
 	{
-		public const string DocumentWasNotGiven = "D001";
+		public const string DocumentNotFound = "D001";
 
 		public const string HasNoTitle = "D002";
 	}

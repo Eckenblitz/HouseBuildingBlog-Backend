@@ -1,6 +1,6 @@
-﻿using HouseBuildingBlog.Api.Documents.Models;
-using HouseBuildingBlog.Api.Documents.Queries.Contracts;
+﻿using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -21,11 +21,13 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 		{
 			try
 			{
-				var updateDocument = await _writeDocumentsAggregate.UpdateDocumentAsync(new Document(request));
-				if (updateDocument == null)
-					return new NotFoundResult();
+				var updateDocument = await _writeDocumentsAggregate.UpdateDocumentAsync(request.DocumentId, request);
 				return new OkObjectResult(new DocumentQueryDto(updateDocument));
 
+			}
+			catch (AggregateNotFoundException ex)
+			{
+				return new NotFoundObjectResult(ex.Error);
 			}
 			catch
 			{

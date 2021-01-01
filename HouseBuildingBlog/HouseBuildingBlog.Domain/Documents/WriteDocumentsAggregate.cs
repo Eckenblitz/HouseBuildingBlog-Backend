@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Errors;
 using System;
 using System.Threading.Tasks;
 
@@ -13,23 +13,38 @@ namespace HouseBuildingBlog.Domain.Documents
 			_writeDocumentsRepository = writeDocumentsRepository;
 		}
 
-		public async Task<IDocument> CreateDocumentAsync(IDocument newDocument)
+		public async Task<IDocument> CreateDocumentAsync(IDocumentContent newDocumentContent)
 		{
-			var validationError = DocumentValidator.Validate(newDocument);
-			if (validationError.Count > 0)
-				throw new ValidationException(validationError);
+			var newDocument = new Document(Guid.NewGuid(), newDocumentContent);
+
+			var validationErrors = DocumentValidator.ValidateContent(newDocument);
+			if (validationErrors.Count > 0)
+				throw new ValidationException(validationErrors);
 
 			return await _writeDocumentsRepository.CreateDocumentAsync(newDocument);
 		}
 
 		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
+			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
+
+			if (existingDocument == null)
+				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
+
 			return await _writeDocumentsRepository.DeleteDocumentAsync(documentId);
 		}
 
-		public async Task<IDocument> UpdateDocumentAsync(IDocument document)
+		public async Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent)
 		{
-			var validationError = DocumentValidator.Validate(document);
+			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
+
+			if (existingDocument == null)
+				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
+
+			var document = new Document(documentId, existingDocument);
+			document.Update(documentContent);
+
+			var validationError = DocumentValidator.ValidateContent(document);
 			if (validationError.Count > 0)
 				throw new ValidationException(validationError);
 

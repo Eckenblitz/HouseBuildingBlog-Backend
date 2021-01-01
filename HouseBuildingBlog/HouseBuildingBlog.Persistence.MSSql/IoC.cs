@@ -16,13 +16,15 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			var sqlConfig = config.GetSection("MSSqlConfig").Get<MSSQLConfig>();
 			services.AddSingleton(sqlConfig);
 			services.AddDbContext<DatabaseContext>();
-
+			//Events
 			services.AddTransient<IWriteEventsAggregate, WriteEventsAggregate>();
 			services.AddTransient<IReadEventsAggregate, ReadEventsAggregate>();
+			//Tags
 			services.AddTransient<IWriteTagsAggregate, WriteTagsAggregate>();
 			services.AddTransient<IReadTagsAggregate, ReadTagsAggregate>();
-			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
-			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
+			//Documents
+			services.AddTransient<IWriteDocumentsRepository, WriteDocumentsRepository>();
+			services.AddTransient<IReadDocumentsRepository, ReadDocumentsRepository>();
 		}
 	}
 }

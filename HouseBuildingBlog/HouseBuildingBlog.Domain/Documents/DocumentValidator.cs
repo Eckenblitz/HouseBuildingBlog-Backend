@@ -1,23 +1,18 @@
-﻿using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Errors;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
 	public class DocumentValidator
 	{
-		public static ICollection<ValidationError> Validate(IDocument document)
+		public static ICollection<DomainError> ValidateContent(Document document)
 		{
-			ICollection<ValidationError> validationError = new List<ValidationError>();
-			if (document != null)
-			{
-				if (string.IsNullOrWhiteSpace(document.Title))
-					validationError.Add(new ValidationError(DocumentErrorCodes.HasNoTitle, ("DocumentId", document.DocumentId.ToString())));
-			}
-			else
-			{
-				validationError.Add(new ValidationError(DocumentErrorCodes.DocumentWasNotGiven));
-			}
-			return validationError;
+			ICollection<DomainError> validationErrors = new List<DomainError>();
+
+			if (string.IsNullOrWhiteSpace(document.Title))
+				validationErrors.Add(new DomainError(DocumentErrorCodes.HasNoTitle, ("DocumentId", document.DocumentId.ToString())));
+
+			return validationErrors;
 		}
 	}
 }

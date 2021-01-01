@@ -1,6 +1,7 @@
 ﻿using HouseBuildingBlog.Api.Documents.Queries;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -22,10 +23,12 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			try
 			{
 				var deleteDocument = await _writeDocumentsAggregate.DeleteDocumentAsync(request.DocumentId);
-				if (deleteDocument == null)
-					return new NotFoundResult();
 
 				return new OkObjectResult(new DocumentQueryDto(deleteDocument));
+			}
+			catch (AggregateNotFoundException ex)
+			{
+				return new NotFoundObjectResult(ex.Error);
 			}
 			catch
 			{

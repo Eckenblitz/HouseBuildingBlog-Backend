@@ -2,12 +2,8 @@
 
 namespace HouseBuildingBlog.Domain.Documents
 {
-	public interface IDocument
+	public interface IDocument : IDocumentContent
 	{
 		Guid DocumentId { get; }
-		string Title { get; }
-		string Comment { get; }
-		decimal Price { get; }
-		Nullable<Guid> EventId { get; }
 	}
 }

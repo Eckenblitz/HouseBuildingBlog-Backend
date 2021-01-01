@@ -1,7 +1,7 @@
 ﻿using HouseBuildingBlog.Api.Events.Models;
 using HouseBuildingBlog.Api.Events.Queries.Contracts;
+using HouseBuildingBlog.Domain.Errors;
 using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Domain.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;

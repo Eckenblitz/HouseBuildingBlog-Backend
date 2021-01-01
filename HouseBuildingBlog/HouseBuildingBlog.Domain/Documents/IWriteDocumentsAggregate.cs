@@ -5,8 +5,8 @@ namespace HouseBuildingBlog.Domain.Documents
 {
 	public interface IWriteDocumentsAggregate
 	{
-		Task<IDocument> CreateDocumentAsync(IDocument newDocument);
-		Task<IDocument> UpdateDocumentAsync(IDocument document);
+		Task<IDocument> CreateDocumentAsync(IDocumentContent newDocumentContent);
+		Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent);
 		Task<IDocument> DeleteDocumentAsync(Guid documentId);
 	}
 }

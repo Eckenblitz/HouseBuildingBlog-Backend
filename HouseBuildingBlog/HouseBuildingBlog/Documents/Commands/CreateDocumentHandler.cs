@@ -1,6 +1,5 @@
-﻿using HouseBuildingBlog.Api.Documents.Models;
-using HouseBuildingBlog.Domain.Documents;
-using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -21,12 +20,11 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 		{
 			try
 			{
-				var newDocument = await _writeDocumentsAggregate.CreateDocumentAsync(new Document(request));
+				var newDocument = await _writeDocumentsAggregate.CreateDocumentAsync(request);
 				return new CreatedResult(string.Empty, newDocument);
 			}
 			catch (ValidationException)
 			{
-
 				return new BadRequestResult();
 			}
 		}

@@ -1,3 +1,4 @@
+using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Persistence.MSSql;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,8 @@ namespace HouseBuildingBlog.Api
 			//ToDo: uncomment when files are implemented
 			//services.AddTransient<ITransformDocumentFileService, TransformDocumentFileService>();
 
+			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
+			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
 			services.RegisterMSSQLRepositories(Configuration);
 		}
 
