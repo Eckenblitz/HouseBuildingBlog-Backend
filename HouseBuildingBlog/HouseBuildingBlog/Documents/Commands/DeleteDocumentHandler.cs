@@ -23,7 +23,6 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			try
 			{
 				var deleteDocument = await _writeDocumentsAggregate.DeleteDocumentAsync(request.DocumentId);
-
 				return new OkObjectResult(new DocumentQueryDto(deleteDocument));
 			}
 			catch (AggregateNotFoundException ex)
