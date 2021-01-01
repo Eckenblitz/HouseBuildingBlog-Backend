@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain.Documents;
-using System;
+﻿using System;
 
 namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 {
@@ -12,16 +11,5 @@ namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 		public decimal? Price { get; set; }
 
 		public Guid? EventId { get; set; }
-
-
-		public DocumentCommandDto() { }
-
-		public DocumentCommandDto(IDocument doc)
-		{
-			Title = doc.Title;
-			Comment = doc.Comment;
-			Price = doc.Price;
-			EventId = doc.EventId;
-		}
 	}
 }
