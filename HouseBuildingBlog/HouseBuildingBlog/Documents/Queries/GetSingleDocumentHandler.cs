@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Domain.Documents;
+﻿using HouseBuildingBlog.Api.Documents.Queries.Contracts;
+using HouseBuildingBlog.Domain.Documents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 		public async Task<IActionResult> Handle(GetSingleDocumentQuery request, CancellationToken cancellationToken)
 		{
 			var document = await _readDocumentsAggregate.GetByIdAsync(request.DocumentId);
-			return new OkObjectResult(document);
+			return new OkObjectResult(new DocumentQueryDto(document));
 
 		}
 	}
