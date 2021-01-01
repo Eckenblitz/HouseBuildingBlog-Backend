@@ -27,7 +27,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			_DBContext.Add(document);
 			await _DBContext.SaveChangesAsync();
 
-			return newDocument;
+			return document;
 		}
 
 		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
