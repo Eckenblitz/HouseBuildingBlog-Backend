@@ -29,10 +29,6 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			{
 				return new NotFoundObjectResult(ex.Error);
 			}
-			catch
-			{
-				return new BadRequestResult();
-			}
 		}
 	}
 }
