@@ -1,6 +1,7 @@
-﻿using System;
+﻿using HouseBuildingBlog.Persistence.MSSql.Tags;
+using System;
 
-namespace HouseBuildingBlog.Persistence.MSSql.Models
+namespace HouseBuildingBlog.Persistence.MSSql.Events
 {
 	public class AssignedTagsModel
 	{

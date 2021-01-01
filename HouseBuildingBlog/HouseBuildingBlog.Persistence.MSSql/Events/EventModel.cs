@@ -1,9 +1,10 @@
 ﻿using HouseBuildingBlog.Domain.Events;
+using HouseBuildingBlog.Persistence.MSSql.Documents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HouseBuildingBlog.Persistence.MSSql.Models
+namespace HouseBuildingBlog.Persistence.MSSql.Events
 {
 	public class EventModel : IEvent
 	{
@@ -19,6 +20,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public ICollection<AssignedTagsModel> AssignedTags { get; set; }
 
+		public ICollection<DocumentModel> Documents { get; set; }
 		public EventModel() { }
 
 		public EventModel(IEvent newEvent)

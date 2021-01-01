@@ -1,5 +1,4 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
-using HouseBuildingBlog.Persistence.MSSql.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

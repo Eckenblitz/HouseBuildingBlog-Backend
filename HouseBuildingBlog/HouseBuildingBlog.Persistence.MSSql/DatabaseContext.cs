@@ -1,4 +1,6 @@
-﻿using HouseBuildingBlog.Persistence.MSSql.Models;
+﻿using HouseBuildingBlog.Persistence.MSSql.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Events;
+using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseBuildingBlog.Persistence.MSSql
@@ -8,6 +10,8 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		public DbSet<EventModel> Events { get; set; }
 		public DbSet<TagModel> Tags { get; set; }
 		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
+
+		public DbSet<DocumentModel> Documents { get; set; }
 
 		private MSSQLConfig _config;
 
@@ -53,15 +57,28 @@ namespace HouseBuildingBlog.Persistence.MSSql
 					.HasConstraintName("FK_AssignedTags_Tags");
 			});
 
-			modelBuilder.Entity<TagModel>(e =>
+			modelBuilder.Entity<TagModel>(entity =>
 			{
-				e.ToTable("Tags", "Events");
-				e.HasKey(e => e.TagId);
+				entity.ToTable("Tags", "Events");
+				entity.HasKey(e => e.TagId);
 
-				e.Property(e => e.TagId).ValueGeneratedNever();
-				e.Property(e => e.Title)
+				entity.Property(e => e.TagId).ValueGeneratedNever();
+				entity.Property(e => e.Title)
 					.IsRequired()
 					.HasMaxLength(200);
+			});
+
+			modelBuilder.Entity<DocumentModel>(entitiy =>
+			{
+				entitiy.ToTable("Documents", "Documents");
+				entitiy.HasKey(e => e.DocumentId);
+				entitiy.Property(e => e.DocumentId).ValueGeneratedNever();
+				entitiy.Property(e => e.Title).IsRequired();
+				entitiy.HasOne(et => et.Event)
+					.WithMany(a => a.Documents)
+					.HasForeignKey(a => a.EventId)
+					.HasConstraintName("FK_Documents_Events")
+					.OnDelete(DeleteBehavior.SetNull);
 			});
 		}
 	}

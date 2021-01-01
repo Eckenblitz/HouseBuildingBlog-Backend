@@ -1,22 +1,22 @@
-﻿using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Errors;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Tags
 {
 	internal static class TagValidator
 	{
-		internal static ICollection<ValidationError> Validate(ITag tag)
+		internal static ICollection<DomainError> Validate(ITag tag)
 		{
-			ICollection<ValidationError> validationErrors = new List<ValidationError>();
+			ICollection<DomainError> validationErrors = new List<DomainError>();
 
 			if (tag != null)
 			{
 				if (string.IsNullOrWhiteSpace(tag.Title))
-					validationErrors.Add(new ValidationError(TagErrorCodes.HasNoTitle, ("TagId", tag.TagId.ToString())));
+					validationErrors.Add(new DomainError(TagErrorCodes.HasNoTitle, ("TagId", tag.TagId.ToString())));
 			}
 			else
 			{
-				validationErrors.Add(new ValidationError(TagErrorCodes.TagWasNotGiven));
+				validationErrors.Add(new DomainError(TagErrorCodes.TagWasNotGiven));
 			}
 
 			return validationErrors;

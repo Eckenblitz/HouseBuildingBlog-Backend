@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Domain.Events;
+﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.Events;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,16 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 				.Include(e => e.AssignedTags)
 				.Where(e => e.AssignedTags.Any(et => tagIds.Contains(et.TagId)))
 				.ToListAsync();
+		}
+
+		protected override async Task<IEnumerable<IDocument>> GetAssignedDocuments(Guid eventId)
+		{
+			var @event = await _DBContext.Events
+				.Include(e => e.Documents)
+				.Where(e => e.EventId.Equals(eventId))
+				.SingleOrDefaultAsync();
+
+			return @event?.Documents;
 		}
 	}
 }

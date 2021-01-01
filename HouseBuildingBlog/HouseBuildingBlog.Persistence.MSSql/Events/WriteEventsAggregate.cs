@@ -1,5 +1,4 @@
 ﻿using HouseBuildingBlog.Domain.Events;
-using HouseBuildingBlog.Persistence.MSSql.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -47,7 +46,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 				toUpdate.Update(@event);
 				_DBContext.Events.Update(toUpdate);
 				await _DBContext.SaveChangesAsync();
-				return toUpdate;
 			}
 			return toUpdate;
 		}
