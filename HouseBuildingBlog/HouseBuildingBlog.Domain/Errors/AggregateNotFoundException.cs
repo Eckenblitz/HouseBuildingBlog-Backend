@@ -8,7 +8,7 @@ namespace HouseBuildingBlog.Domain.Errors
 
 		public AggregateNotFoundException(string errorCode, Guid aggregateId)
 		{
-			Error = new DomainError(errorCode, ("aggregateId", aggregateId.ToString()));
+			Error = new DomainError(errorCode, (nameof(aggregateId), aggregateId.ToString()));
 		}
 	}
 }
