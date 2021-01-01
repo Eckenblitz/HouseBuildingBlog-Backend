@@ -1,8 +1,9 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Persistence.MSSql.Events;
 using System;
 using System.Collections.Generic;
 
-namespace HouseBuildingBlog.Persistence.MSSql.Models
+namespace HouseBuildingBlog.Persistence.MSSql.Tags
 {
 	public class TagModel : ITag
 	{

@@ -1,4 +1,6 @@
-﻿using HouseBuildingBlog.Persistence.MSSql.Models;
+﻿using HouseBuildingBlog.Persistence.MSSql.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Events;
+using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseBuildingBlog.Persistence.MSSql

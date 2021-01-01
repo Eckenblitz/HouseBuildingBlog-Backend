@@ -1,7 +1,8 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Events;
 using System;
 
-namespace HouseBuildingBlog.Persistence.MSSql.Models
+namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
 	public class DocumentModel : IDocument
 	{
@@ -16,7 +17,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 
 		public string Title { get; set; }
 
-		public string? Comment { get; set; }
+		public string Comment { get; set; }
 
 		public decimal? Price { get; set; }
 
