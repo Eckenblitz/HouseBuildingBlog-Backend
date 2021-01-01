@@ -24,16 +24,6 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _writeDocumentsRepository.CreateDocumentAsync(newDocument);
 		}
 
-		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
-		{
-			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
-
-			if (existingDocument == null)
-				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
-
-			return await _writeDocumentsRepository.DeleteDocumentAsync(documentId);
-		}
-
 		public async Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent)
 		{
 			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
@@ -49,6 +39,16 @@ namespace HouseBuildingBlog.Domain.Documents
 				throw new ValidationException(validationError);
 
 			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
+		}
+
+		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
+		{
+			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
+
+			if (existingDocument == null)
+				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
+
+			return await _writeDocumentsRepository.DeleteDocumentAsync(documentId);
 		}
 	}
 }
