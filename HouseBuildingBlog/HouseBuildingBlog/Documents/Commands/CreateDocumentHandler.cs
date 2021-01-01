@@ -1,4 +1,5 @@
-﻿using HouseBuildingBlog.Domain.Documents;
+﻿using HouseBuildingBlog.Api.Documents.Queries.Contracts;
+using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,11 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			try
 			{
 				var newDocument = await _writeDocumentsAggregate.CreateDocumentAsync(request);
-				return new CreatedResult(string.Empty, newDocument);
+				return new CreatedResult(string.Empty, new DocumentQueryDto(newDocument));
 			}
-			catch (ValidationException)
+			catch (ValidationException ex)
 			{
-				return new BadRequestResult();
+				return new BadRequestObjectResult(ex.ValidationErrors);
 			}
 		}
 	}
