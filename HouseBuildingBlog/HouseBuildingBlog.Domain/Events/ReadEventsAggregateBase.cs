@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Documents;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,6 +26,13 @@ namespace HouseBuildingBlog.Domain.Events
 		public Task<IEnumerable<IEvent>> GetAllAsync()
 		{
 			return GetAll();
+		}
+
+		protected abstract Task<IEnumerable<IDocument>> GetAssignedDocuments(Guid eventId);
+
+		public Task<IEnumerable<IDocument>> GetAssignedDocumentsAsync(Guid eventId)
+		{
+			return GetAssignedDocuments(eventId);
 		}
 	}
 }
