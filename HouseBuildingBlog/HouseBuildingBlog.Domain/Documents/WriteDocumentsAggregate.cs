@@ -8,7 +8,7 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		private readonly IWriteDocumentsRepository _writeDocumentsRepository;
 
-		protected WriteDocumentsAggregate(IWriteDocumentsRepository writeDocumentsRepository)
+		public WriteDocumentsAggregate(IWriteDocumentsRepository writeDocumentsRepository)
 		{
 			_writeDocumentsRepository = writeDocumentsRepository;
 		}
