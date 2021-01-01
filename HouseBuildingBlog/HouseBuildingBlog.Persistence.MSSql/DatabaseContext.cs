@@ -70,6 +70,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			{
 				entitiy.ToTable("Documents", "Documents");
 				entitiy.HasKey(e => e.DocumentId);
+				entitiy.Property(e => e.DocumentId).ValueGeneratedNever();
 				entitiy.Property(e => e.Title).IsRequired();
 				entitiy.HasOne(et => et.Event)
 					.WithMany(a => a.Documents)
