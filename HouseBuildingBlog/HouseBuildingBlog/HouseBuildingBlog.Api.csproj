@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HouseBuildingBlog.Domain\HouseBuildingBlog.Domain.csproj" />
-    <ProjectReference Include="..\HouseBuildingBlog.Persistence.Mock\HouseBuildingBlog.Persistence.Mock.csproj" />
     <ProjectReference Include="..\HouseBuildingBlog.Persistence.MSSql\HouseBuildingBlog.Persistence.MSSql.csproj" />
   </ItemGroup>
 
