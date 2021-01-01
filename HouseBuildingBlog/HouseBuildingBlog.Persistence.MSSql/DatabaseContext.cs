@@ -74,7 +74,8 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				entitiy.HasOne(et => et.Event)
 					.WithMany(a => a.Documents)
 					.HasForeignKey(a => a.EventId)
-					.HasConstraintName("FK_Documents_Events");
+					.HasConstraintName("FK_Documents_Events")
+					.OnDelete(DeleteBehavior.SetNull);
 			});
 		}
 	}
