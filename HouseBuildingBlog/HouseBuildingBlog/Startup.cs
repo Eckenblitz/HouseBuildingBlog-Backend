@@ -34,7 +34,6 @@ namespace HouseBuildingBlog.Api
 			//ToDo: uncomment when files are implemented
 			//services.AddTransient<ITransformDocumentFileService, TransformDocumentFileService>();
 
-			//services.RegisterMockRepositories();
 			services.RegisterMSSQLRepositories(Configuration);
 		}
 
