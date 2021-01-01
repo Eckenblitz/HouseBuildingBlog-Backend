@@ -12,7 +12,7 @@ CREATE TABLE Documents.Documents (
 	Price decimal(10,2),
 	EventId uniqueidentifier NULL,
 	CONSTRAINT PK_Documents PRIMARY KEY (DocumentId),
-	CONSTRAINT FK_Documents_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId)
+	CONSTRAINT FK_Documents_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId) ON DELETE SET NULL
 )
 GO
 
