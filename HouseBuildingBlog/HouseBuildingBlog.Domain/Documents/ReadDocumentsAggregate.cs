@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Errors;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,9 +19,14 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _readDocumentsRepository.GetAllAsync();
 		}
 
-		public async Task<IDocument> GetByIdAsync(Guid id)
+		public async Task<IDocument> GetByIdAsync(Guid documentId)
 		{
-			return await _readDocumentsRepository.GetByIdAsync(id);
+			var existingDocument = await _readDocumentsRepository.GetByIdAsync(documentId);
+
+			if (existingDocument == null)
+				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
+
+			return existingDocument;
 		}
 	}
 }
