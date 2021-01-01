@@ -29,9 +29,9 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			{
 				return new NotFoundObjectResult(ex.Error);
 			}
-			catch
+			catch (ValidationException ex)
 			{
-				return new BadRequestResult();
+				return new BadRequestObjectResult(ex.ValidationErrors);
 			}
 
 		}
