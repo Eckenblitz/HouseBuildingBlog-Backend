@@ -5,7 +5,7 @@ namespace HouseBuildingBlog.Domain.Documents
 {
 	public class DocumentValidator
 	{
-		public static ICollection<DomainError> ValidateContent(Document document)
+		public static ICollection<DomainError> Validate(Document document)
 		{
 			ICollection<DomainError> validationErrors = new List<DomainError>();
 
