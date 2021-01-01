@@ -6,7 +6,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 {
 	public class DeleteDocumentCommand : IRequest<IActionResult>
 	{
-		public Guid DocumentId { get; set; }
+		public Guid DocumentId { get; }
 
 		public DeleteDocumentCommand(Guid documentId)
 		{
