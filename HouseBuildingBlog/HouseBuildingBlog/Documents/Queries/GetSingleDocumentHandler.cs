@@ -16,7 +16,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 		}
 		public async Task<IActionResult> Handle(GetSingleDocumentQuery request, CancellationToken cancellationToken)
 		{
-			var document = await _readDocumentsAggregate.GetAsync(request.DocumentId);
+			var document = await _readDocumentsAggregate.GetByIdAsync(request.DocumentId);
 			return new OkObjectResult(document);
 
 		}

@@ -15,7 +15,7 @@ namespace HouseBuildingBlog.Persistence.Mock
 			_repo = repo;
 		}
 
-		public async Task<IDocument> GetAsync(Guid id)
+		public async Task<IDocument> GetByIdAsync(Guid id)
 		{
 			return await _repo.GetById(id);
 		}

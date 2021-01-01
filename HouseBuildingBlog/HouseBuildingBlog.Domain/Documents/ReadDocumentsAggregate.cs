@@ -18,9 +18,9 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _readDocumentsRepository.GetAllAsync();
 		}
 
-		public async Task<IDocument> GetAsync(Guid id)
+		public async Task<IDocument> GetByIdAsync(Guid id)
 		{
-			return await _readDocumentsRepository.GetAsync(id);
+			return await _readDocumentsRepository.GetByIdAsync(id);
 		}
 	}
 }
