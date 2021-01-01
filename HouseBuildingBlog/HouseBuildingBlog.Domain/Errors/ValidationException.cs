@@ -9,7 +9,7 @@ namespace HouseBuildingBlog.Domain.Errors
 
 		public ValidationException(ICollection<DomainError> validationErrors)
 		{
-			ValidationErrors = validationErrors;
+			ValidationErrors = new List<DomainError>(validationErrors);
 		}
 	}
 }
