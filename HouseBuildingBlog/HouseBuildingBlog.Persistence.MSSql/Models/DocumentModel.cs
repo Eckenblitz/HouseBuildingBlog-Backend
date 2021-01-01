@@ -9,10 +9,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Models
 		public DocumentModel(IDocument newDocument)
 		{
 			DocumentId = newDocument.DocumentId;
-			Title = newDocument.Title;
-			Comment = newDocument.Comment;
-			Price = newDocument.Price;
-			EventId = newDocument.EventId;
+			Update(newDocument);
 		}
 
 		public Guid DocumentId { get; }
