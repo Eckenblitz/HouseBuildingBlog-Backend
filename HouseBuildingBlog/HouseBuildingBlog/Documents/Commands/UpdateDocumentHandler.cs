@@ -33,7 +33,6 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			{
 				return new BadRequestObjectResult(ex.ValidationErrors);
 			}
-
 		}
 	}
 }

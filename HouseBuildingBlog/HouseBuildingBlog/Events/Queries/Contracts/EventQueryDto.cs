@@ -24,6 +24,5 @@ namespace HouseBuildingBlog.Api.Events.Queries.Contracts
 			Title = @event.Title;
 			TagIds = @event.TagIds != null ? @event.TagIds : null;
 		}
-
 	}
 }
