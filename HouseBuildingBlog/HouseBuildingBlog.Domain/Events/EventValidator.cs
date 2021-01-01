@@ -1,22 +1,22 @@
-﻿using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Errors;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Events
 {
 	public static class EventValidator
 	{
-		public static ICollection<ValidationError> Validate(IEvent @event)
+		public static ICollection<DomainError> Validate(IEvent @event)
 		{
-			ICollection<ValidationError> validationErrors = new List<ValidationError>();
+			ICollection<DomainError> validationErrors = new List<DomainError>();
 
 			if (@event != null)
 			{
 				if (string.IsNullOrWhiteSpace(@event.Title))
-					validationErrors.Add(new ValidationError(EventErrorCodes.HasNoTitle, ("EventId", @event.EventId.ToString())));
+					validationErrors.Add(new DomainError(EventErrorCodes.HasNoTitle, ("EventId", @event.EventId.ToString())));
 			}
 			else
 			{
-				validationErrors.Add(new ValidationError(EventErrorCodes.EventWasNotGiven));
+				validationErrors.Add(new DomainError(EventErrorCodes.EventWasNotGiven));
 			}
 
 			return validationErrors;

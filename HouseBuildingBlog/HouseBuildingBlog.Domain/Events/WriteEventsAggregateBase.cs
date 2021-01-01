@@ -1,4 +1,4 @@
-﻿using HouseBuildingBlog.Domain.Validation;
+﻿using HouseBuildingBlog.Domain.Errors;
 using System;
 using System.Threading.Tasks;
 
