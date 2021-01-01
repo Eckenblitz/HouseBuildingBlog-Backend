@@ -38,7 +38,7 @@ namespace HouseBuildingBlog.Api.Documents.Models
 
 		public Document(UpdateDocumentCommand command)
 		{
-			DocumentId = command.Id;
+			DocumentId = command.DocumentId;
 			Title = command.Data.Title;
 			Comment = command.Data.Comment;
 			Price = command.Data.Price;

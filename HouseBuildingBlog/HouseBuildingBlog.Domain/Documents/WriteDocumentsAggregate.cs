@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
-	public abstract class WriteDocumentsAggregate : IWriteDocumentsAggregate
+	public class WriteDocumentsAggregate : IWriteDocumentsAggregate
 	{
 		private readonly IWriteDocumentsRepository _writeDocumentsRepository;
 

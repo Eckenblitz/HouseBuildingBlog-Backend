@@ -8,6 +8,6 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		Task<IEnumerable<IDocument>> GetAllAsync();
 
-		Task<IDocument> GetByIdAsync(Guid id);
+		Task<IDocument> GetByIdAsync(Guid documentId);
 	}
 }
