@@ -34,9 +34,9 @@ namespace HouseBuildingBlog.Domain.Documents
 			var document = new Document(documentId, existingDocument);
 			document.Update(documentContent);
 
-			var validationError = DocumentValidator.Validate(document);
-			if (validationError.Count > 0)
-				throw new ValidationException(validationError);
+			var validationErrors = DocumentValidator.Validate(document);
+			if (validationErrors.Count > 0)
+				throw new ValidationException(validationErrors);
 
 			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
 		}
