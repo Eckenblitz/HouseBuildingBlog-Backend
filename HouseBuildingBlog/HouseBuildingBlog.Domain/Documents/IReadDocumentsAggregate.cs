@@ -9,5 +9,7 @@ namespace HouseBuildingBlog.Domain.Documents
 		Task<IEnumerable<IDocument>> GetAllAsync();
 
 		Task<IDocument> GetByIdAsync(Guid documentId);
+
+		Task<IDocumentFile> DownloadFile(Guid documentId);
 	}
 }

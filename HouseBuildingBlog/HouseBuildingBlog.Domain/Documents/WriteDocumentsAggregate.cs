@@ -26,10 +26,7 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public async Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent)
 		{
-			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
-
-			if (existingDocument == null)
-				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
+			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
 
 			var document = new Document(documentId, existingDocument);
 			document.Update(documentContent);
@@ -43,12 +40,24 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
+			_ = await CheckExistingDocumentAndThrow(documentId);
+			return await _writeDocumentsRepository.DeleteDocumentAsync(documentId);
+		}
+
+		public async Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file)
+		{
+			_ = await CheckExistingDocumentAndThrow(documentId);
+			return await _writeDocumentsRepository.UploadFileAsync(documentId, file);
+		}
+
+		private async Task<IDocument> CheckExistingDocumentAndThrow(Guid documentId)
+		{
 			var existingDocument = await _writeDocumentsRepository.GetByIdAsync(documentId);
 
 			if (existingDocument == null)
 				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
 
-			return await _writeDocumentsRepository.DeleteDocumentAsync(documentId);
+			return existingDocument;
 		}
 	}
 }
