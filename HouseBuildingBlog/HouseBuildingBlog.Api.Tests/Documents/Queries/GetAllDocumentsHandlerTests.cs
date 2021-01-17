@@ -33,7 +33,6 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 				Comment = "Comment",
 				Price = 1.23M,
 				EventId = Guid.NewGuid()
-
 			});
 			var document2 = new Document(Guid.NewGuid(), new TestDocumentContent()
 			{

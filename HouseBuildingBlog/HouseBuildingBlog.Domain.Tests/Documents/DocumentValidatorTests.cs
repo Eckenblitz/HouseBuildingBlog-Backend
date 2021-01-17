@@ -8,7 +8,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 	public class DocumentValidatorTests
 	{
 		[Fact]
-		public void Expect_NoHasNoTitleError_When_TitleIsFilled()
+		public void Expect_ResultWithoutHasNoTitleError_When_TitleIsFilled()
 		{
 			//Arrange
 			var document = new Document(Guid.NewGuid(), new TestDocumentContent() { Title = "Test123" });
