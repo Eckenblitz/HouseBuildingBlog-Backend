@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
+	//ToDo make interface to substitute in UNitTests
 	public class DocumentValidator
 	{
 		public static ICollection<DomainError> Validate(Document document)

@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 		public async Task<IActionResult> Handle(GetAllDocumentsQuery request, CancellationToken cancellationToken)
 		{
 			var documents = await _readDocumentsAggegate.GetAllAsync();
-			return new OkObjectResult(documents.Select(d => new DocumentQueryDto(d)));
+			return new OkObjectResult(documents.Select(d => new DocumentQueryDto(d)).ToList());
 		}
 	}
 }
