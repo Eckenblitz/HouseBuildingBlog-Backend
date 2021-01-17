@@ -23,7 +23,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		}
 
 		[Fact]
-		public async Task Expect_CreatedDocument_On_Create()
+		public async Task Expect_CreatedDocument_OnCreate()
 		{
 			//Arrange
 			var content = new TestDocumentContent() { Title = "TestTitle", Comment = "TestComment", Price = 1.23M, EventId = Guid.NewGuid() };
@@ -43,7 +43,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		[InlineData(null)]
 		[InlineData("")]
 		[InlineData("  ")]
-		public async Task Expect_AggregateNotFoundException_When_TitleIsEmptyOnCreate(string? title)
+		public async Task Expect_ValidationException_When_TitleIsEmpty_OnCreate(string? title)
 		{
 			//Arrange
 			var content = new TestDocumentContent() { Title = title };

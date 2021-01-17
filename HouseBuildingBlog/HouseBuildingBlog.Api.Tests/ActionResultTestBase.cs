@@ -7,12 +7,12 @@ namespace HouseBuildingBlog.Api.Tests
 {
 	public abstract class ActionResultTestBase
 	{
-		public TResult CheckResult<TResult>(IActionResult result)
+		public static TResult CheckResult<TResult>(IActionResult result)
 		{
 			return result.Should().BeOfType<TResult>().Subject;
 		}
 
-		public void CheckResult<TResult, TValue>(IActionResult actionResult, Expression<Func<TValue, bool>> checkValueExpression = null)
+		public static void CheckResult<TResult, TValue>(IActionResult actionResult, Expression<Func<TValue, bool>> checkValueExpression = null)
 			where TResult : ObjectResult
 		{
 			var castedResutl = CheckResult<TResult>(actionResult);
@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Api.Tests
 			checkValueExpression?.Compile()(valueObject).Should().BeTrue();
 		}
 
-		public TValue CheckResult<TResult, TValue>(IActionResult actionResult)
+		public static TValue CheckResult<TResult, TValue>(IActionResult actionResult)
 			where TResult : ObjectResult
 		{
 			var castedResutl = CheckResult<TResult>(actionResult);
