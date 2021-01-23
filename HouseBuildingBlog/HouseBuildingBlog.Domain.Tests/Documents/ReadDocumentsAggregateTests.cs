@@ -21,11 +21,11 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		}
 
 		[Fact]
-		public async Task Expect_Document_When_DocumentExistInRepository()
+		public async Task Given_GetById_Expect_Document_When_DocumentExistInRepository()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
-			var document = new Document(documentId, new TestDocumentContent());
+			var document = new TestDocument() { DocumentId = documentId, Title = "Title", Comment = "Comment", EventId = Guid.NewGuid(), Price = 1.23M };
 			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId)).Returns(document);
 
 			//Act
@@ -41,11 +41,11 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		}
 
 		[Fact]
-		public async Task Expect_AggregateNotFoundException_When_DocumentIsNotFound()
+		public async Task Given_GetById_Expect_AggregateNotFoundException_When_DocumentIsNotFound()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
-			var document = new Document(documentId, new TestDocumentContent());
+			var document = new TestDocument() { DocumentId = documentId };
 			_readDocumentsRepository.GetByIdAsync(Arg.Any<Guid>()).Returns((IDocument)null);
 
 			//Act //Assert
@@ -57,11 +57,11 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 
 		//GetAll
 		[Fact]
-		public async Task Expect_AllDocuments_When_GetAllIsCalled()
+		public async Task Given_GetAll_Expect_AllDocuments()
 		{
 			//Arrange
-			var document1 = new Document(Guid.NewGuid(), new TestDocumentContent());
-			var document2 = new Document(Guid.NewGuid(), new TestDocumentContent());
+			var document1 = new TestDocument() { DocumentId = Guid.NewGuid() };
+			var document2 = new TestDocument() { DocumentId = Guid.NewGuid() };
 			_readDocumentsRepository.GetAllAsync().Returns(new List<IDocument>() { document1, document2 });
 
 			//Act
@@ -71,6 +71,65 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			documents.Should().HaveCount(2);
 			documents.Should().Contain(d => d.DocumentId.Equals(document1.DocumentId));
 			documents.Should().Contain(d => d.DocumentId.Equals(document2.DocumentId));
+		}
+
+		[Fact]
+		public async Task Given_DownloadFile_Expect_ReturnedFile()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			var testFile = new TestDocumentFile()
+			{
+				DocumentId = documentId,
+				FileName = "test.pdf",
+				FileType = DocumentFileType.PDF,
+				Binaries = CreateRandomBytes()
+			};
+			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId)).Returns(new TestDocument() { DocumentId = documentId });
+			_readDocumentsRepository.GetFileAsync(Arg.Is(documentId)).Returns(testFile);
+
+			//Act
+			var file = await SuT.DownloadFile(documentId);
+
+			//Assert
+			file.Should().BeSameAs(testFile);
+		}
+
+		[Fact]
+		public async Task Given_DownloadFile_Expect_AggregateNotFoundException_When_DocumentIsNotFound()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			_readDocumentsRepository.GetByIdAsync(Arg.Any<Guid>()).Returns((IDocument)null);
+			_readDocumentsRepository.GetFileAsync(Arg.Any<Guid>()).Returns(new TestDocumentFile());
+
+			//Act //Assert
+			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFile(documentId);
+			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
+			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
+			exception.Error.ErrorParameters["aggregateId"].Should().Be(documentId.ToString());
+		}
+
+		[Fact]
+		public async Task Given_DownloadFile_Expect_AggregateNotFoundException_When_FileIsNotFound()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			_readDocumentsRepository.GetByIdAsync(Arg.Any<Guid>()).Returns(new TestDocument());
+			_readDocumentsRepository.GetFileAsync(Arg.Any<Guid>()).Returns((IDocumentFile)null);
+
+			//Act //Assert
+			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFile(documentId);
+			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
+			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.FileNotFound);
+			exception.Error.ErrorParameters["aggregateId"].Should().Be(documentId.ToString());
+		}
+
+		private byte[] CreateRandomBytes()
+		{
+			var data = new Byte[1024];
+			new Random().NextBytes(data);
+			return data;
 		}
 	}
 }
