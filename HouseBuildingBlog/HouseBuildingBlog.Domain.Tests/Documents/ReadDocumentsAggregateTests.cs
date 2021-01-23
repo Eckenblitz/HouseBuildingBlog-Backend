@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.Tests.Extensions;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -26,18 +27,17 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var document = new TestDocument() { DocumentId = documentId, Title = "Title", Comment = "Comment", EventId = Guid.NewGuid(), Price = 1.23M };
-			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId)).Returns(document);
+			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
+				.Returns(document);
 
 			//Act
 			var result = await SuT.GetByIdAsync(documentId);
 
 			//Assert
+			_ = _readDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
 			result.Should().NotBeNull();
 			result.DocumentId.Should().Be(document.DocumentId);
-			result.Title.Should().Be(document.Title);
-			result.Comment.Should().Be(document.Comment);
-			result.Price.Should().Be(document.Price);
-			result.EventId.Should().Be(document.EventId);
+			result.CheckDocumentContent(document);
 		}
 
 		[Fact]
@@ -68,6 +68,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var documents = await SuT.GetAllAsync();
 
 			//Assert
+			_ = _readDocumentsRepository.Received(1).GetAllAsync();
 			documents.Should().HaveCount(2);
 			documents.Should().Contain(d => d.DocumentId.Equals(document1.DocumentId));
 			documents.Should().Contain(d => d.DocumentId.Equals(document2.DocumentId));
@@ -83,7 +84,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				DocumentId = documentId,
 				FileName = "test.pdf",
 				FileType = DocumentFileType.PDF,
-				Binaries = CreateRandomBytes()
+				Binaries = TestDataCreator.CreateRandomBytes()
 			};
 			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId)).Returns(new TestDocument() { DocumentId = documentId });
 			_readDocumentsRepository.GetFileAsync(Arg.Is(documentId)).Returns(testFile);
@@ -92,7 +93,9 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var file = await SuT.DownloadFile(documentId);
 
 			//Assert
-			file.Should().BeSameAs(testFile);
+			_ = _readDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
+			_ = _readDocumentsRepository.Received(1).GetFileAsync(Arg.Is(documentId));
+			file.CheckDocumentFile(testFile);
 		}
 
 		[Fact]
@@ -123,13 +126,6 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.FileNotFound);
 			exception.Error.ErrorParameters["aggregateId"].Should().Be(documentId.ToString());
-		}
-
-		private byte[] CreateRandomBytes()
-		{
-			var data = new Byte[1024];
-			new Random().NextBytes(data);
-			return data;
 		}
 	}
 }
