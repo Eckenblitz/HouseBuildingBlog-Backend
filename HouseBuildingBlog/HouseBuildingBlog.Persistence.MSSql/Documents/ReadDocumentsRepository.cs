@@ -25,5 +25,10 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			return await _DBContext.Documents
 				.ToListAsync();
 		}
+
+		public Task<IDocumentFile> GetFileAsync(Guid documentId)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
