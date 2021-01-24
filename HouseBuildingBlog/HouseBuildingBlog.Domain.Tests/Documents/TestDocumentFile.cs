@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.Files;
 using System;
 
 namespace HouseBuildingBlog.Domain.Tests.Documents
@@ -7,7 +8,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 	{
 		public Guid DocumentId { get; set; }
 
-		public DocumentFileType FileType { get; set; }
+		public FileType FileType { get; set; }
 
 		public string FileName { get; set; }
 

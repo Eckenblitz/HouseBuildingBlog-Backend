@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.Files;
 using HouseBuildingBlog.Domain.Tests.Extensions;
 using NSubstitute;
 using System;
@@ -83,7 +84,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			{
 				DocumentId = documentId,
 				FileName = "test.pdf",
-				FileType = DocumentFileType.PDF,
+				FileType = FileType.PDF,
 				Binaries = TestDataCreator.CreateRandomBytes()
 			};
 			_readDocumentsRepository.GetByIdAsync(Arg.Is(documentId)).Returns(new TestDocument() { DocumentId = documentId });

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.Files;
 using HouseBuildingBlog.Domain.Tests.Extensions;
 using NSubstitute;
 using System;
@@ -147,7 +148,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var documentFile = new TestDocumentFile()
 			{
 				DocumentId = Guid.NewGuid(),
-				FileType = DocumentFileType.PDF,
+				FileType = FileType.PDF,
 				FileName = "FileName",
 				Binaries = TestDataCreator.CreateRandomBytes()
 			};
@@ -169,7 +170,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var documentFile = new TestDocumentFile()
 			{
 				DocumentId = Guid.NewGuid(),
-				FileType = DocumentFileType.PDF,
+				FileType = FileType.PDF,
 				FileName = "FileName",
 				Binaries = TestDataCreator.CreateRandomBytes()
 			};

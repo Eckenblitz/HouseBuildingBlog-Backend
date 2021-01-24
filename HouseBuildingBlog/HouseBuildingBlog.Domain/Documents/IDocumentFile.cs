@@ -1,15 +1,10 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Files;
+using System;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
-	public interface IDocumentFile
+	public interface IDocumentFile : IFile
 	{
 		Guid DocumentId { get; }
-
-		DocumentFileType FileType { get; }
-
-		string FileName { get; }
-
-		byte[] Binaries { get; }
 	}
 }
