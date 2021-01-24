@@ -1,3 +1,4 @@
+using HouseBuildingBlog.Api.Services;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Persistence.MSSql;
 using MediatR;
@@ -37,6 +38,7 @@ namespace HouseBuildingBlog.Api
 
 			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
 			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
+			services.AddTransient<ITransformFileService, TransformFileService>();
 			services.RegisterMSSQLRepositories(Configuration);
 		}
 
