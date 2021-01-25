@@ -3,8 +3,8 @@ GO
 
 CREATE TABLE Documents.Files (
 	DocumentId uniqueidentifier NOT NULL, 
-	FileType nvarchar(max) NOT NULL, 
-	FileName nvarchar(max) NOT NULL,
+	FileType nvarchar(20) NOT NULL, 
+	FileName nvarchar(200) NOT NULL,
 	CONSTRAINT PK_Files PRIMARY KEY (DocumentId),
 	CONSTRAINT FK_Files_Documents FOREIGN KEY (DocumentId) REFERENCES Documents.Documents (DocumentId) ON DELETE CASCADE
 )
