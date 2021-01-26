@@ -54,9 +54,25 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			return toUpdate;
 		}
 
-		public Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file)
+		public async Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file)
 		{
-			throw new NotImplementedException();
+			var toUpdate = await _DBContext.DocumentFiles.FindAsync(documentId);
+
+			if (toUpdate == null)
+			{
+				toUpdate = new DocumentFileModel(documentId);
+				toUpdate.Update(file);
+				_DBContext.DocumentFiles.Add(toUpdate);
+			}
+			else
+			{
+				toUpdate.Update(file);
+				_DBContext.DocumentFiles.Update(toUpdate);
+			}
+
+			//ToDo: Write File
+			await _DBContext.SaveChangesAsync();
+			return toUpdate;
 		}
 	}
 }
