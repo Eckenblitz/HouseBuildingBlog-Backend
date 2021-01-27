@@ -7,5 +7,7 @@
 		public string DatabaseName { get; set; }
 
 		public bool TrustedConnection { get; set; }
+
+		public string FileStorageLocation { get; set; }
 	}
 }

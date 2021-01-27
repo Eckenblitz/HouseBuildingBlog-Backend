@@ -3,6 +3,7 @@ using HouseBuildingBlog.Domain.Events;
 using HouseBuildingBlog.Domain.Tags;
 using HouseBuildingBlog.Persistence.MSSql.Documents;
 using HouseBuildingBlog.Persistence.MSSql.Events;
+using HouseBuildingBlog.Persistence.MSSql.Files;
 using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			//Documents
 			services.AddTransient<IWriteDocumentsRepository, WriteDocumentsRepository>();
 			services.AddTransient<IReadDocumentsRepository, ReadDocumentsRepository>();
+			services.AddTransient<IWriteFileRepository<IDocumentFile>, WriteDocumentFileRepository>();
 		}
 	}
 }
