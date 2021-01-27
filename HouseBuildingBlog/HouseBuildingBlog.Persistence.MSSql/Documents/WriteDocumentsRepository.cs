@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Files;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -8,10 +9,12 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 	public class WriteDocumentsRepository : IWriteDocumentsRepository
 	{
 		private readonly DatabaseContext _DBContext;
+		private readonly IWriteFileRepository<IDocumentFile> _writeFileRepository;
 
-		public WriteDocumentsRepository(DatabaseContext dBContext)
+		public WriteDocumentsRepository(DatabaseContext dBContext, IWriteFileRepository<IDocumentFile> writeFileRepository)
 		{
 			_DBContext = dBContext;
+			_writeFileRepository = writeFileRepository;
 		}
 
 		public async Task<IDocument> GetByIdAsync(Guid documentId)
@@ -32,10 +35,12 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
 			var document = await _DBContext.Documents
+				.Include(d => d.File)
 				.SingleOrDefaultAsync(e => e.DocumentId.Equals(documentId));
 			if (document != null)
 			{
 				_DBContext.Remove(document);
+				await _writeFileRepository.DeleteFileBinariesAsync(document.File);
 				await _DBContext.SaveChangesAsync();
 			}
 			return document;
@@ -70,7 +75,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 				_DBContext.DocumentFiles.Update(toUpdate);
 			}
 
-			//ToDo: Write File
+			await _writeFileRepository.WriteFileBinariesAsync(file);
 			await _DBContext.SaveChangesAsync();
 			return toUpdate;
 		}
