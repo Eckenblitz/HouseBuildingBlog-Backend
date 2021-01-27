@@ -14,6 +14,8 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 
 		public byte[] Binaries { get; set; }
 
+		public DocumentModel Document { get; set; }
+
 		public DocumentFileModel() { }
 
 		public DocumentFileModel(Guid documentId)

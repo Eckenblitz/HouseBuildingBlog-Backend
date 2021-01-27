@@ -25,6 +25,8 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 
 		public EventModel Event { get; set; }
 
+		public DocumentFileModel File { get; set; }
+
 		public void Update(IDocument document)
 		{
 			Title = document.Title;

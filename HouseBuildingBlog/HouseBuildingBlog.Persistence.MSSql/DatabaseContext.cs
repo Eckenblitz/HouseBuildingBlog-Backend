@@ -80,6 +80,9 @@ namespace HouseBuildingBlog.Persistence.MSSql
 					.HasForeignKey(a => a.EventId)
 					.HasConstraintName("FK_Documents_Events")
 					.OnDelete(DeleteBehavior.SetNull);
+				entity.HasOne(e => e.File)
+					.WithOne(df => df.Document)
+					.HasForeignKey<DocumentFileModel>(e => e.DocumentId);
 			});
 
 			modelBuilder.Entity<DocumentFileModel>(entity =>
