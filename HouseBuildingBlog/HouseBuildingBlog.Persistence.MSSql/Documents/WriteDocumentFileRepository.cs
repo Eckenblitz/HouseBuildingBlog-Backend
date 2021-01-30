@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
 {
-	public class WriteDocumentFileRepository : IWriteFileRepository<IDocumentFile>
+	public class WriteDocumentFileRepository : DocumentFileRepositoryBase, IWriteFileRepository<IDocumentFile>
 	{
-		private readonly string _fileDirectory;
-
-		public WriteDocumentFileRepository(MSSQLConfig config)
-		{
-			_fileDirectory = Path.Combine(config.FileStorageLocation, "Resources", "Documents");
-		}
+		public WriteDocumentFileRepository(MSSQLConfig config) : base(config)
+		{ }
 
 		public async Task WriteFileBinariesAsync(IDocumentFile documentFile)
 		{
@@ -35,19 +31,6 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 			}
 
 			return Task.CompletedTask;
-		}
-
-		private void CheckAndCreateDirectory()
-		{
-			if (!Directory.Exists(_fileDirectory))
-			{
-				Directory.CreateDirectory(_fileDirectory);
-			}
-		}
-
-		private string GetFileName(IDocumentFile documentFile)
-		{
-			return $"{documentFile.DocumentId}.{documentFile.FileType.ToString().ToLower()}";
 		}
 	}
 }
