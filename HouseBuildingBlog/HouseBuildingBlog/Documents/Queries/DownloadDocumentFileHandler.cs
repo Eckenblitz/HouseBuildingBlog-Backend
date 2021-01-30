@@ -1,7 +1,9 @@
 ﻿using HouseBuildingBlog.Api.Services;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Persistence.MSSql.Files;
 using MediatR;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -21,7 +23,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 			{
 				file = await _readDocumentsAggregate.DownloadFile(request.DocumentId);
 			}
-			catch (AggregateNotFoundException)
+			catch (Exception ex) when (ex is AggregateNotFoundException || ex is FileNotFoundException<IDocumentFile>)
 			{
 				//ToDo: integrate exception into result?
 				return new HttpResponseMessage(HttpStatusCode.NotFound);
