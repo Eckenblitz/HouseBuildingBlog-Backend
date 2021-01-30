@@ -33,6 +33,8 @@ namespace HouseBuildingBlog.Api.Services
 			{
 				case ".jpg":
 					return FileType.JPG;
+				case ".png":
+					return FileType.PNG;
 				case ".pdf":
 					return FileType.PDF;
 				case ".txt":

@@ -6,6 +6,8 @@
 
 		TXT,
 
-		JPG
+		JPG,
+
+		PNG
 	}
 }
