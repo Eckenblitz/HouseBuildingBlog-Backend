@@ -10,5 +10,7 @@
 		//File
 
 		public const string FileNotFound = "D101";
+
+		public const string FileTypeNotAllowed = "D102";
 	}
 }

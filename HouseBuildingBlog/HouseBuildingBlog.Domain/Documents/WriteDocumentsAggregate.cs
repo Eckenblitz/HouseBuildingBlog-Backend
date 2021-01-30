@@ -46,6 +46,10 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public async Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file)
 		{
+			var validationErrors = DocumentFileValidator.Validate(file);
+			if (validationErrors.Count > 0)
+				throw new ValidationException(validationErrors);
+
 			_ = await CheckExistingDocumentAndThrow(documentId);
 			return await _writeDocumentsRepository.UploadFileAsync(documentId, file);
 		}

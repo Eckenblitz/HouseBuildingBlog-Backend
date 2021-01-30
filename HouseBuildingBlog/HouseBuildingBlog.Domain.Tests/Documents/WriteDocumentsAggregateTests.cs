@@ -182,5 +182,27 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
 		}
+
+		[Theory]
+		[InlineData(FileType.PNG)]
+		[InlineData(FileType.JPG)]
+		public async Task Given_UploadFile_Expect_ValidationException_When_FileTypeIsInvalid(FileType fileType)
+		{
+			//Arrange
+			var documentFile = new TestDocumentFile()
+			{
+				DocumentId = Guid.NewGuid(),
+				FileType = fileType,
+				FileName = "FileName",
+				Binaries = TestDataCreator.CreateRandomBytes()
+			};
+			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentFile.DocumentId))
+				.Returns((IDocument)null);
+
+			//Act / Assert
+			Func<Task<IDocumentFile>> act = async () => await SuT.UploadFileAsync(documentFile.DocumentId, documentFile);
+			var exception = (await act.Should().ThrowAsync<ValidationException>()).And;
+			exception.ValidationErrors.Should().Contain(e => e.ErrorCode == DocumentErrorCodes.FileTypeNotAllowed);
+		}
 	}
 }
