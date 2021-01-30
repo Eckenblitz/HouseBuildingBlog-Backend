@@ -27,6 +27,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 			services.AddTransient<IWriteDocumentsRepository, WriteDocumentsRepository>();
 			services.AddTransient<IReadDocumentsRepository, ReadDocumentsRepository>();
 			services.AddTransient<IWriteFileRepository<IDocumentFile>, WriteDocumentFileRepository>();
+			services.AddTransient<IReadFileRepository<IDocumentFile>, ReadDocumentFileRepository>();
 		}
 	}
 }

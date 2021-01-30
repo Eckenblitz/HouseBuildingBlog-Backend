@@ -16,6 +16,12 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 		private readonly IReadDocumentsAggregate _readDocumentsAggregate;
 		private readonly IFileResponseService _fileResponseService;
 
+		public DownloadDocumentFileHandler(IReadDocumentsAggregate readDocumentsAggregate, IFileResponseService fileResponseService)
+		{
+			_readDocumentsAggregate = readDocumentsAggregate;
+			_fileResponseService = fileResponseService;
+		}
+
 		public async Task<HttpResponseMessage> Handle(DownloadDocumentFileQuery request, CancellationToken cancellationToken)
 		{
 			IDocumentFile file;
