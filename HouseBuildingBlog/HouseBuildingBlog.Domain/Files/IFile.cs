@@ -6,6 +6,6 @@
 
 		string FileName { get; }
 
-		byte[] Binaries { get; }
+		byte[] Binaries { get; set; }
 	}
 }

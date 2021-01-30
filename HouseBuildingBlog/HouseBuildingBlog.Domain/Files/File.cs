@@ -4,7 +4,7 @@
 	{
 		public string FileName { get; }
 
-		public byte[] Binaries { get; }
+		public byte[] Binaries { get; set; }
 
 		public FileType FileType { get; }
 
