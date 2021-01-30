@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Controllers
@@ -66,6 +67,12 @@ namespace HouseBuildingBlog.Api.Controllers
 		public async Task<IActionResult> UploadFile(Guid id, IFormFile file)
 		{
 			return await _mediator.Send(new UploadDocumentFileCommand(id, file));
+		}
+
+		[HttpGet("{id}/File")]
+		public async Task<HttpResponseMessage> DownloadFile(Guid id)
+		{
+			return await _mediator.Send(new DownloadDocumentFileQuery(id));
 		}
 	}
 }
