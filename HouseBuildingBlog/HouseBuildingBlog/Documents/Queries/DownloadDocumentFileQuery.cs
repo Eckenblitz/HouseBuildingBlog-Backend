@@ -1,10 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net.Http;
 
 namespace HouseBuildingBlog.Api.Documents.Queries
 {
-	public class DownloadDocumentFileQuery : IRequest<HttpResponseMessage>
+	public class DownloadDocumentFileQuery : IRequest<IActionResult>
 	{
 		public Guid DocumentId { get; }
 

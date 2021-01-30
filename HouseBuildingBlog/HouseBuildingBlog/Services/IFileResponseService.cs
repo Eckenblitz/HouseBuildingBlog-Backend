@@ -1,10 +1,10 @@
 ﻿using HouseBuildingBlog.Domain.Files;
-using System.Net.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HouseBuildingBlog.Api.Services
 {
 	public interface IFileResponseService
 	{
-		HttpResponseMessage CreateFileResponse(IFile file);
+		FileContentResult CreateFileContentResult(IFile file);
 	}
 }

@@ -1,21 +1,14 @@
 ﻿using HouseBuildingBlog.Domain.Files;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace HouseBuildingBlog.Api.Services
 {
 	public class FileResponseService : IFileResponseService
 	{
-		public HttpResponseMessage CreateFileResponse(IFile file)
+		public FileContentResult CreateFileContentResult(IFile file)
 		{
-			HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-			response.Content = new ByteArrayContent(file.Binaries);
-			response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-			response.Content.Headers.ContentDisposition.FileName = file.FileName;
-			response.Content.Headers.ContentType = new MediaTypeHeaderValue(GetMediaType(file.FileType));
-			return response;
+			return new FileContentResult(file.Binaries, GetMediaType(file.FileType));
 		}
 
 		private string GetMediaType(FileType fileType)

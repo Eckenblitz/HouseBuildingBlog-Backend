@@ -3,15 +3,14 @@ using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
 using HouseBuildingBlog.Persistence.MSSql.Files;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Documents.Queries
 {
-	public class DownloadDocumentFileHandler : IRequestHandler<DownloadDocumentFileQuery, HttpResponseMessage>
+	public class DownloadDocumentFileHandler : IRequestHandler<DownloadDocumentFileQuery, IActionResult>
 	{
 		private readonly IReadDocumentsAggregate _readDocumentsAggregate;
 		private readonly IFileResponseService _fileResponseService;
@@ -22,7 +21,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 			_fileResponseService = fileResponseService;
 		}
 
-		public async Task<HttpResponseMessage> Handle(DownloadDocumentFileQuery request, CancellationToken cancellationToken)
+		public async Task<IActionResult> Handle(DownloadDocumentFileQuery request, CancellationToken cancellationToken)
 		{
 			IDocumentFile file;
 			try
@@ -32,10 +31,10 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 			catch (Exception ex) when (ex is AggregateNotFoundException || ex is FileNotFoundException<IDocumentFile>)
 			{
 				//ToDo: integrate exception into result?
-				return new HttpResponseMessage(HttpStatusCode.NotFound);
+				return new NotFoundObjectResult(ex);
 			}
 
-			return _fileResponseService.CreateFileResponse(file);
+			return _fileResponseService.CreateFileContentResult(file);
 		}
 	}
 }

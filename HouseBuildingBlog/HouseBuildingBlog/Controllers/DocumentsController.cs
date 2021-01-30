@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Controllers
@@ -70,7 +69,7 @@ namespace HouseBuildingBlog.Api.Controllers
 		}
 
 		[HttpGet("{id}/File")]
-		public async Task<HttpResponseMessage> DownloadFile(Guid id)
+		public async Task<IActionResult> DownloadFile(Guid id)
 		{
 			return await _mediator.Send(new DownloadDocumentFileQuery(id));
 		}
