@@ -39,6 +39,7 @@ namespace HouseBuildingBlog.Api
 			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
 			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
 			services.AddTransient<ITransformFileService, TransformFileService>();
+			services.AddTransient<IFileResponseService, FileResponseService>();
 			services.RegisterMSSQLRepositories(Configuration);
 		}
 
