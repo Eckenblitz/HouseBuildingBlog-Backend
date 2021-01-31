@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Services
 {
+	//ToDo: Tests
 	public class TransformFileService : ITransformFileService
 	{
 		public async Task<IFile> TransformAsync(IFormFile file)

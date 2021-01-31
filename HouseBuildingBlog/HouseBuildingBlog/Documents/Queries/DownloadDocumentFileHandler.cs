@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Documents.Queries
 {
+	//ToDo: Tests
 	public class DownloadDocumentFileHandler : IRequestHandler<DownloadDocumentFileQuery, IActionResult>
 	{
 		private readonly IReadDocumentsAggregate _readDocumentsAggregate;
