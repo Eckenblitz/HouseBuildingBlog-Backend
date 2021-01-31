@@ -2,6 +2,7 @@
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
 using HouseBuildingBlog.Domain.Files;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using HouseBuildingBlog.Domain.Tests.Extensions;
 using NSubstitute;
 using System;
