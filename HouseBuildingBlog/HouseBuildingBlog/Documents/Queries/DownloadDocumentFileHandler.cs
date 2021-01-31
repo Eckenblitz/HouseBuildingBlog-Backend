@@ -30,7 +30,6 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 			}
 			catch (Exception ex) when (ex is AggregateNotFoundException || ex is FileNotFoundException<IDocumentFile>)
 			{
-				//ToDo: integrate exception into result?
 				return new NotFoundObjectResult(ex);
 			}
 

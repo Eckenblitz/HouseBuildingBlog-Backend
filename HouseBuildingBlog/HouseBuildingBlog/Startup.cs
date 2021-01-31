@@ -33,9 +33,6 @@ namespace HouseBuildingBlog.Api
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 			});
 
-			//ToDo: uncomment when files are implemented
-			//services.AddTransient<ITransformDocumentFileService, TransformDocumentFileService>();
-
 			services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
 			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
 			services.AddTransient<ITransformFileService, TransformFileService>();
