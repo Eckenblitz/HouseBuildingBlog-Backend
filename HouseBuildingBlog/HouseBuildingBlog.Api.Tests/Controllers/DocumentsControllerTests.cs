@@ -3,6 +3,7 @@ using HouseBuildingBlog.Api.Documents.Commands;
 using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using System;
 using System.Threading.Tasks;
@@ -103,6 +104,33 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 
 			//Assert
 			await _mediator.Received(1).Send(Arg.Is<GetSingleDocumentQuery>(q => q.DocumentId == documentId));
+		}
+
+		[Fact]
+		public async Task Expect_CalledUploadDocumentFileCommand_When_UploadFileIsCalled()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			var file = Substitute.For<IFormFile>();
+
+			//Act
+			await SuT.UploadFile(documentId, file);
+
+			//Assert
+			await _mediator.Received(1).Send(Arg.Is<UploadDocumentFileCommand>(c => c.DocumentId == documentId && c.File == file));
+		}
+
+		[Fact]
+		public async Task Expect_CalledDownloadDocumentFileQuery_When_DownloadFileIsCalled()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+
+			//Act
+			await SuT.DownloadFile(documentId);
+
+			//Assert
+			await _mediator.Received(1).Send(Arg.Is<DownloadDocumentFileQuery>(c => c.DocumentId == documentId));
 		}
 	}
 }
