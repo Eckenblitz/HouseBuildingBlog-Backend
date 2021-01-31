@@ -2,6 +2,7 @@
 using HouseBuildingBlog.Api.Documents.Queries;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using System;
