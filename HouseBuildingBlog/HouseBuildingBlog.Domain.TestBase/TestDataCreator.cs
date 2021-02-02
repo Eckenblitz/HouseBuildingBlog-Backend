@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace HouseBuildingBlog.Domain.Tests.Extensions
+namespace HouseBuildingBlog.Domain.TestBase
 {
 	public static class TestDataCreator
 	{
 		public static byte[] CreateRandomBytes()
 		{
-			var data = new Byte[1024];
+			var data = new byte[1024];
 			new Random().NextBytes(data);
 			return data;
 		}

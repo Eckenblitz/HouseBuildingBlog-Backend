@@ -2,7 +2,7 @@
 using HouseBuildingBlog.Domain.Documents;
 using System.Linq;
 
-namespace HouseBuildingBlog.Domain.Tests.Extensions
+namespace HouseBuildingBlog.Domain.TestBase.Documents
 {
 	public static class DocumentTestExtensions
 	{
