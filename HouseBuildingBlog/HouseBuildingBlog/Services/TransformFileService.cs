@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Services
 {
-	//ToDo: Tests
 	public class TransformFileService : ITransformFileService
 	{
 		public async Task<IFile> TransformAsync(IFormFile file)
@@ -24,7 +23,7 @@ namespace HouseBuildingBlog.Api.Services
 				return transformed;
 			}
 			//ToDo: think about empty file handling
-			throw new InvalidOperationException();
+			throw new InvalidOperationException("File is empty");
 		}
 
 		private FileType GetTypeFromExtension(IFormFile file)

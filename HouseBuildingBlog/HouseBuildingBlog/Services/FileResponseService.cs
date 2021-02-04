@@ -4,7 +4,6 @@ using System;
 
 namespace HouseBuildingBlog.Api.Services
 {
-	//ToDo: Tests
 	public class FileResponseService : IFileResponseService
 	{
 		public FileContentResult CreateFileContentResult(IFile file)
