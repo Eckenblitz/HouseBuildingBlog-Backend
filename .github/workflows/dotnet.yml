@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build ./HouseBuildingBlog/ --no-restore
     - name: Test
-      run: dotnet test ./HouseBuildingBlog/ --no-build --verbosity normal
+      run: dotnet test ./HouseBuildingBlog/ --verbosity normal
