@@ -10,6 +10,6 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		Task<IDocument> GetByIdAsync(Guid documentId);
 
-		Task<IDocumentFile> DownloadFile(Guid documentId);
+		Task<IDocumentFile> DownloadFileAsync(Guid documentId);
 	}
 }

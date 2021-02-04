@@ -92,7 +92,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			_readDocumentsRepository.GetFileAsync(Arg.Is(documentId)).Returns(testFile);
 
 			//Act
-			var file = await SuT.DownloadFile(documentId);
+			var file = await SuT.DownloadFileAsync(documentId);
 
 			//Assert
 			_ = _readDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
@@ -109,7 +109,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			_readDocumentsRepository.GetFileAsync(Arg.Any<Guid>()).Returns(new TestDocumentFile());
 
 			//Act //Assert
-			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFile(documentId);
+			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFileAsync(documentId);
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
 			exception.Error.ErrorParameters["aggregateId"].Should().Be(documentId.ToString());
@@ -124,7 +124,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			_readDocumentsRepository.GetFileAsync(Arg.Any<Guid>()).Returns((IDocumentFile)null);
 
 			//Act //Assert
-			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFile(documentId);
+			Func<Task<IDocumentFile>> act = async () => await SuT.DownloadFileAsync(documentId);
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.FileNotFound);
 			exception.Error.ErrorParameters["aggregateId"].Should().Be(documentId.ToString());

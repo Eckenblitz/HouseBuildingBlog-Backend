@@ -46,7 +46,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 		{
 			//Arrange 
 			var documentId = Guid.NewGuid();
-			_readDocumentsAggregate.DownloadFile(Arg.Is<Guid>(documentId))
+			_readDocumentsAggregate.DownloadFileAsync(Arg.Is<Guid>(documentId))
 				.Throws(new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId));
 
 			// Act
@@ -63,7 +63,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 		{
 			//Arrange 
 			var documentId = Guid.NewGuid();
-			_readDocumentsAggregate.DownloadFile(Arg.Any<Guid>())
+			_readDocumentsAggregate.DownloadFileAsync(Arg.Any<Guid>())
 				.Throws(new FileNotFoundException<IDocumentFile>(null, null));
 
 			// Act

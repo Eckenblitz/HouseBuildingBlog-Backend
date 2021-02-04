@@ -26,7 +26,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries
 			IDocumentFile file;
 			try
 			{
-				file = await _readDocumentsAggregate.DownloadFile(request.DocumentId);
+				file = await _readDocumentsAggregate.DownloadFileAsync(request.DocumentId);
 			}
 			catch (Exception ex) when (ex is AggregateNotFoundException || ex is FileNotFoundException<IDocumentFile>)
 			{

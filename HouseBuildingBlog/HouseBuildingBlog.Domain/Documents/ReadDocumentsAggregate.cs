@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Domain.Documents
 			return existingDocument;
 		}
 
-		public async Task<IDocumentFile> DownloadFile(Guid documentId)
+		public async Task<IDocumentFile> DownloadFileAsync(Guid documentId)
 		{
 			_ = await CheckExistingDocumentAndThrow(documentId);
 
