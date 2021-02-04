@@ -24,6 +24,5 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 				Directory.CreateDirectory(_fileDirectory);
 			}
 		}
-
 	}
 }
