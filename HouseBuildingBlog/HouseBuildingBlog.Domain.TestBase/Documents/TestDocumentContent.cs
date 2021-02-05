@@ -1,7 +1,7 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
 using System;
 
-namespace HouseBuildingBlog.Api.Tests.Documents
+namespace HouseBuildingBlog.Domain.TestBase.Documents
 {
 	public class TestDocumentContent : IDocumentContent
 	{
@@ -12,5 +12,15 @@ namespace HouseBuildingBlog.Api.Tests.Documents
 		public decimal? Price { get; set; }
 
 		public Guid? EventId { get; set; }
+
+		public TestDocumentContent() { }
+
+		public TestDocumentContent(IDocumentContent content)
+		{
+			Title = content.Title;
+			Comment = content.Comment;
+			Price = content.Price;
+			EventId = content.EventId;
+		}
 	}
 }

@@ -12,6 +12,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
 
 		public DbSet<DocumentModel> Documents { get; set; }
+		public DbSet<DocumentFileModel> DocumentFiles { get; set; }
 
 		private MSSQLConfig _config;
 
@@ -68,17 +69,33 @@ namespace HouseBuildingBlog.Persistence.MSSql
 					.HasMaxLength(200);
 			});
 
-			modelBuilder.Entity<DocumentModel>(entitiy =>
+			modelBuilder.Entity<DocumentModel>(entity =>
 			{
-				entitiy.ToTable("Documents", "Documents");
-				entitiy.HasKey(e => e.DocumentId);
-				entitiy.Property(e => e.DocumentId).ValueGeneratedNever();
-				entitiy.Property(e => e.Title).IsRequired();
-				entitiy.HasOne(et => et.Event)
+				entity.ToTable("Documents", "Documents");
+				entity.HasKey(e => e.DocumentId);
+				entity.Property(e => e.DocumentId).ValueGeneratedNever();
+				entity.Property(e => e.Title).IsRequired();
+				entity.HasOne(et => et.Event)
 					.WithMany(a => a.Documents)
 					.HasForeignKey(a => a.EventId)
 					.HasConstraintName("FK_Documents_Events")
 					.OnDelete(DeleteBehavior.SetNull);
+				entity.HasOne(e => e.File)
+					.WithOne(df => df.Document)
+					.HasForeignKey<DocumentFileModel>(e => e.DocumentId);
+			});
+
+			modelBuilder.Entity<DocumentFileModel>(entity =>
+			{
+				entity.ToTable("Files", "Documents");
+				entity.HasKey(e => e.DocumentId);
+				entity.Property(e => e.DocumentId).ValueGeneratedNever();
+				entity.Property(e => e.FileName).HasMaxLength(200).IsRequired();
+				entity.Property(e => e.FileType)
+					.HasConversion<string>()
+					.HasMaxLength(20)
+					.IsRequired();
+				entity.Ignore(e => e.Binaries);
 			});
 		}
 	}

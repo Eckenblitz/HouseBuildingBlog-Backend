@@ -21,6 +21,24 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public async Task<IDocument> GetByIdAsync(Guid documentId)
 		{
+			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
+			return existingDocument;
+		}
+
+		public async Task<IDocumentFile> DownloadFileAsync(Guid documentId)
+		{
+			_ = await CheckExistingDocumentAndThrow(documentId);
+
+			var existingFile = await _readDocumentsRepository.GetFileAsync(documentId);
+
+			if (existingFile == null)
+				throw new AggregateNotFoundException(DocumentErrorCodes.FileNotFound, documentId);
+
+			return existingFile;
+		}
+
+		private async Task<IDocument> CheckExistingDocumentAndThrow(Guid documentId)
+		{
 			var existingDocument = await _readDocumentsRepository.GetByIdAsync(documentId);
 
 			if (existingDocument == null)

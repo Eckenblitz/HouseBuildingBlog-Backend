@@ -61,5 +61,17 @@ namespace HouseBuildingBlog.Api.Controllers
 		{
 			return await _mediator.Send(new DeleteDocumentCommand(id));
 		}
+
+		[HttpPut("{id}/File")]
+		public async Task<IActionResult> UploadFile(Guid id, IFormFile file)
+		{
+			return await _mediator.Send(new UploadDocumentFileCommand(id, file));
+		}
+
+		[HttpGet("{id}/File")]
+		public async Task<IActionResult> DownloadFile(Guid id)
+		{
+			return await _mediator.Send(new DownloadDocumentFileQuery(id));
+		}
 	}
 }

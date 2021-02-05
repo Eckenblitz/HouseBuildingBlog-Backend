@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using System;
 using Xunit;
 
