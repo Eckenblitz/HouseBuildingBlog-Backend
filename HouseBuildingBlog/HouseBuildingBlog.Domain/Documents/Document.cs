@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
@@ -14,10 +15,13 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public Guid? EventId { get; private set; }
 
-		public Document(Guid documentId, IDocumentContent content)
+		public IList<Guid> TagIds { get; }
+
+		public Document(Guid documentId, IDocumentContent content, IEnumerable<Guid> tagIds)
 		{
 			DocumentId = documentId;
 			Update(content);
+			TagIds = new List<Guid>(tagIds);
 		}
 
 		public void Update(IDocumentContent content)
