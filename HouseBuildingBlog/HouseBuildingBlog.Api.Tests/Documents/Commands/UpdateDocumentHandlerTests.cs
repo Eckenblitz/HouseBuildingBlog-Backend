@@ -3,11 +3,13 @@ using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -35,12 +37,13 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			var command = new UpdateDocumentCommand(documentId, data);
-			var document = new Document(documentId, command);
-			_writeDocumentsAggregate.UpdateDocumentAsync(Arg.Is<Guid>(documentId), Arg.Any<IDocumentContent>()).Returns(document);
+			var document = new TestDocument(documentId, command, data.TagIds);
+			_writeDocumentsAggregate.UpdateDocumentAsync(Arg.Is<Guid>(documentId), Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>()).Returns(document);
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);
@@ -51,7 +54,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				&& d.Title == data.Title
 				&& d.Comment == data.Comment
 				&& d.EventId == data.EventId
-				&& d.Price == data.Price);
+				&& d.Price == data.Price
+				&& d.TagIds.SequenceEqual(data.TagIds));
 		}
 
 		[Fact]
@@ -60,7 +64,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var command = new UpdateDocumentCommand(documentId, new DocumentCommandDto());
-			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>())
+			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
 				.Throws(new ValidationException(new List<DomainError>()));
 
 			//Act
@@ -76,7 +80,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var command = new UpdateDocumentCommand(documentId, new DocumentCommandDto());
-			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>())
+			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
 				.Throws(new AggregateNotFoundException("", documentId));
 
 			//Act

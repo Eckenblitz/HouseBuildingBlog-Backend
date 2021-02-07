@@ -3,11 +3,13 @@ using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -38,8 +40,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			};
 
 			var command = new CreateDocumentCommand(data);
-			var document = new Document(Guid.NewGuid(), command);
-			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>()).Returns(document);
+			var document = new TestDocument(Guid.NewGuid(), command, new List<Guid>() { Guid.NewGuid() });
+			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>()).Returns(document);
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);
@@ -50,7 +52,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				&& d.Title == document.Title
 				&& d.Comment == document.Comment
 				&& d.EventId == document.EventId
-				&& d.Price == document.Price);
+				&& d.Price == document.Price
+				&& d.TagIds.SequenceEqual(document.TagIds));
 		}
 
 		[Fact]
@@ -58,7 +61,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 		{
 			//Arrange
 			var command = new CreateDocumentCommand(new DocumentCommandDto());
-			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>())
+			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
 				.Throws(new ValidationException(new List<DomainError>()));
 
 			//Act

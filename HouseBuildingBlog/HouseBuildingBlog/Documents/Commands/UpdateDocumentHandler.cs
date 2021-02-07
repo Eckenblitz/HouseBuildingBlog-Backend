@@ -21,7 +21,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 		{
 			try
 			{
-				var updateDocument = await _writeDocumentsAggregate.UpdateDocumentAsync(request.DocumentId, request);
+				var updateDocument = await _writeDocumentsAggregate.UpdateDocumentAsync(request.DocumentId, request, request.TagIds);
 				return new OkObjectResult(new DocumentQueryDto(updateDocument));
 
 			}

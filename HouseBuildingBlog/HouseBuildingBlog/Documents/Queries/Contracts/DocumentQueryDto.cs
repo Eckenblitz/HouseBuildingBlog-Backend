@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
 using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 {
@@ -15,6 +16,8 @@ namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 
 		public Guid? EventId { get; set; }
 
+		public IEnumerable<Guid> TagIds { get; set; }
+
 		public DocumentQueryDto(IDocument doc)
 		{
 			DocumentId = doc.DocumentId;
@@ -22,6 +25,7 @@ namespace HouseBuildingBlog.Api.Documents.Queries.Contracts
 			Comment = doc.Comment;
 			Price = doc.Price;
 			EventId = doc.EventId;
+			TagIds = doc.TagIds;
 		}
 	}
 }
