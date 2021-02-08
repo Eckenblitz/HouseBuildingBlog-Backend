@@ -19,12 +19,16 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		}
 		public async Task<IDocument> GetByIdAsync(Guid id)
 		{
-			return await _DBContext.Documents.FindAsync(id);
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.SingleOrDefaultAsync(d => d.DocumentId == id);
 		}
 
 		public async Task<IEnumerable<IDocument>> GetAllAsync()
 		{
-			return await _DBContext.Documents.ToListAsync();
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.ToListAsync();
 		}
 
 		public async Task<IDocumentFile> GetFileAsync(Guid documentId)

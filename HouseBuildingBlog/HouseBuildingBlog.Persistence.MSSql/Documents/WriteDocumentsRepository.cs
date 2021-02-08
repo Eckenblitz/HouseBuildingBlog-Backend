@@ -20,6 +20,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		public async Task<IDocument> GetByIdAsync(Guid documentId)
 		{
 			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
 				.SingleOrDefaultAsync(e => e.DocumentId.Equals(documentId));
 		}
 
@@ -49,6 +50,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		public async Task<IDocument> UpdateDocumentAsync(IDocument document)
 		{
 			var toUpdate = await _DBContext.Documents
+				.Include(d => d.AssignedTags)
 				.SingleOrDefaultAsync(e => e.DocumentId.Equals(document.DocumentId));
 			if (toUpdate != null)
 			{
