@@ -16,7 +16,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Documents
 
 		public Guid? EventId { get; set; }
 
-		public IList<Guid> TagIds { get; set; }
+		public IEnumerable<Guid> TagIds { get; set; }
 
 		public TestDocument() { }
 

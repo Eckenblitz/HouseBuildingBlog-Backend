@@ -15,7 +15,7 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public Guid? EventId { get; private set; }
 
-		public IList<Guid> TagIds { get; }
+		public IEnumerable<Guid> TagIds { get; }
 
 		public Document(Guid documentId, IDocumentContent content, IEnumerable<Guid> tagIds)
 		{

@@ -7,6 +7,6 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		Guid DocumentId { get; }
 
-		IList<Guid> TagIds { get; }
+		IEnumerable<Guid> TagIds { get; }
 	}
 }
