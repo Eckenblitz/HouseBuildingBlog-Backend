@@ -37,6 +37,7 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new GetSingleEventQuery(id));
 		}
 
+		//ToDo: think of GET URL parameter max length
 		[HttpGet]
 		[ProducesResponseType(typeof(IList<SimpleEventQueryDto>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetEvents([FromQuery] IList<Guid> tagIds)
