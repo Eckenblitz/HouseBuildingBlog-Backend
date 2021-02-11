@@ -3,6 +3,7 @@ using HouseBuildingBlog.Persistence.MSSql.Files;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
@@ -28,6 +29,14 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		{
 			return await _DBContext.Documents
 				.Include(d => d.AssignedTags)
+				.ToListAsync();
+		}
+
+		public async Task<IEnumerable<IDocument>> FilterByTagsAsync(IEnumerable<Guid> tagIds)
+		{
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.Where(d => d.AssignedTags.Any(et => tagIds.Contains(et.TagId)))
 				.ToListAsync();
 		}
 

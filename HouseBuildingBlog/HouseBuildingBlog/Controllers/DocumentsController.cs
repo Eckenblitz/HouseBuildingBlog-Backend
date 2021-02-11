@@ -2,6 +2,7 @@
 using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
+using HouseBuildingBlog.Api.Events.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,17 @@ namespace HouseBuildingBlog.Api.Controllers
 		public async Task<IActionResult> CreateDocument([FromBody] DocumentCommandDto dto)
 		{
 			return await _mediator.Send(new CreateDocumentCommand(dto));
+		}
+
+		//ToDo: think of GET URL parameter max length
+		[HttpGet]
+		[ProducesResponseType(typeof(IList<DocumentQueryDto>), StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetEvents([FromQuery] IList<Guid> tagIds)
+		{
+			if (tagIds.Count > 0)
+				return await _mediator.Send(new GetFilteredEventsQuery(tagIds));
+			else
+				return await _mediator.Send(new GetAllDocumentsQuery());
 		}
 
 		[HttpGet]
