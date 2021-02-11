@@ -19,12 +19,12 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				Title = "TestTitle",
 				Comment = "TestComment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
-			var tagIds = new List<Guid>() { Guid.NewGuid() };
 
 			//Act
-			var newDocument = new Document(documentId, content, tagIds);
+			var newDocument = new Document(documentId, content);
 
 			//Assert
 			newDocument.DocumentId.Should().Be(documentId);
@@ -32,20 +32,21 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			newDocument.Comment.Should().Be(content.Comment);
 			newDocument.Price.Should().Be(content.Price);
 			newDocument.EventId.Should().Be(content.EventId);
-			newDocument.TagIds.Should().BeEquivalentTo(tagIds);
+			newDocument.TagIds.Should().BeEquivalentTo(content.TagIds);
 		}
 
 		[Fact]
 		public void Expect_UpdatedProperties_When_IsUpdated()
 		{
 			//Arrange
-			var document = new Document(Guid.NewGuid(), new TestDocumentContent(), new List<Guid>());
+			var document = new Document(Guid.NewGuid(), new TestDocumentContent());
 			var newContent = new TestDocumentContent()
 			{
 				Title = "TestTitle",
 				Comment = "TestComment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			//Act
@@ -56,6 +57,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			document.Comment.Should().Be(newContent.Comment);
 			document.Price.Should().Be(newContent.Price);
 			document.EventId.Should().Be(newContent.EventId);
+			document.TagIds.Should().BeEquivalentTo(newContent.TagIds);
 		}
 	}
 }

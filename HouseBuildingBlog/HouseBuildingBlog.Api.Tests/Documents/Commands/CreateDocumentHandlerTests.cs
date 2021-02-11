@@ -36,12 +36,13 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			var command = new CreateDocumentCommand(data);
-			var document = new TestDocument(Guid.NewGuid(), command, new List<Guid>() { Guid.NewGuid() });
-			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>()).Returns(document);
+			var document = new TestDocument(Guid.NewGuid(), command);
+			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>()).Returns(document);
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);
@@ -61,7 +62,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 		{
 			//Arrange
 			var command = new CreateDocumentCommand(new DocumentCommandDto());
-			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
+			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>())
 				.Throws(new ValidationException(new List<DomainError>()));
 
 			//Act

@@ -42,8 +42,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			};
 
 			var command = new UpdateDocumentCommand(documentId, data);
-			var document = new TestDocument(documentId, command, data.TagIds);
-			_writeDocumentsAggregate.UpdateDocumentAsync(Arg.Is<Guid>(documentId), Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>()).Returns(document);
+			var document = new TestDocument(documentId, command);
+			_writeDocumentsAggregate.UpdateDocumentAsync(Arg.Is<Guid>(documentId), Arg.Any<IDocumentContent>()).Returns(document);
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);
@@ -64,7 +64,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var command = new UpdateDocumentCommand(documentId, new DocumentCommandDto());
-			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
+			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>())
 				.Throws(new ValidationException(new List<DomainError>()));
 
 			//Act
@@ -80,7 +80,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var command = new UpdateDocumentCommand(documentId, new DocumentCommandDto());
-			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>(), Arg.Any<IEnumerable<Guid>>())
+			_writeDocumentsAggregate.UpdateDocumentAsync(documentId, Arg.Any<IDocumentContent>())
 				.Throws(new AggregateNotFoundException("", documentId));
 
 			//Act

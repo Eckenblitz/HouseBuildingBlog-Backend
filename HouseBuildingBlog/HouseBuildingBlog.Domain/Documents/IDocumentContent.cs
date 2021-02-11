@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
@@ -11,5 +12,7 @@ namespace HouseBuildingBlog.Domain.Documents
 		decimal? Price { get; }
 
 		Guid? EventId { get; }
+
+		IEnumerable<Guid> TagIds { get; }
 	}
 }

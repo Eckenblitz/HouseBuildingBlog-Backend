@@ -1,6 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Errors;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Domain.Documents
@@ -14,9 +13,9 @@ namespace HouseBuildingBlog.Domain.Documents
 			_writeDocumentsRepository = writeDocumentsRepository;
 		}
 
-		public async Task<IDocument> CreateDocumentAsync(IDocumentContent newDocumentContent, IEnumerable<Guid> assignedTagIds)
+		public async Task<IDocument> CreateDocumentAsync(IDocumentContent newDocumentContent)
 		{
-			var newDocument = new Document(Guid.NewGuid(), newDocumentContent, assignedTagIds);
+			var newDocument = new Document(Guid.NewGuid(), newDocumentContent);
 
 			var validationErrors = DocumentValidator.Validate(newDocument);
 			if (validationErrors.Count > 0)
@@ -25,11 +24,11 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _writeDocumentsRepository.CreateDocumentAsync(newDocument);
 		}
 
-		public async Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent, IEnumerable<Guid> assignedTagIds)
+		public async Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent)
 		{
 			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
 
-			var document = new Document(documentId, existingDocument, assignedTagIds);
+			var document = new Document(documentId, existingDocument);
 			document.Update(documentContent);
 
 			var validationErrors = DocumentValidator.Validate(document);

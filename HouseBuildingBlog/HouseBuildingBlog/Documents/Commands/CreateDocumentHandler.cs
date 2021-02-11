@@ -21,7 +21,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 		{
 			try
 			{
-				var newDocument = await _writeDocumentsAggregate.CreateDocumentAsync(request, request.TagIds);
+				var newDocument = await _writeDocumentsAggregate.CreateDocumentAsync(request);
 				return new CreatedResult(string.Empty, new DocumentQueryDto(newDocument));
 			}
 			catch (ValidationException ex)

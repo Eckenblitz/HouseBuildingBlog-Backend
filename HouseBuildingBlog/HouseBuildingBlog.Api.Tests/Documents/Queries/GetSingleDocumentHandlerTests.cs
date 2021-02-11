@@ -36,8 +36,9 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
-			}, new List<Guid>() { Guid.NewGuid() });
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			});
 			var command = new GetSingleDocumentQuery(documentId);
 			_readDocumentsAggregate.GetByIdAsync(Arg.Is<Guid>(documentId)).Returns(document);
 

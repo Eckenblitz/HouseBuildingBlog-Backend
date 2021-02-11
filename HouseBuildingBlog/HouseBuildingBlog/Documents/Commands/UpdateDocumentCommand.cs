@@ -19,7 +19,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 
 		public Guid? EventId { get; }
 
-		public IList<Guid> TagIds { get; }
+		public IEnumerable<Guid> TagIds { get; }
 
 		public UpdateDocumentCommand(Guid documentId, DocumentCommandDto data)
 		{

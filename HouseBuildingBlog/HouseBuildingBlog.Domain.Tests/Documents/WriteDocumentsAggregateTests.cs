@@ -31,17 +31,22 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		public async Task Given_CreateDocument_Expect_CreatedDocument()
 		{
 			//Arrange
-			var content = new TestDocumentContent() { Title = "TestTitle", Comment = "TestComment", Price = 1.23M, EventId = Guid.NewGuid() };
-			var tagIds = new List<Guid>() { Guid.NewGuid() };
+			var content = new TestDocumentContent()
+			{
+				Title = "TestTitle",
+				Comment = "TestComment",
+				Price = 1.23M,
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			};
 
 			//Act
-			var document = await SuT.CreateDocumentAsync(content, tagIds);
+			var document = await SuT.CreateDocumentAsync(content);
 
 			//Assert
 			_ = _writeDocumentsRepository.Received(1).CreateDocumentAsync(
 				Arg.Is<IDocument>(d => d.DocumentId != Guid.Empty && d.HasDocumentExpectedContent(content)));
 			document.DocumentId.Should().NotBeEmpty();
-			document.TagIds.Should().BeEquivalentTo(tagIds);
 			document.CheckDocumentContent(content);
 		}
 
@@ -55,7 +60,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var content = new TestDocumentContent() { Title = title };
 
 			//Act / Assert
-			Func<Task<IDocument>> act = async () => await SuT.CreateDocumentAsync(content, new List<Guid>());
+			Func<Task<IDocument>> act = async () => await SuT.CreateDocumentAsync(content);
 			var exception = (await act.Should().ThrowAsync<ValidationException>()).And;
 			exception.ValidationErrors.Should().Contain(e => e.ErrorCode == DocumentErrorCodes.HasNoTitle);
 		}
@@ -67,18 +72,23 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var documentId = Guid.NewGuid();
 			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
 				.Returns(new TestDocument() { DocumentId = documentId });
-			var newContent = new TestDocumentContent() { Title = "TestTitle", Comment = "TestComment", Price = 1.23M, EventId = Guid.NewGuid() };
-			var newTagIds = new List<Guid>() { Guid.NewGuid() };
+			var newContent = new TestDocumentContent()
+			{
+				Title = "TestTitle",
+				Comment = "TestComment",
+				Price = 1.23M,
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			};
 
 			//Act
-			var updatedDocument = await SuT.UpdateDocumentAsync(documentId, newContent, newTagIds);
+			var updatedDocument = await SuT.UpdateDocumentAsync(documentId, newContent);
 
 			//Assert
 			_ = _writeDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
 			_ = _writeDocumentsRepository.Received(1).UpdateDocumentAsync(
 				Arg.Is<IDocument>(d => d.DocumentId == documentId && d.HasDocumentExpectedContent(newContent)));
 			updatedDocument.DocumentId.Should().Be(documentId);
-			updatedDocument.TagIds.Should().BeEquivalentTo(newTagIds);
 			updatedDocument.CheckDocumentContent(newContent);
 		}
 
@@ -95,7 +105,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var newContent = new TestDocumentContent() { Title = title };
 
 			//Act / Assert
-			Func<Task<IDocument>> act = async () => await SuT.UpdateDocumentAsync(documentId, newContent, new List<Guid>());
+			Func<Task<IDocument>> act = async () => await SuT.UpdateDocumentAsync(documentId, newContent);
 			var exception = (await act.Should().ThrowAsync<ValidationException>()).And;
 			exception.ValidationErrors.Should().Contain(e => e.ErrorCode == DocumentErrorCodes.HasNoTitle);
 		}
@@ -110,7 +120,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var newContent = new TestDocumentContent() { Title = "Test" };
 
 			//Act / Assert
-			Func<Task<IDocument>> act = async () => await SuT.UpdateDocumentAsync(documentId, newContent, new List<Guid>());
+			Func<Task<IDocument>> act = async () => await SuT.UpdateDocumentAsync(documentId, newContent);
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
 		}

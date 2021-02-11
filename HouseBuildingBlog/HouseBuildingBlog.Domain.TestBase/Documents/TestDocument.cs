@@ -20,14 +20,14 @@ namespace HouseBuildingBlog.Domain.TestBase.Documents
 
 		public TestDocument() { }
 
-		public TestDocument(Guid documentId, IDocumentContent content, IList<Guid> tagIds)
+		public TestDocument(Guid documentId, IDocumentContent content)
 		{
 			DocumentId = documentId;
 			Title = content.Title;
 			Comment = content.Comment;
 			Price = content.Price;
 			EventId = content.EventId;
-			TagIds = new List<Guid>(tagIds);
+			TagIds = content.TagIds;
 		}
 
 		public TestDocument(IDocument document)

@@ -37,8 +37,9 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
-			}, new List<Guid>() { Guid.NewGuid() });
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			});
 			var command = new DeleteDocumentCommand(documentId);
 			_writeDocumentsAggregate.DeleteDocumentAsync(Arg.Is<Guid>(documentId)).Returns(document);
 

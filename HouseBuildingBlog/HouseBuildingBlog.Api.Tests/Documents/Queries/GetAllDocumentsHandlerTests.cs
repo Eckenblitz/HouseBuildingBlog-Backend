@@ -34,15 +34,17 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
-			}, new List<Guid>() { Guid.NewGuid() });
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			});
 			var document2 = new TestDocument(Guid.NewGuid(), new TestDocumentContent()
 			{
 				Title = "Title2",
 				Comment = "Comment2",
 				Price = 1.24M,
-				EventId = Guid.NewGuid()
-			}, new List<Guid>() { Guid.NewGuid() });
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			});
 			var command = new GetAllDocumentsQuery();
 			_readDocumentsAggregate.GetAllAsync().Returns(new List<TestDocument>() { document1, document2 });
 
