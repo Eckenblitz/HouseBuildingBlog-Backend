@@ -2,7 +2,6 @@
 using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
-using HouseBuildingBlog.Api.Events.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,20 +32,13 @@ namespace HouseBuildingBlog.Api.Controllers
 
 		//ToDo: think of GET URL parameter max length
 		[HttpGet]
-		[ProducesResponseType(typeof(IList<DocumentQueryDto>), StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetEvents([FromQuery] IList<Guid> tagIds)
+		[ProducesResponseType(typeof(IEnumerable<DocumentQueryDto>), StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetDocuments([FromQuery] IList<Guid> tagIds)
 		{
 			if (tagIds.Count > 0)
-				return await _mediator.Send(new GetFilteredEventsQuery(tagIds));
+				return await _mediator.Send(new GetFilteredDocumentsQuery(tagIds));
 			else
 				return await _mediator.Send(new GetAllDocumentsQuery());
-		}
-
-		[HttpGet]
-		[ProducesResponseType(typeof(IEnumerable<DocumentQueryDto>), StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetAllDocuments()
-		{
-			return await _mediator.Send(new GetAllDocumentsQuery());
 		}
 
 		[HttpGet("{id}")]

@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,7 +25,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledCreateDocumentCommand_When_CreateDocumentIsCalled()
+		public async Task Given_CreateDocument_Expect_CreateDocumentCommand()
 		{
 			//Arrange
 			var data = new DocumentCommandDto()
@@ -46,7 +48,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledUpdateDocumentCommand_When_UpdateDocumentIsCalled()
+		public async Task Given_UpdateDocument_Expect_UpdateDocumentCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -71,7 +73,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledDeleteDocumentCommand_When_DeleteDocumentIsCalled()
+		public async Task Given_DeleteDocument_Expect_DeleteDocumentCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -84,17 +86,30 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledGetAllDocumentsQuery_When_GetAllDocumentsIsCalled()
+		public async Task Given_GetDocuments_Expect_GetAllDocumentsQuery_When_NoTagsArePassed()
 		{
 			//Arrange / Act
-			await SuT.GetAllDocuments();
+			await SuT.GetDocuments(new List<Guid>());
 
 			//Assert
 			await _mediator.Received(1).Send(Arg.Any<GetAllDocumentsQuery>());
 		}
 
 		[Fact]
-		public async Task Expect_CalledGetSingleDocumentQuery_When_GetSingleDocumentIsCalled()
+		public async Task Expect_GetFilteredDocumentsQuerys_When_TagsArePassed()
+		{
+			//Arrange 
+			var tagIds = new List<Guid>() { Guid.NewGuid() };
+
+			// Act
+			await SuT.GetDocuments(tagIds);
+
+			//Assert
+			await _mediator.Received(1).Send(Arg.Is<GetFilteredDocumentsQuery>(q => q.TagIds.SequenceEqual(tagIds)));
+		}
+
+		[Fact]
+		public async Task Expect_GetSingleDocumentQuery_When_GetSingleDocumentIsCalled()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -107,7 +122,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledUploadDocumentFileCommand_When_UploadFileIsCalled()
+		public async Task Expect_UploadDocumentFileCommand_When_UploadFileIsCalled()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -121,7 +136,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_CalledDownloadDocumentFileQuery_When_DownloadFileIsCalled()
+		public async Task Expect_DownloadDocumentFileQuery_When_DownloadFileIsCalled()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
