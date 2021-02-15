@@ -3,11 +3,13 @@ using HouseBuildingBlog.Api.Documents.Commands.Contracts;
 using HouseBuildingBlog.Api.Documents.Queries.Contracts;
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Errors;
+using HouseBuildingBlog.Domain.TestBase.Documents;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -34,11 +36,12 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			var command = new CreateDocumentCommand(data);
-			var document = new Document(Guid.NewGuid(), command);
+			var document = new TestDocument(Guid.NewGuid(), command);
 			_writeDocumentsAggregate.CreateDocumentAsync(Arg.Any<IDocumentContent>()).Returns(document);
 
 			//Act
@@ -50,7 +53,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				&& d.Title == document.Title
 				&& d.Comment == document.Comment
 				&& d.EventId == document.EventId
-				&& d.Price == document.Price);
+				&& d.Price == document.Price
+				&& d.TagIds.SequenceEqual(document.TagIds));
 		}
 
 		[Fact]

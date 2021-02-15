@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
 using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.TestBase.Documents
 {
@@ -15,7 +16,19 @@ namespace HouseBuildingBlog.Domain.TestBase.Documents
 
 		public Guid? EventId { get; set; }
 
+		public IEnumerable<Guid> TagIds { get; set; }
+
 		public TestDocument() { }
+
+		public TestDocument(Guid documentId, IDocumentContent content)
+		{
+			DocumentId = documentId;
+			Title = content.Title;
+			Comment = content.Comment;
+			Price = content.Price;
+			EventId = content.EventId;
+			TagIds = content.TagIds;
+		}
 
 		public TestDocument(IDocument document)
 		{
@@ -24,6 +37,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Documents
 			Comment = document.Comment;
 			Price = document.Price;
 			EventId = document.EventId;
+			TagIds = document.TagIds;
 		}
 	}
 }

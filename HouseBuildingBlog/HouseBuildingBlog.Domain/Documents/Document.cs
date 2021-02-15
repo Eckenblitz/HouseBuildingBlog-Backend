@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Documents
 {
@@ -14,6 +15,8 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public Guid? EventId { get; private set; }
 
+		public IEnumerable<Guid> TagIds { get; private set; }
+
 		public Document(Guid documentId, IDocumentContent content)
 		{
 			DocumentId = documentId;
@@ -26,6 +29,7 @@ namespace HouseBuildingBlog.Domain.Documents
 			Comment = content.Comment;
 			Price = content.Price;
 			EventId = content.EventId;
+			TagIds = content.TagIds != null ? new List<Guid>(content.TagIds) : new List<Guid>();
 		}
 	}
 }

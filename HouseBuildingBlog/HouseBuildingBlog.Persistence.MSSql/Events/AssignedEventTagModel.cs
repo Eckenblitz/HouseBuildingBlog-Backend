@@ -3,7 +3,7 @@ using System;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Events
 {
-	public class AssignedTagsModel
+	public class AssignedEventTagModel
 	{
 		public Guid EventId { get; set; }
 

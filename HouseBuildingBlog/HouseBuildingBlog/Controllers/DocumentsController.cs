@@ -30,11 +30,15 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new CreateDocumentCommand(dto));
 		}
 
+		//ToDo: think of GET URL parameter max length
 		[HttpGet]
 		[ProducesResponseType(typeof(IEnumerable<DocumentQueryDto>), StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetAllDocuments()
+		public async Task<IActionResult> GetDocuments([FromQuery] IList<Guid> tagIds)
 		{
-			return await _mediator.Send(new GetAllDocumentsQuery());
+			if (tagIds.Count > 0)
+				return await _mediator.Send(new GetFilteredDocumentsQuery(tagIds));
+			else
+				return await _mediator.Send(new GetAllDocumentsQuery());
 		}
 
 		[HttpGet("{id}")]

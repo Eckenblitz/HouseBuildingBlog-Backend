@@ -19,6 +19,11 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _readDocumentsRepository.GetAllAsync();
 		}
 
+		public async Task<IEnumerable<IDocument>> FilterByTagsAsync(IEnumerable<Guid> tagIds)
+		{
+			return await _readDocumentsRepository.FilterByTagsAsync(tagIds);
+		}
+
 		public async Task<IDocument> GetByIdAsync(Guid documentId)
 		{
 			var existingDocument = await CheckExistingDocumentAndThrow(documentId);

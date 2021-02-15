@@ -18,7 +18,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		public IEnumerable<Guid> TagIds => AssignedTags?.Select(et => et.TagId);
 
-		public ICollection<AssignedTagsModel> AssignedTags { get; set; }
+		public ICollection<AssignedEventTagModel> AssignedTags { get; set; }
 
 		public ICollection<DocumentModel> Documents { get; set; }
 		public EventModel() { }
@@ -26,7 +26,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		public EventModel(IEvent newEvent)
 		{
 			EventId = newEvent.EventId == Guid.Empty ? Guid.NewGuid() : newEvent.EventId;
-			AssignedTags = new List<AssignedTagsModel>();
+			AssignedTags = new List<AssignedEventTagModel>();
 			Update(newEvent);
 		}
 
@@ -40,11 +40,11 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		private void UpdateTags(IEvent update)
 		{
-			var assignedTags = new List<AssignedTagsModel>(AssignedTags);
+			var assignedTags = new List<AssignedEventTagModel>(AssignedTags);
 
 			//Create
 			foreach (var tagId in update.TagIds.Except(assignedTags.Select(at => at.TagId)))
-				AssignedTags.Add(new AssignedTagsModel() { EventId = EventId, TagId = tagId });
+				AssignedTags.Add(new AssignedEventTagModel() { EventId = EventId, TagId = tagId });
 
 			//Delete
 			foreach (var assignedTag in assignedTags.Where(at => !update.TagIds.Contains(at.TagId)))

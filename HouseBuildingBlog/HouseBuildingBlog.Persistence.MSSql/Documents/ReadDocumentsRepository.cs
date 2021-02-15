@@ -3,6 +3,7 @@ using HouseBuildingBlog.Persistence.MSSql.Files;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Persistence.MSSql.Documents
@@ -19,12 +20,24 @@ namespace HouseBuildingBlog.Persistence.MSSql.Documents
 		}
 		public async Task<IDocument> GetByIdAsync(Guid id)
 		{
-			return await _DBContext.Documents.FindAsync(id);
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.SingleOrDefaultAsync(d => d.DocumentId == id);
 		}
 
 		public async Task<IEnumerable<IDocument>> GetAllAsync()
 		{
-			return await _DBContext.Documents.ToListAsync();
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.ToListAsync();
+		}
+
+		public async Task<IEnumerable<IDocument>> FilterByTagsAsync(IEnumerable<Guid> tagIds)
+		{
+			return await _DBContext.Documents
+				.Include(d => d.AssignedTags)
+				.Where(d => d.AssignedTags.Any(et => tagIds.Contains(et.TagId)))
+				.ToListAsync();
 		}
 
 		public async Task<IDocumentFile> GetFileAsync(Guid documentId)

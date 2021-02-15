@@ -3,6 +3,7 @@ using HouseBuildingBlog.Domain.Documents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Api.Documents.Commands
 {
@@ -18,6 +19,8 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 
 		public Guid? EventId { get; }
 
+		public IEnumerable<Guid> TagIds { get; }
+
 		public UpdateDocumentCommand(Guid documentId, DocumentCommandDto data)
 		{
 			DocumentId = documentId;
@@ -25,6 +28,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			Comment = data.Comment;
 			Price = data.Price;
 			EventId = data.EventId;
+			TagIds = data.TagIds;
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		public void Expect_ResultWithoutHasNoTitleError_When_TitleIsFilled()
 		{
 			//Arrange
-			var document = new Document(Guid.NewGuid(), new TestDocumentContent() { Title = "Test123" });
+			var document = new TestDocument(Guid.NewGuid(), new TestDocumentContent() { Title = "Test123" });
 
 			//Act
 			var validationResult = DocumentValidator.Validate(document);
@@ -28,7 +28,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		public void Expect_HasNoTitleError_When_TitleIsEmpty(string? title)
 		{
 			//Arrange
-			var document = new Document(Guid.NewGuid(), new TestDocumentContent() { Title = title });
+			var document = new TestDocument(Guid.NewGuid(), new TestDocumentContent() { Title = title });
 
 			//Act
 			var validationResult = DocumentValidator.Validate(document);

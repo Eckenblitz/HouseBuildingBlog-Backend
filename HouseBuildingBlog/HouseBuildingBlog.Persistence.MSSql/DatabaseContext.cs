@@ -9,10 +9,11 @@ namespace HouseBuildingBlog.Persistence.MSSql
 	{
 		public DbSet<EventModel> Events { get; set; }
 		public DbSet<TagModel> Tags { get; set; }
-		public DbSet<AssignedTagsModel> AssignedEventTags { get; set; }
+		public DbSet<AssignedEventTagModel> AssignedEventTags { get; set; }
 
 		public DbSet<DocumentModel> Documents { get; set; }
 		public DbSet<DocumentFileModel> DocumentFiles { get; set; }
+		public DbSet<AssignedDocumentTagModel> AssignedDocumentTags { get; set; }
 
 		private MSSQLConfig _config;
 
@@ -25,7 +26,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer($"Server={_config.Server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection}");
+				optionsBuilder.UseSqlServer($"Server={_config.Server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection};user id={_config.UserId};pwd={_config.UserPw}");
 			}
 		}
 
@@ -40,7 +41,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 				e.Property(e => e.Title).IsRequired();
 			});
 
-			modelBuilder.Entity<AssignedTagsModel>(e =>
+			modelBuilder.Entity<AssignedEventTagModel>(e =>
 			{
 				e.ToTable("AssignedTags", "Events");
 				e.HasKey(et => new { et.EventId, et.TagId });
@@ -60,7 +61,7 @@ namespace HouseBuildingBlog.Persistence.MSSql
 
 			modelBuilder.Entity<TagModel>(entity =>
 			{
-				entity.ToTable("Tags", "Events");
+				entity.ToTable("Tags", "Tags");
 				entity.HasKey(e => e.TagId);
 
 				entity.Property(e => e.TagId).ValueGeneratedNever();
@@ -96,6 +97,24 @@ namespace HouseBuildingBlog.Persistence.MSSql
 					.HasMaxLength(20)
 					.IsRequired();
 				entity.Ignore(e => e.Binaries);
+			});
+
+			modelBuilder.Entity<AssignedDocumentTagModel>(e =>
+			{
+				e.ToTable("AssignedTags", "Documents");
+				e.HasKey(et => new { et.DocumentId, et.TagId });
+
+				e.HasOne(et => et.Document)
+					.WithMany(e => e.AssignedTags)
+					.HasForeignKey(et => et.DocumentId)
+					.OnDelete(DeleteBehavior.Cascade)
+					.HasConstraintName("FK_AssignedTags_Documents");
+
+				e.HasOne(et => et.Tag)
+					.WithMany(t => t.AssignedDocuments)
+					.HasForeignKey(et => et.TagId)
+					.OnDelete(DeleteBehavior.Cascade)
+					.HasConstraintName("FK_AssignedTags_Tags");
 			});
 		}
 	}

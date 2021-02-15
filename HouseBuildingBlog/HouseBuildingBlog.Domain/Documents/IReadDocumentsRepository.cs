@@ -8,6 +8,8 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		Task<IEnumerable<IDocument>> GetAllAsync();
 
+		Task<IEnumerable<IDocument>> FilterByTagsAsync(IEnumerable<Guid> tagIds);
+
 		Task<IDocument> GetByIdAsync(Guid documentId);
 
 		Task<IDocumentFile> GetFileAsync(Guid documentId);

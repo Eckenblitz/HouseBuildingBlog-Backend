@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 {
@@ -11,5 +12,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands.Contracts
 		public decimal? Price { get; set; }
 
 		public Guid? EventId { get; set; }
+
+		public IList<Guid> TagIds { get; set; }
 	}
 }

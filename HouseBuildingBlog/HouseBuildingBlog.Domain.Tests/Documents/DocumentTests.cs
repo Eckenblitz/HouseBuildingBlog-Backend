@@ -2,6 +2,7 @@
 using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.TestBase.Documents;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace HouseBuildingBlog.Domain.Tests.Documents
@@ -18,7 +19,8 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				Title = "TestTitle",
 				Comment = "TestComment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			//Act
@@ -30,6 +32,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			newDocument.Comment.Should().Be(content.Comment);
 			newDocument.Price.Should().Be(content.Price);
 			newDocument.EventId.Should().Be(content.EventId);
+			newDocument.TagIds.Should().BeEquivalentTo(content.TagIds);
 		}
 
 		[Fact]
@@ -42,7 +45,8 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				Title = "TestTitle",
 				Comment = "TestComment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			};
 
 			//Act
@@ -53,6 +57,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			document.Comment.Should().Be(newContent.Comment);
 			document.Price.Should().Be(newContent.Price);
 			document.EventId.Should().Be(newContent.EventId);
+			document.TagIds.Should().BeEquivalentTo(newContent.TagIds);
 		}
 	}
 }

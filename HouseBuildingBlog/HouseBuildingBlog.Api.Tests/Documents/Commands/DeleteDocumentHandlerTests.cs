@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -30,12 +32,13 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
-			var document = new Document(documentId, new TestDocumentContent()
+			var document = new TestDocument(documentId, new TestDocumentContent()
 			{
 				Title = "Title",
 				Comment = "Comment",
 				Price = 1.23M,
-				EventId = Guid.NewGuid()
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
 			});
 			var command = new DeleteDocumentCommand(documentId);
 			_writeDocumentsAggregate.DeleteDocumentAsync(Arg.Is<Guid>(documentId)).Returns(document);
@@ -49,7 +52,8 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 				&& d.Title == document.Title
 				&& d.Comment == document.Comment
 				&& d.EventId == document.EventId
-				&& d.Price == document.Price);
+				&& d.Price == document.Price
+				&& d.TagIds.SequenceEqual(document.TagIds));
 		}
 
 		[Fact]

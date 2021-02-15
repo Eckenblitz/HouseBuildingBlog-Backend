@@ -6,6 +6,7 @@ using HouseBuildingBlog.Domain.TestBase;
 using HouseBuildingBlog.Domain.TestBase.Documents;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -30,7 +31,14 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		public async Task Given_CreateDocument_Expect_CreatedDocument()
 		{
 			//Arrange
-			var content = new TestDocumentContent() { Title = "TestTitle", Comment = "TestComment", Price = 1.23M, EventId = Guid.NewGuid() };
+			var content = new TestDocumentContent()
+			{
+				Title = "TestTitle",
+				Comment = "TestComment",
+				Price = 1.23M,
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			};
 
 			//Act
 			var document = await SuT.CreateDocumentAsync(content);
@@ -64,7 +72,14 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var documentId = Guid.NewGuid();
 			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
 				.Returns(new TestDocument() { DocumentId = documentId });
-			var newContent = new TestDocumentContent() { Title = "TestTitle", Comment = "TestComment", Price = 1.23M, EventId = Guid.NewGuid() };
+			var newContent = new TestDocumentContent()
+			{
+				Title = "TestTitle",
+				Comment = "TestComment",
+				Price = 1.23M,
+				EventId = Guid.NewGuid(),
+				TagIds = new List<Guid>() { Guid.NewGuid() }
+			};
 
 			//Act
 			var updatedDocument = await SuT.UpdateDocumentAsync(documentId, newContent);

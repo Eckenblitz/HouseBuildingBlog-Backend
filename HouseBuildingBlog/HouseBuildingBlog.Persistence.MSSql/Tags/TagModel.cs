@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Tags;
+using HouseBuildingBlog.Persistence.MSSql.Documents;
 using HouseBuildingBlog.Persistence.MSSql.Events;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace HouseBuildingBlog.Persistence.MSSql.Tags
 
 		public string Title { get; private set; }
 
-		public ICollection<AssignedTagsModel> AssignedEvents { get; set; }
+		public ICollection<AssignedEventTagModel> AssignedEvents { get; set; }
+
+		public ICollection<AssignedDocumentTagModel> AssignedDocuments { get; set; }
 
 		public TagModel() { }
 
