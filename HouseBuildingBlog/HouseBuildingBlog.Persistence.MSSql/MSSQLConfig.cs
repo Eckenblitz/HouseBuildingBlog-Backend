@@ -4,13 +4,13 @@
     {
         public string Server { get; set; }
 
-        public int Port { get; set; }
+        public int? Port { get; set; }
 
         public string DatabaseName { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
-        public string UserPw { get; set; }
+        public string? UserPw { get; set; }
 
         public bool TrustedConnection { get; set; }
 

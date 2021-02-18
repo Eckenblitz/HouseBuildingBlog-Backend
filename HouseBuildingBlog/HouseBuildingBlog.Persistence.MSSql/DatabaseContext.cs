@@ -26,7 +26,9 @@ namespace HouseBuildingBlog.Persistence.MSSql
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer($"Server={_config.Server},{_config.Port};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection};user id={_config.UserId};pwd={_config.UserPw}");
+                var server = $"{_config.Server}" + (_config.Port.HasValue ? $",{_config.Port.Value}" : string.Empty);
+                var credentials = !_config.TrustedConnection ? $";user id={_config.UserId};pwd={_config.UserPw}" : string.Empty;
+                optionsBuilder.UseSqlServer($"Server={server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection}{credentials}");
             }
         }
 
