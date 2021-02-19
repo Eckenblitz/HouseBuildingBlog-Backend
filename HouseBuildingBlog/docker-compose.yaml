@@ -1,0 +1,34 @@
+version: "3.9"
+
+networks:
+    hbb_network:
+        name: hbb_network
+
+services:
+    hbb_api:
+        build: .
+        container_name: HBB-API
+        ports:
+            - "5000:5000"
+            - "5001:5001"
+        depends_on:
+            - hbb_sqldb
+        networks:
+            - hbb_network
+        volumes:
+            - C:\dev\HBB_Data\files:/app/hbb_files
+    hbb_sqldb:
+        image: "microsoft/mssql-server-linux:latest"
+        container_name: HBB-SQL
+        ports:
+            - "1439:1433"
+        environment:
+            SA_PASSWORD: "HBB-SQL-pw0"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Express" 
+        networks:
+            - hbb_network
+        volumes:
+            - C:\dev\HBB_Data\sql\data:/var/opt/mssql/data
+            - C:\dev\HBB_Data\sql\logs:/var/opt/mssql/log
+            - C:\dev\HBB_Data\sql\secrets:/var/opt/mssql/secrets
