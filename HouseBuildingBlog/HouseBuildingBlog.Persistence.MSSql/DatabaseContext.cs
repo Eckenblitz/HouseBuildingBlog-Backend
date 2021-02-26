@@ -2,6 +2,7 @@
 using HouseBuildingBlog.Persistence.MSSql.Events;
 using HouseBuildingBlog.Persistence.MSSql.Tags;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HouseBuildingBlog.Persistence.MSSql
 {
@@ -16,10 +17,14 @@ namespace HouseBuildingBlog.Persistence.MSSql
         public DbSet<AssignedDocumentTagModel> AssignedDocumentTags { get; set; }
 
         private MSSQLConfig _config;
+        private ILogger<DatabaseContext> _logger;
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options, MSSQLConfig config) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, MSSQLConfig config, ILogger<DatabaseContext> logger) : base(options)
         {
+            _logger = logger;
             _config = config;
+
+            _logger.LogInformation(_config.ToString());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,7 +33,10 @@ namespace HouseBuildingBlog.Persistence.MSSql
             {
                 var server = $"{_config.Server}" + (_config.Port.HasValue ? $",{_config.Port.Value}" : string.Empty);
                 var credentials = !_config.TrustedConnection ? $";user id={_config.UserId};pwd={_config.UserPw}" : string.Empty;
-                optionsBuilder.UseSqlServer($"Server={server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection}{credentials}");
+                var connectionString =
+                    $"Server={server};Database={_config.DatabaseName};Trusted_Connection={_config.TrustedConnection}{credentials}";
+                _logger.LogInformation($"SQL ConnectionString: {connectionString}");
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 
