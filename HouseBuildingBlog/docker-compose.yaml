@@ -16,7 +16,8 @@ services:
         networks:
             - hbb_network
         volumes:
-            - C:\dev\HBB_Data\files:/app/hbb_files
+            - C:\HBB_Data\files:/app/hbb_files
+            - C:\HBB_Data\logs:/app/logs
     hbb_sqldb:
         image: "microsoft/mssql-server-linux:latest"
         container_name: HBB-SQL
@@ -29,6 +30,6 @@ services:
         networks:
             - hbb_network
         volumes:
-            - C:\dev\HBB_Data\sql\data:/var/opt/mssql/data
-            - C:\dev\HBB_Data\sql\logs:/var/opt/mssql/log
-            - C:\dev\HBB_Data\sql\secrets:/var/opt/mssql/secrets
+            - C:\HBB_Data\sql\data:/var/opt/mssql/data
+            - C:\HBB_Data\sql\logs:/var/opt/mssql/log
+            - C:\HBB_Data\sql\secrets:/var/opt/mssql/secrets
