@@ -1,5 +1,5 @@
 using HouseBuildingBlog.Api.Services;
-using HouseBuildingBlog.Domain.Documents;
+using HouseBuildingBlog.Domain;
 using HouseBuildingBlog.Persistence.MSSql;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,61 +13,60 @@ using System.Reflection;
 
 namespace HouseBuildingBlog.Api
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers().AddNewtonsoftJson();
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddControllers().AddNewtonsoftJson();
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+			services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+			});
 
-            services.AddTransient<IWriteDocumentsAggregate, WriteDocumentsAggregate>();
-            services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
-            services.AddTransient<ITransformFileService, TransformFileService>();
-            services.AddTransient<IFileResponseService, FileResponseService>();
-            services.RegisterMSSQLRepositories(Configuration);
-        }
+			services.RegisterDomainDependencies();
+			services.AddTransient<ITransformFileService, TransformFileService>();
+			services.AddTransient<IFileResponseService, FileResponseService>();
+			services.RegisterMSSQLRepositories(Configuration);
+		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.AddFile(Configuration.GetSection("Logging"));
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+		{
+			loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
-            app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 
-            app.UseRouting();
+			app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+			});
 
-            app.UseSwagger();
+			app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
-        }
-    }
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+			});
+		}
+	}
 }
