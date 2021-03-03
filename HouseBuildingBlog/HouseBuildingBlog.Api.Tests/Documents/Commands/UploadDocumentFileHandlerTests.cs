@@ -15,7 +15,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 {
-	public class UploadDocumentFileHandlerTests : ActionResultTestBase
+	public class UploadDocumentFileHandlerTests
 	{
 		private UploadDocumentFileHandler SuT { get; }
 
@@ -38,7 +38,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(new UploadDocumentFileCommand(Guid.NewGuid(), Substitute.For<IFormFile>()), CancellationToken.None);
 
 			//Assert
-			CheckResult<OkResult>(result);
+			result.CheckResult<OkResult>();
 		}
 
 		[Fact]
@@ -52,7 +52,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(new UploadDocumentFileCommand(Guid.NewGuid(), Substitute.For<IFormFile>()), CancellationToken.None);
 
 			//Assert
-			CheckResult<NotFoundObjectResult>(result);
+			result.CheckResult<NotFoundObjectResult>();
 		}
 
 		[Fact]
@@ -66,7 +66,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(new UploadDocumentFileCommand(Guid.NewGuid(), Substitute.For<IFormFile>()), CancellationToken.None);
 
 			//Assert
-			CheckResult<BadRequestObjectResult>(result);
+			result.CheckResult<BadRequestObjectResult>();
 		}
 	}
 }

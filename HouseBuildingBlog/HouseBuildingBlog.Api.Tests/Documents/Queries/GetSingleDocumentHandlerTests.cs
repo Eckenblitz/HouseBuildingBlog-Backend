@@ -15,7 +15,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 {
-	public class GetSingleDocumentHandlerTests : ActionResultTestBase
+	public class GetSingleDocumentHandlerTests
 	{
 		private GetSingleDocumentHandler SuT { get; }
 		private readonly IReadDocumentsAggregate _readDocumentsAggregate;
@@ -46,7 +46,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(command, CancellationToken.None);
 
 			//Assert
-			CheckResult<OkObjectResult, DocumentQueryDto>(result, d =>
+			result.CheckResult<OkObjectResult, DocumentQueryDto>(d =>
 				d.DocumentId == document.DocumentId
 				&& d.Title == document.Title
 				&& d.Comment == document.Comment
@@ -68,7 +68,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(command, CancellationToken.None);
 
 			//Assert
-			_ = CheckResult<NotFoundObjectResult>(result);
+			_ = result.CheckResult<NotFoundObjectResult>();
 		}
 	}
 }

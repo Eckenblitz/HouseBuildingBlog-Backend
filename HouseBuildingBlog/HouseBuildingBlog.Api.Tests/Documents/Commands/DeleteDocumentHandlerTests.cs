@@ -16,7 +16,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 {
-	public class DeleteDocumentHandlerTests : ActionResultTestBase
+	public class DeleteDocumentHandlerTests
 	{
 		private DeleteDocumentHandler SuT { get; }
 		private readonly IWriteDocumentsAggregate _writeDocumentsAggregate;
@@ -47,7 +47,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(command, CancellationToken.None);
 
 			//Assert
-			CheckResult<OkObjectResult, DocumentQueryDto>(result, d =>
+			result.CheckResult<OkObjectResult, DocumentQueryDto>(d =>
 				d.DocumentId == document.DocumentId
 				&& d.Title == document.Title
 				&& d.Comment == document.Comment
@@ -69,7 +69,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(command, CancellationToken.None);
 
 			//Assert
-			_ = CheckResult<NotFoundObjectResult>(result);
+			_ = result.CheckResult<NotFoundObjectResult>();
 		}
 	}
 }

@@ -14,7 +14,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 {
-	public class DownloadDocumentFileHandlerTests : ActionResultTestBase
+	public class DownloadDocumentFileHandlerTests
 	{
 		private DownloadDocumentFileHandler SuT { get; }
 
@@ -38,7 +38,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(new DownloadDocumentFileQuery(Guid.NewGuid()), CancellationToken.None);
 
 			//Assert
-			CheckResult<FileContentResult>(result);
+			result.CheckResult<FileContentResult>();
 		}
 
 		[Fact]
@@ -53,7 +53,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(new DownloadDocumentFileQuery(documentId), CancellationToken.None);
 
 			//Assert
-			CheckResult<NotFoundObjectResult, AggregateNotFoundException>(result, ex =>
+			result.CheckResult<NotFoundObjectResult, AggregateNotFoundException>(ex =>
 				ex.Error.ErrorCode == DocumentErrorCodes.DocumentNotFound
 				&& ex.Error.ErrorParameters["aggregateId"] == documentId.ToString());
 		}
@@ -70,7 +70,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(new DownloadDocumentFileQuery(documentId), CancellationToken.None);
 
 			//Assert
-			CheckResult<NotFoundObjectResult, FileNotFoundException<IDocumentFile>>(result);
+			result.CheckResult<NotFoundObjectResult, FileNotFoundException<IDocumentFile>>();
 		}
 	}
 }
