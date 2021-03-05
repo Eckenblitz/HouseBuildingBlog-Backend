@@ -7,6 +7,7 @@
 
 		public const string HasNoTitle = "D002";
 
+		//ToDo: own class + Prefix
 		//File
 
 		public const string FileNotFound = "D101";
