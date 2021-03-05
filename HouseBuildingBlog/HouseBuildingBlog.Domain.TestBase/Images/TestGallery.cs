@@ -12,12 +12,16 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 
 		public IEnumerable<Guid> ImageIds { get; set; }
 
+		public IEnumerable<Guid> TagIds { get; set; }
+
 		public TestGallery() { }
 
 		public TestGallery(Guid galleryId, string title)
 		{
 			GalleryId = galleryId;
 			Title = title;
+			ImageIds = new List<Guid>();
+			TagIds = new List<Guid>();
 		}
 	}
 }

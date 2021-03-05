@@ -10,5 +10,7 @@ namespace HouseBuildingBlog.Domain.Images
 		string Title { get; }
 
 		IEnumerable<Guid> ImageIds { get; }
+
+		IEnumerable<Guid> TagIds { get; }
 	}
 }
