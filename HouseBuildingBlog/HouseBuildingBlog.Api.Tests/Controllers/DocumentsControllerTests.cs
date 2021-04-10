@@ -161,5 +161,18 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 			//Assert
 			await _mediator.Received(1).Send(Arg.Is<AssignDocumentToEventCommand>(c => c.DocumentId == documentId && c.EventId == eventId));
 		}
+
+		[Fact]
+		public async Task Given_UnassignDocumentFromEvent_Expect_UnassignDocumentFromEventCommand()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+
+			//Act
+			await SuT.UnassignDocumentFromEvent(documentId);
+
+			//Assert
+			await _mediator.Received(1).Send(Arg.Is<UnassignEventFromDocumentCommand>(c => c.DocumentId == documentId));
+		}
 	}
 }
