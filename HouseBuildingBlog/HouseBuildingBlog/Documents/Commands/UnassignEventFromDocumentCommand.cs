@@ -4,16 +4,13 @@ using System;
 
 namespace HouseBuildingBlog.Api.Documents.Commands
 {
-	public class AssignDocumentToEventCommand : IRequest<IActionResult>
+	public class UnassignEventFromDocumentCommand : IRequest<IActionResult>
 	{
 		public Guid DocumentId { get; }
 
-		public Guid EventId { get; }
-
-		public AssignDocumentToEventCommand(Guid documentId, Guid eventId)
+		public UnassignEventFromDocumentCommand(Guid documentId)
 		{
 			DocumentId = documentId;
-			EventId = eventId;
 		}
 	}
 }

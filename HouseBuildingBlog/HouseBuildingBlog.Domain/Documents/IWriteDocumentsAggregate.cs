@@ -11,6 +11,8 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		Task<IDocument> AssignEventAsync(Guid documentId, Guid eventId);
 
+		Task<IDocument> UnassignEventAsync(Guid documentId);
+
 		Task<IDocument> DeleteDocumentAsync(Guid documentId);
 
 		Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file);

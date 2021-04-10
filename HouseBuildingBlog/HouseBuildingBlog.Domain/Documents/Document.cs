@@ -36,5 +36,10 @@ namespace HouseBuildingBlog.Domain.Documents
 		{
 			EventId = eventId;
 		}
+
+		public void UnassignEvent()
+		{
+			EventId = null;
+		}
 	}
 }

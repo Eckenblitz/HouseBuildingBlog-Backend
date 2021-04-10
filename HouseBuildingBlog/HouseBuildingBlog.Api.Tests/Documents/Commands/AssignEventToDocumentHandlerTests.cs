@@ -15,13 +15,13 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 {
-	public class AssignDocumentToEventHandlerTests : ActionResultTestBase
+	public class AssignEventToDocumentHandlerTests : ActionResultTestBase
 	{
-		private AssignDocumentToEventHandler SuT { get; }
+		private AssignEventToDocumentHandler SuT { get; }
 		private readonly IWriteDocumentsAggregate _writeDocumentsAggregate;
 		private readonly IReadEventsAggregate _readEventsAggragate;
 
-		public AssignDocumentToEventHandlerTests()
+		public AssignEventToDocumentHandlerTests()
 		{
 			_writeDocumentsAggregate = Substitute.For<IWriteDocumentsAggregate>();
 			_writeDocumentsAggregate.AssignEventAsync(Arg.Any<Guid>(), Arg.Any<Guid>())
@@ -31,7 +31,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			_readEventsAggragate.GetAsync(Arg.Any<Guid>())
 				.Returns(args => new TestEvent() { EventId = args.ArgAt<Guid>(0) });
 
-			SuT = new AssignDocumentToEventHandler(_readEventsAggragate, _writeDocumentsAggregate);
+			SuT = new AssignEventToDocumentHandler(_readEventsAggragate, _writeDocumentsAggregate);
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var newEventId = Guid.NewGuid();
-			var command = new AssignDocumentToEventCommand(documentId, newEventId);
+			var command = new AssignEventToDocumentCommand(documentId, newEventId);
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);
@@ -59,7 +59,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var newEventId = Guid.NewGuid();
-			var command = new AssignDocumentToEventCommand(documentId, newEventId);
+			var command = new AssignEventToDocumentCommand(documentId, newEventId);
 			_readEventsAggragate.GetAsync(Arg.Is(newEventId)).Throws(new AggregateNotFoundException("", documentId));
 
 			//Act
@@ -75,7 +75,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var newEventId = Guid.NewGuid();
-			var command = new AssignDocumentToEventCommand(documentId, newEventId);
+			var command = new AssignEventToDocumentCommand(documentId, newEventId);
 			_writeDocumentsAggregate.AssignEventAsync(Arg.Is(documentId), Arg.Is(newEventId)).Throws(new AggregateNotFoundException("", documentId));
 
 			//Act

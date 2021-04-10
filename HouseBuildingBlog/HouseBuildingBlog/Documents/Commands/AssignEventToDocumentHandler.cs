@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace HouseBuildingBlog.Api.Documents.Commands
 {
-	public class AssignDocumentToEventHandler : IRequestHandler<AssignDocumentToEventCommand, IActionResult>
+	public class AssignEventToDocumentHandler : IRequestHandler<AssignEventToDocumentCommand, IActionResult>
 	{
 		private readonly IReadEventsAggregate _readEventsAggregate;
 		private readonly IWriteDocumentsAggregate _writeDocumentsAggregate;
 
-		public AssignDocumentToEventHandler(IReadEventsAggregate readEventsAggregate, IWriteDocumentsAggregate writeDocumentsAggregate)
+		public AssignEventToDocumentHandler(IReadEventsAggregate readEventsAggregate, IWriteDocumentsAggregate writeDocumentsAggregate)
 		{
 			_readEventsAggregate = readEventsAggregate;
 			_writeDocumentsAggregate = writeDocumentsAggregate;
 		}
 
-		public async Task<IActionResult> Handle(AssignDocumentToEventCommand request, CancellationToken cancellationToken)
+		public async Task<IActionResult> Handle(AssignEventToDocumentCommand request, CancellationToken cancellationToken)
 		{
 			try
 			{
