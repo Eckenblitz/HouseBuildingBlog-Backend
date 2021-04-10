@@ -149,7 +149,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Given_AssignEventToDocument_Expect_AssignDocumentToEventCommand()
+		public async Task Given_AssignEventToDocument_Expect_AssignEventToDocumentCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
