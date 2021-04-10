@@ -58,6 +58,12 @@ namespace HouseBuildingBlog.Api.Controllers
 			return await _mediator.Send(new UpdateDocumentCommand(id, dto));
 		}
 
+		[HttpPatch("{id}/Event")]
+		public async Task<IActionResult> AssignDocumentToEvent(Guid id, Guid eventId)
+		{
+			return await _mediator.Send(new AssignDocumentToEventCommand(id, eventId));
+		}
+
 		[HttpDelete("{id}")]
 		[ProducesResponseType(typeof(DocumentQueryDto), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]

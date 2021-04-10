@@ -96,7 +96,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_GetFilteredDocumentsQuerys_When_TagsArePassed()
+		public async Task Given_GetDocuments_Expect_GetFilteredDocumentsQuerys_When_TagsArePassed()
 		{
 			//Arrange 
 			var tagIds = new List<Guid>() { Guid.NewGuid() };
@@ -109,7 +109,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_GetSingleDocumentQuery_When_GetSingleDocumentIsCalled()
+		public async Task Given_GetSingleDocument_Expect_GetSingleDocumentQuery()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -122,7 +122,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_UploadDocumentFileCommand_When_UploadFileIsCalled()
+		public async Task Given_UploadFile_Expect_UploadDocumentFileCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -136,7 +136,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Expect_DownloadDocumentFileQuery_When_DownloadFileIsCalled()
+		public async Task Given_DownloadFile_Expect_DownloadDocumentFileQuery()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -146,6 +146,20 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 
 			//Assert
 			await _mediator.Received(1).Send(Arg.Is<DownloadDocumentFileQuery>(c => c.DocumentId == documentId));
+		}
+
+		[Fact]
+		public async Task Given_AssignDocumentToEvent_Expect_AssignDocumentToEventCommand()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			var eventId = Guid.NewGuid();
+
+			//Act
+			await SuT.AssignDocumentToEvent(documentId, eventId);
+
+			//Assert
+			await _mediator.Received(1).Send(Arg.Is<AssignDocumentToEventCommand>(c => c.DocumentId == documentId && c.EventId == eventId));
 		}
 	}
 }
