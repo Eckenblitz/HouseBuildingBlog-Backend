@@ -17,9 +17,7 @@ namespace HouseBuildingBlog.Domain.Documents
 		{
 			var newDocument = new Document(Guid.NewGuid(), newDocumentContent);
 
-			var validationErrors = DocumentValidator.Validate(newDocument);
-			if (validationErrors.Count > 0)
-				throw new ValidationException(validationErrors);
+			Validate(newDocument);
 
 			return await _writeDocumentsRepository.CreateDocumentAsync(newDocument);
 		}
@@ -31,9 +29,19 @@ namespace HouseBuildingBlog.Domain.Documents
 			var document = new Document(documentId, existingDocument);
 			document.Update(documentContent);
 
-			var validationErrors = DocumentValidator.Validate(document);
-			if (validationErrors.Count > 0)
-				throw new ValidationException(validationErrors);
+			Validate(document);
+
+			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
+		}
+
+		public async Task<IDocument> AssignEventAsync(Guid documentId, Guid eventId)
+		{
+			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
+
+			var document = new Document(documentId, existingDocument);
+			document.AssignEvent(eventId);
+
+			Validate(document);
 
 			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
 		}
@@ -46,9 +54,7 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public async Task<IDocumentFile> UploadFileAsync(Guid documentId, IDocumentFile file)
 		{
-			var validationErrors = DocumentFileValidator.Validate(file);
-			if (validationErrors.Count > 0)
-				throw new ValidationException(validationErrors);
+			ValidateFile(file);
 
 			_ = await CheckExistingDocumentAndThrow(documentId);
 			return await _writeDocumentsRepository.UploadFileAsync(documentId, file);
@@ -62,6 +68,20 @@ namespace HouseBuildingBlog.Domain.Documents
 				throw new AggregateNotFoundException(DocumentErrorCodes.DocumentNotFound, documentId);
 
 			return existingDocument;
+		}
+
+		private void Validate(IDocument document)
+		{
+			var validationErrors = DocumentValidator.Validate(document);
+			if (validationErrors.Count > 0)
+				throw new ValidationException(validationErrors);
+		}
+
+		private void ValidateFile(IDocumentFile file)
+		{
+			var validationErrors = DocumentFileValidator.Validate(file);
+			if (validationErrors.Count > 0)
+				throw new ValidationException(validationErrors);
 		}
 	}
 }

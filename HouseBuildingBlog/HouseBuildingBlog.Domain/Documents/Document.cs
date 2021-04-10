@@ -31,5 +31,10 @@ namespace HouseBuildingBlog.Domain.Documents
 			EventId = content.EventId;
 			TagIds = content.TagIds != null ? new List<Guid>(content.TagIds) : new List<Guid>();
 		}
+
+		public void AssignEvent(Guid eventId)
+		{
+			EventId = eventId;
+		}
 	}
 }
