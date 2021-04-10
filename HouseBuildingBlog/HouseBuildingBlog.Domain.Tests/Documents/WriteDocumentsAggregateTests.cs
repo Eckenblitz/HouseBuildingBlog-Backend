@@ -220,5 +220,24 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var exception = (await act.Should().ThrowAsync<ValidationException>()).And;
 			exception.ValidationErrors.Should().Contain(e => e.ErrorCode == DocumentErrorCodes.FileTypeNotAllowed);
 		}
+
+		[Fact]
+		public async Task Given_AssignEvent_Expect_UpdatedEventId()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			var newEventId = Guid.NewGuid();
+			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
+				.Returns(new TestDocument() { DocumentId = documentId, Title = "TestTitle", EventId = Guid.NewGuid() });
+
+			//Act
+			var updatedDocument = await SuT.AssignToEventAsync(documentId, newEventId);
+
+			//Assert
+			_ = _writeDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
+			_ = _writeDocumentsRepository.Received(1).UpdateDocumentAsync(
+				Arg.Is<IDocument>(d => d.DocumentId == documentId && d.EventId == newEventId));
+			updatedDocument.EventId.Should().Be(newEventId);
+		}
 	}
 }
