@@ -24,7 +24,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 		public AssignDocumentToEventHandlerTests()
 		{
 			_writeDocumentsAggregate = Substitute.For<IWriteDocumentsAggregate>();
-			_writeDocumentsAggregate.AssignToEventAsync(Arg.Any<Guid>(), Arg.Any<Guid>())
+			_writeDocumentsAggregate.AssignEventAsync(Arg.Any<Guid>(), Arg.Any<Guid>())
 				.Returns(args => new TestDocument() { DocumentId = args.ArgAt<Guid>(0), EventId = args.ArgAt<Guid>(1) });
 
 			_readEventsAggragate = Substitute.For<IReadEventsAggregate>();
@@ -47,7 +47,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 
 			//Assert
 			_ = _readEventsAggragate.Received(1).GetAsync(newEventId);
-			_ = _writeDocumentsAggregate.Received(1).AssignToEventAsync(documentId, newEventId);
+			_ = _writeDocumentsAggregate.Received(1).AssignEventAsync(documentId, newEventId);
 			CheckResult<OkObjectResult, DocumentQueryDto>(result, d =>
 				d.DocumentId == documentId
 				&& d.EventId == newEventId);
@@ -76,7 +76,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var documentId = Guid.NewGuid();
 			var newEventId = Guid.NewGuid();
 			var command = new AssignDocumentToEventCommand(documentId, newEventId);
-			_writeDocumentsAggregate.AssignToEventAsync(Arg.Is(documentId), Arg.Is(newEventId)).Throws(new AggregateNotFoundException("", documentId));
+			_writeDocumentsAggregate.AssignEventAsync(Arg.Is(documentId), Arg.Is(newEventId)).Throws(new AggregateNotFoundException("", documentId));
 
 			//Act
 			var result = await SuT.Handle(command, CancellationToken.None);

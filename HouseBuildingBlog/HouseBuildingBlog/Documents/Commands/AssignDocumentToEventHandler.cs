@@ -28,7 +28,7 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 				if (@event == null)
 					return new NotFoundResult();
 
-				var document = await _writeDocumentsAggregate.AssignToEventAsync(request.DocumentId, request.EventId);
+				var document = await _writeDocumentsAggregate.AssignEventAsync(request.DocumentId, request.EventId);
 
 				return new OkObjectResult(new DocumentQueryDto(document));
 			}

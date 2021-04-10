@@ -9,7 +9,7 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		Task<IDocument> UpdateDocumentAsync(Guid documentId, IDocumentContent documentContent);
 
-		Task<IDocument> AssignToEventAsync(Guid documentId, Guid eventId);
+		Task<IDocument> AssignEventAsync(Guid documentId, Guid eventId);
 
 		Task<IDocument> DeleteDocumentAsync(Guid documentId);
 

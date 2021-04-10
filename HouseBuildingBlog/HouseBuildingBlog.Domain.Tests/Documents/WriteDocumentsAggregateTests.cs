@@ -231,7 +231,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				.Returns(new TestDocument() { DocumentId = documentId, Title = "TestTitle", EventId = Guid.NewGuid() });
 
 			//Act
-			var updatedDocument = await SuT.AssignToEventAsync(documentId, newEventId);
+			var updatedDocument = await SuT.AssignEventAsync(documentId, newEventId);
 
 			//Assert
 			_ = _writeDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
@@ -250,7 +250,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				.Returns((IDocument)null);
 
 			//Act / Assert
-			Func<Task<IDocument>> act = async () => await SuT.AssignToEventAsync(documentId, newEventId);
+			Func<Task<IDocument>> act = async () => await SuT.AssignEventAsync(documentId, newEventId);
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
 		}

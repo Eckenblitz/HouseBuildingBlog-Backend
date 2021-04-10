@@ -34,7 +34,7 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
 		}
 
-		public async Task<IDocument> AssignToEventAsync(Guid documentId, Guid eventId)
+		public async Task<IDocument> AssignEventAsync(Guid documentId, Guid eventId)
 		{
 			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
 
