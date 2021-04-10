@@ -169,7 +169,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 			var documentId = Guid.NewGuid();
 
 			//Act
-			await SuT.UnassignDocumentFromEvent(documentId);
+			await SuT.UnassignEventFromDocument(documentId);
 
 			//Assert
 			await _mediator.Received(1).Send(Arg.Is<UnassignEventFromDocumentCommand>(c => c.DocumentId == documentId));

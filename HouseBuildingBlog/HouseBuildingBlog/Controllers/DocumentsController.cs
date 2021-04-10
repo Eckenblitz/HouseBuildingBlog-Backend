@@ -65,7 +65,7 @@ namespace HouseBuildingBlog.Api.Controllers
 		}
 
 		[HttpDelete("{id}/Event")]
-		public async Task<IActionResult> UnassignDocumentFromEvent(Guid id)
+		public async Task<IActionResult> UnassignEventFromDocument(Guid id)
 		{
 			return await _mediator.Send(new UnassignEventFromDocumentCommand(id));
 		}
