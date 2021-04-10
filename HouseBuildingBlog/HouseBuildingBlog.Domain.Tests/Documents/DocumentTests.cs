@@ -59,5 +59,19 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			document.EventId.Should().Be(newContent.EventId);
 			document.TagIds.Should().BeEquivalentTo(newContent.TagIds);
 		}
+
+		[Fact]
+		public void Given_AssignEvent_Expect_Updated_EventId()
+		{
+			//Arrange
+			var document = new Document(Guid.NewGuid(), new TestDocumentContent());
+			var eventId = Guid.NewGuid();
+
+			//Act
+			document.AssignEvent(eventId);
+
+			//Assert
+			document.EventId.Should().Be(eventId);
+		}
 	}
 }
