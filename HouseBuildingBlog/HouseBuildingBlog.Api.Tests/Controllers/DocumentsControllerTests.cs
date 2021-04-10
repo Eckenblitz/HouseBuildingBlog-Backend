@@ -149,17 +149,17 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Given_AssignDocumentToEvent_Expect_AssignDocumentToEventCommand()
+		public async Task Given_AssignEventToDocument_Expect_AssignDocumentToEventCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
 			var eventId = Guid.NewGuid();
 
 			//Act
-			await SuT.AssignDocumentToEvent(documentId, eventId);
+			await SuT.AssignEventToDocument(documentId, eventId);
 
 			//Assert
-			await _mediator.Received(1).Send(Arg.Is<AssignDocumentToEventCommand>(c => c.DocumentId == documentId && c.EventId == eventId));
+			await _mediator.Received(1).Send(Arg.Is<AssignEventToDocumentCommand>(c => c.DocumentId == documentId && c.EventId == eventId));
 		}
 
 		[Fact]
