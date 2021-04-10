@@ -239,5 +239,20 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 				Arg.Is<IDocument>(d => d.DocumentId == documentId && d.EventId == newEventId));
 			updatedDocument.EventId.Should().Be(newEventId);
 		}
+
+		[Fact]
+		public async Task Given_AssignEvent_Expect_AggragateNotFoundException_When_DocumentIsNotFound()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			var newEventId = Guid.NewGuid();
+			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
+				.Returns((IDocument)null);
+
+			//Act / Assert
+			Func<Task<IDocument>> act = async () => await SuT.AssignToEventAsync(documentId, newEventId);
+			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
+			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
+		}
 	}
 }
