@@ -25,8 +25,9 @@ namespace HouseBuildingBlog.Api.Documents.Commands
 			try
 			{
 				var @event = await _readEventsAggregate.GetAsync(request.EventId);
+				//ToDo: should be thrown by the ReadEventsAggregate
 				if (@event == null)
-					return new NotFoundResult();
+					throw new AggregateNotFoundException(EventErrorCodes.EventNotFound, request.EventId);
 
 				var document = await _writeDocumentsAggregate.AssignEventAsync(request.DocumentId, request.EventId);
 
