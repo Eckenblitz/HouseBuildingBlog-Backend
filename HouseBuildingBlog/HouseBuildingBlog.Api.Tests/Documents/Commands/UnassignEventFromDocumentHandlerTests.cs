@@ -28,7 +28,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 		}
 
 		[Fact]
-		public async Task Expect_OkResult_When_AssignedSuccessfully()
+		public async Task Expect_OkResult_When_UnassignedSuccessfully()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
