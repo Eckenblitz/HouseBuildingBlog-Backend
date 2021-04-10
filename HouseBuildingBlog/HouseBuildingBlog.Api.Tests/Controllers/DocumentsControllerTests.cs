@@ -163,7 +163,7 @@ namespace HouseBuildingBlog.Api.Tests.Controllers
 		}
 
 		[Fact]
-		public async Task Given_UnassignDocumentFromEvent_Expect_UnassignDocumentFromEventCommand()
+		public async Task Given_UnassignEventFromDocument_Expect_UnassignEventFromDocumentCommand()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
