@@ -46,6 +46,18 @@ namespace HouseBuildingBlog.Domain.Documents
 			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
 		}
 
+		public async Task<IDocument> UnassignEventAsync(Guid documentId)
+		{
+			var existingDocument = await CheckExistingDocumentAndThrow(documentId);
+
+			var document = new Document(documentId, existingDocument);
+			document.UnassignEvent();
+
+			Validate(document);
+
+			return await _writeDocumentsRepository.UpdateDocumentAsync(document);
+		}
+
 		public async Task<IDocument> DeleteDocumentAsync(Guid documentId)
 		{
 			_ = await CheckExistingDocumentAndThrow(documentId);

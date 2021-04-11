@@ -254,5 +254,37 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
 			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
 		}
+
+		[Fact]
+		public async Task Given_UnassignEvent_Expect_EmptyEventId()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
+				.Returns(new TestDocument() { DocumentId = documentId, Title = "TestTitle", EventId = Guid.NewGuid() });
+
+			//Act
+			var updatedDocument = await SuT.UnassignEventAsync(documentId);
+
+			//Assert
+			_ = _writeDocumentsRepository.Received(1).GetByIdAsync(Arg.Is(documentId));
+			_ = _writeDocumentsRepository.Received(1).UpdateDocumentAsync(
+				Arg.Is<IDocument>(d => d.DocumentId == documentId && d.EventId == null));
+			updatedDocument.EventId.Should().BeNull();
+		}
+
+		[Fact]
+		public async Task Given_UnassignEvent_Expect_AggragateNotFoundException_When_DocumentIsNotFound()
+		{
+			//Arrange
+			var documentId = Guid.NewGuid();
+			_writeDocumentsRepository.GetByIdAsync(Arg.Is(documentId))
+				.Returns((IDocument)null);
+
+			//Act / Assert
+			Func<Task<IDocument>> act = async () => await SuT.UnassignEventAsync(documentId);
+			var exception = (await act.Should().ThrowAsync<AggregateNotFoundException>()).And;
+			exception.Error.ErrorCode.Should().Be(DocumentErrorCodes.DocumentNotFound);
+		}
 	}
 }

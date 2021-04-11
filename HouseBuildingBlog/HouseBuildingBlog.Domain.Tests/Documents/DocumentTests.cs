@@ -10,7 +10,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 	public class DocumentTests
 	{
 		[Fact]
-		public void Expect_FilledProperties_When_IsCreated()
+		public void Given_NewDocument_Expect_FilledProperties()
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
@@ -36,7 +36,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		}
 
 		[Fact]
-		public void Expect_UpdatedProperties_When_IsUpdated()
+		public void Given_Update_Expect_UpdatedProperties()
 		{
 			//Arrange
 			var document = new Document(Guid.NewGuid(), new TestDocumentContent());
@@ -72,6 +72,19 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 
 			//Assert
 			document.EventId.Should().Be(eventId);
+		}
+
+		[Fact]
+		public void Given_UnassignEvent_Expect_Empty_EventId()
+		{
+			//Arrange
+			var document = new Document(Guid.NewGuid(), new TestDocumentContent() { EventId = Guid.NewGuid() });
+
+			//Act
+			document.UnassignEvent();
+
+			//Assert
+			document.EventId.Should().BeNull();
 		}
 	}
 }

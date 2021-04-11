@@ -59,9 +59,15 @@ namespace HouseBuildingBlog.Api.Controllers
 		}
 
 		[HttpPatch("{id}/Event")]
-		public async Task<IActionResult> AssignDocumentToEvent(Guid id, Guid eventId)
+		public async Task<IActionResult> AssignEventToDocument(Guid id, Guid eventId)
 		{
-			return await _mediator.Send(new AssignDocumentToEventCommand(id, eventId));
+			return await _mediator.Send(new AssignEventToDocumentCommand(id, eventId));
+		}
+
+		[HttpDelete("{id}/Event")]
+		public async Task<IActionResult> UnassignEventFromDocument(Guid id)
+		{
+			return await _mediator.Send(new UnassignEventFromDocumentCommand(id));
 		}
 
 		[HttpDelete("{id}")]

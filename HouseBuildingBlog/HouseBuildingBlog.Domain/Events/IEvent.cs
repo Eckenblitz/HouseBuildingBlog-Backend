@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain.Tags;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Events
@@ -12,8 +11,10 @@ namespace HouseBuildingBlog.Domain.Events
 
 		DateTime Date { get; }
 
+		string Description { get; }
+
 		IEnumerable<Guid> TagIds { get; }
 
-		string Description { get; }
+		IEnumerable<Guid> DocumentIds { get; }
 	}
 }
