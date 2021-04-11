@@ -21,6 +21,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		{
 			return await _DBContext.Events
 				.Include(e => e.AssignedTags)
+				.Include(e => e.Documents)
 				.SingleOrDefaultAsync(e => e.EventId.Equals(eventId));
 		}
 
@@ -28,6 +29,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		{
 			return await _DBContext.Events
 				.Include(e => e.AssignedTags)
+				.Include(e => e.Documents)
 				.ToListAsync();
 		}
 
@@ -36,6 +38,7 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 			return await _DBContext.Events
 				.Include(e => e.AssignedTags)
 				.Where(e => e.AssignedTags.Any(et => tagIds.Contains(et.TagId)))
+				.Include(e => e.Documents)
 				.ToListAsync();
 		}
 

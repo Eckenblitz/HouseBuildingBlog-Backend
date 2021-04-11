@@ -18,9 +18,12 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 
 		public IEnumerable<Guid> TagIds => AssignedTags?.Select(et => et.TagId);
 
+		public IEnumerable<Guid> DocumentIds => Documents?.Select(d => d.DocumentId);
+
 		public ICollection<AssignedEventTagModel> AssignedTags { get; set; }
 
 		public ICollection<DocumentModel> Documents { get; set; }
+
 		public EventModel() { }
 
 		public EventModel(IEvent newEvent)

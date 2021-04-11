@@ -22,7 +22,7 @@ namespace HouseBuildingBlog.Api.Events.Queries.Contracts
 			Date = @event.Date;
 			Description = @event.Description;
 			Title = @event.Title;
-			TagIds = @event.TagIds != null ? @event.TagIds : null;
+			TagIds = @event?.TagIds;
 		}
 	}
 }

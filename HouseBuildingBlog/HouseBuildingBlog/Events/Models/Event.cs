@@ -18,6 +18,8 @@ namespace HouseBuildingBlog.Api.Events.Models
 
 		public string Description { get; private set; }
 
+		public IEnumerable<Guid> DocumentIds { get; private set; }
+
 		public Event(IEvent @event)
 		{
 			EventId = @event.EventId;
@@ -25,6 +27,7 @@ namespace HouseBuildingBlog.Api.Events.Models
 			Date = @event.Date;
 			Description = @event.Description;
 			UpdateTags(@event.TagIds);
+			UpdateDocumentIds(@event.DocumentIds);
 		}
 
 		public Event(CreateEventCommand command)
@@ -51,6 +54,14 @@ namespace HouseBuildingBlog.Api.Events.Models
 				TagIds = new List<Guid>(tagIds);
 			else
 				TagIds = new List<Guid>();
+		}
+
+		private void UpdateDocumentIds(IEnumerable<Guid> documentIds)
+		{
+			if (documentIds?.Count() > 0)
+				DocumentIds = new List<Guid>(documentIds);
+			else
+				DocumentIds = new List<Guid>();
 		}
 	}
 }
