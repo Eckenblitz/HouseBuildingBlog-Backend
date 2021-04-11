@@ -12,9 +12,11 @@ namespace HouseBuildingBlog.Domain.TestBase.Events
 
 		public DateTime Date { get; set; }
 
+		public string Description { get; set; }
+
 		public IEnumerable<Guid> TagIds { get; set; }
 
-		public string Description { get; set; }
+		public IEnumerable<Guid> DocumentIds { get; set; }
 
 		public TestEvent() { }
 
@@ -23,8 +25,9 @@ namespace HouseBuildingBlog.Domain.TestBase.Events
 			EventId = @event.EventId;
 			Title = @event.Title;
 			Date = @event.Date;
-			TagIds = @event.TagIds != null ? new List<Guid>(@event.TagIds) : new List<Guid>();
 			Description = @event.Description;
+			TagIds = @event.TagIds != null ? new List<Guid>(@event.TagIds) : new List<Guid>();
+			DocumentIds = @event.DocumentIds != null ? new List<Guid>(@event.DocumentIds) : new List<Guid>();
 		}
 	}
 }
