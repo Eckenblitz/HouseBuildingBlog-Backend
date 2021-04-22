@@ -14,7 +14,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 {
-	public class GetFilteredDocumentsHandlerTests : ActionResultTestBase
+	public class GetFilteredDocumentsHandlerTests
 	{
 		private GetFilteredDocumentsHandler SuT { get; }
 		private readonly IReadDocumentsAggregate _readDocumentsAggregate;
@@ -52,7 +52,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Queries
 			var result = await SuT.Handle(new GetFilteredDocumentsQuery(new List<Guid>() { Guid.NewGuid() }), CancellationToken.None);
 
 			//Assert
-			var documents = CheckResult<OkObjectResult, IEnumerable<DocumentQueryDto>>(result);
+			var documents = result.CheckResult<OkObjectResult, IEnumerable<DocumentQueryDto>>();
 			documents.Should().Contain(d =>
 				d.DocumentId == document1.DocumentId
 				&& d.Title == document1.Title

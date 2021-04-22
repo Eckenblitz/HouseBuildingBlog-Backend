@@ -13,7 +13,7 @@ using Xunit;
 
 namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 {
-	public class UnassignEventFromDocumentHandlerTests : ActionResultTestBase
+	public class UnassignEventFromDocumentHandlerTests
 	{
 		private UnassignEventFromDocumentHandler SuT { get; }
 		private readonly IWriteDocumentsAggregate _writeDocumentsAggregate;
@@ -39,7 +39,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 
 			//Assert
 			_ = _writeDocumentsAggregate.Received(1).UnassignEventAsync(documentId);
-			CheckResult<OkObjectResult, DocumentQueryDto>(result, d =>
+			result.CheckResult<OkObjectResult, DocumentQueryDto>(d =>
 				d.DocumentId == documentId
 				&& d.EventId == null);
 		}
@@ -56,7 +56,7 @@ namespace HouseBuildingBlog.Api.Tests.Documents.Commands
 			var result = await SuT.Handle(command, CancellationToken.None);
 
 			//Assert
-			_ = CheckResult<NotFoundObjectResult>(result);
+			_ = result.CheckResult<NotFoundObjectResult>();
 		}
 	}
 }
