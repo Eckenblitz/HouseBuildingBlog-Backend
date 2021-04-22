@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Documents;
 using HouseBuildingBlog.Domain.Images;
+using HouseBuildingBlog.Domain.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HouseBuildingBlog.Domain
@@ -13,7 +14,7 @@ namespace HouseBuildingBlog.Domain
 			services.AddTransient<IReadDocumentsAggregate, ReadDocumentsAggregate>();
 
 			//Images
-			services.AddTransient<IGalleryValidator, GalleryValidator>();
+			services.AddTransient<IDomainValidator<IGallery>, GalleryValidator>();
 		}
 	}
 }

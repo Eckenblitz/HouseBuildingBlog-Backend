@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Validation
 {
-	public abstract class DomainValidatorBase
+	public abstract class DomainValidatorBase<TDomainObject> : IDomainValidator<TDomainObject>
 	{
 		protected ICollection<DomainError> Errors { get; }
 
@@ -16,5 +16,7 @@ namespace HouseBuildingBlog.Domain.Validation
 		{
 			Errors.Add(new DomainError(errorCode, parameters));
 		}
+
+		public abstract ICollection<DomainError> Validate(TDomainObject domainObject);
 	}
 }
