@@ -25,7 +25,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		[InlineData(null)]
 		[InlineData("")]
 		[InlineData("  ")]
-		public void Expect_HasNoTitleError_When_TitleIsEmpty(string? title)
+		public void Expect_HasNoTitleError_When_TitleIsEmpty(string title)
 		{
 			//Arrange
 			var document = new TestDocument(Guid.NewGuid(), new TestDocumentContent() { Title = title });

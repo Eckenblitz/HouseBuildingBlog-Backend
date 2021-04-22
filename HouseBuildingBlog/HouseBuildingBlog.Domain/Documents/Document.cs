@@ -9,7 +9,7 @@ namespace HouseBuildingBlog.Domain.Documents
 
 		public string Title { get; private set; }
 
-		public string? Comment { get; private set; }
+		public string Comment { get; private set; }
 
 		public decimal? Price { get; private set; }
 

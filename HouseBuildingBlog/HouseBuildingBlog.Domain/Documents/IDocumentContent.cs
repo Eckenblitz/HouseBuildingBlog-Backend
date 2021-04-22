@@ -7,7 +7,7 @@ namespace HouseBuildingBlog.Domain.Documents
 	{
 		string Title { get; }
 
-		string? Comment { get; }
+		string Comment { get; }
 
 		decimal? Price { get; }
 

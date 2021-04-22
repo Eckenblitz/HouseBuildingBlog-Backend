@@ -54,7 +54,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		[InlineData(null)]
 		[InlineData("")]
 		[InlineData("  ")]
-		public async Task Given_CreateDocument_Expect_ValidationException_When_TitleIsEmpty(string? title)
+		public async Task Given_CreateDocument_Expect_ValidationException_When_TitleIsEmpty(string title)
 		{
 			//Arrange
 			var content = new TestDocumentContent() { Title = title };
@@ -96,7 +96,7 @@ namespace HouseBuildingBlog.Domain.Tests.Documents
 		[InlineData(null)]
 		[InlineData("")]
 		[InlineData("  ")]
-		public async Task Given_UpdateDocument_Expect_ValidationException_When_TitleIsEmpty(string? title)
+		public async Task Given_UpdateDocument_Expect_ValidationException_When_TitleIsEmpty(string title)
 		{
 			//Arrange
 			var documentId = Guid.NewGuid();
