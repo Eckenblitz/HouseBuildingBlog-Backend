@@ -17,6 +17,12 @@ namespace HouseBuildingBlog.Domain.Validation
 			Errors.Add(new DomainError(errorCode, parameters));
 		}
 
-		public abstract ICollection<DomainError> Validate(TDomainObject domainObject);
+		public ICollection<DomainError> Validate(TDomainObject domainObject)
+		{
+			CheckAndAddErrors(domainObject);
+			return Errors;
+		}
+
+		protected abstract void CheckAndAddErrors(TDomainObject domainObject);
 	}
 }
