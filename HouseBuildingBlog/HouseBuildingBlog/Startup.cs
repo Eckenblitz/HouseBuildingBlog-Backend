@@ -34,6 +34,7 @@ namespace HouseBuildingBlog.Api
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 			});
 
+			services.AddAutoMapper(typeof(Startup));
 			services.RegisterDomainDependencies();
 			services.AddTransient<ITransformFileService, TransformFileService>();
 			services.AddTransient<IFileResponseService, FileResponseService>();
