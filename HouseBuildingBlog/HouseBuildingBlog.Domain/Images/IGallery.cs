@@ -13,5 +13,7 @@ namespace HouseBuildingBlog.Domain.Images
 		IEnumerable<IImage> Images { get; }
 
 		IEnumerable<ITag> Tags { get; }
+
+		Guid? EventId { get; }
 	}
 }

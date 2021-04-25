@@ -15,6 +15,8 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 
 		public IEnumerable<ITag> Tags { get; set; }
 
+		public Guid? EventId { get; set; }
+
 		public TestGallery() { }
 
 		public TestGallery(Guid galleryId, string title)
