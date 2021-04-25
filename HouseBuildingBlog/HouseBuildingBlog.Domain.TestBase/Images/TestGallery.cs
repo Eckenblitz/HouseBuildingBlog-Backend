@@ -1,4 +1,5 @@
 ﻿using HouseBuildingBlog.Domain.Images;
+using HouseBuildingBlog.Domain.Tags;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 
 		public IEnumerable<IImage> Images { get; set; }
 
-		public IEnumerable<Guid> TagIds { get; set; }
+		public IEnumerable<ITag> Tags { get; set; }
 
 		public TestGallery() { }
 
@@ -21,7 +22,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 			GalleryId = galleryId;
 			Title = title;
 			Images = new List<IImage>();
-			TagIds = new List<Guid>();
+			Tags = new List<ITag>();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HouseBuildingBlog.Domain.Tags;
+using System;
 using System.Collections.Generic;
 
 namespace HouseBuildingBlog.Domain.Images
@@ -11,6 +12,6 @@ namespace HouseBuildingBlog.Domain.Images
 
 		IEnumerable<IImage> Images { get; }
 
-		IEnumerable<Guid> TagIds { get; }
+		IEnumerable<ITag> Tags { get; }
 	}
 }
