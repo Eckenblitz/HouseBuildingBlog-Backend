@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Events;
 using HouseBuildingBlog.Persistence.MSSql.Documents;
+using HouseBuildingBlog.Persistence.MSSql.Images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace HouseBuildingBlog.Persistence.MSSql.Events
 		public ICollection<AssignedEventTagModel> AssignedTags { get; set; }
 
 		public ICollection<DocumentModel> Documents { get; set; }
+
+		public ICollection<GalleryModel> Galleries { get; set; }
 
 		public EventModel() { }
 

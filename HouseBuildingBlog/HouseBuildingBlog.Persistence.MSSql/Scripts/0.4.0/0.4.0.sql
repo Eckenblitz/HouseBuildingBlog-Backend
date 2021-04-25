@@ -7,7 +7,18 @@ GO
 CREATE TABLE Images.Galleries (
 	GalleryId uniqueidentifier NOT NULL, 
 	Title nvarchar(200) NOT NULL, 
-	CONSTRAINT PK_Galleries PRIMARY KEY (GalleryId)
+	EventId uniqueidentifier NULL,
+	CONSTRAINT PK_Galleries PRIMARY KEY (GalleryId),
+	CONSTRAINT FK_Galleries_Events FOREIGN KEY (EventId) REFERENCES Events.Events (EventId) ON DELETE SET NULL
+)
+GO
+
+CREATE TABLE Images.AssignedGalleryTags (
+	GalleryId uniqueidentifier NOT NULL,
+	TagId uniqueidentifier NOT NULL,
+	CONSTRAINT PK_AssignedGalleryTags PRIMARY KEY (GalleryId, TagId),
+	CONSTRAINT FK_AssignedGalleryTags_Galleries FOREIGN KEY (GalleryId) REFERENCES Images.Galleries (GalleryId) ON DELETE CASCADE,
+	CONSTRAINT FK_AssignedGalleryTags_Tags FOREIGN KEY (TagId) REFERENCES Tags.Tags (TagId) ON DELETE CASCADE
 )
 GO
 
