@@ -1,5 +1,4 @@
-﻿using HouseBuildingBlog.Domain.Files;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +10,6 @@ namespace HouseBuildingBlog.Domain.Images
 
 		Task<IImage> GetImageAsync(Guid imageId, CancellationToken cancellationToken);
 
-		Task<IFile> DownloadImageAsync(Guid imageId, CancellationToken cancellationToken);
+		Task<IImageFile> DownloadImageAsync(Guid imageId, CancellationToken cancellationToken);
 	}
 }
