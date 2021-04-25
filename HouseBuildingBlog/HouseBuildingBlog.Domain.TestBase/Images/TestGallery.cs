@@ -10,7 +10,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 
 		public string Title { get; set; }
 
-		public IEnumerable<Guid> ImageIds { get; set; }
+		public IEnumerable<IImage> Images { get; set; }
 
 		public IEnumerable<Guid> TagIds { get; set; }
 
@@ -20,7 +20,7 @@ namespace HouseBuildingBlog.Domain.TestBase.Images
 		{
 			GalleryId = galleryId;
 			Title = title;
-			ImageIds = new List<Guid>();
+			Images = new List<IImage>();
 			TagIds = new List<Guid>();
 		}
 	}
