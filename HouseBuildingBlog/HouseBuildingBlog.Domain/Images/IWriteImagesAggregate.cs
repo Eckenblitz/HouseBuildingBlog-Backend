@@ -1,5 +1,6 @@
 ﻿using HouseBuildingBlog.Domain.Files;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace HouseBuildingBlog.Domain.Images
 {
 	public interface IWriteImagesAggregate
 	{
-		Task<IGallery> CreateGalleryAsync(IGallery gallery, CancellationToken cancellationToken);
+		Task<IGallery> CreateGalleryAsync(string title, IEnumerable<Guid> tagIds, CancellationToken cancellationToken);
 
 		Task<IGallery> UpdateGalleryAsync(IGallery gallery, CancellationToken cancellationToken);
 
