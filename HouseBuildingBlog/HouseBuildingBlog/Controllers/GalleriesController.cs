@@ -1,7 +1,8 @@
 ﻿using HouseBuildingBlog.Api.Filter;
+using HouseBuildingBlog.Api.Images.Commands;
 using HouseBuildingBlog.Api.Images.Commands.Contracts;
 using HouseBuildingBlog.Api.Images.Queries.Contracts;
-using HouseBuildingBlog.Domain.Errors;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,17 @@ namespace HouseBuildingBlog.Api.Controllers
 	[DomainExceptionFilter]
 	public class GalleriesController : ControllerBase
 	{
+		private readonly IMediator _mediator;
+
+		public GalleriesController(IMediator mediator)
+		{
+			_mediator = mediator;
+		}
+
 		[HttpPost]
 		public async Task<GalleryQueryDto> CreateGallery([FromBody] GalleryCommandDto dto, CancellationToken cancellationToken)
 		{
-			throw new AggregateNotFoundException("TEST", Guid.Empty);
+			return await _mediator.Send(new CreateGalleryCommand(dto.Title, dto.TagIds), cancellationToken);
 		}
 
 		[HttpGet]
