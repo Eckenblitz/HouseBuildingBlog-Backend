@@ -11,6 +11,10 @@ namespace HouseBuildingBlog.Domain.Images
 
 		Task<IGallery> UpdateGalleryAsync(IGallery gallery, CancellationToken cancellationToken);
 
+		Task<IGallery> AssignEventAsync(Guid galleryId, Guid eventId, CancellationToken cancellationToken);
+
+		Task<IGallery> UnassignEventAsync(Guid galleryId, CancellationToken cancellationToken);
+
 		Task<IGallery> DeleteGalleryAsync(Guid galleryId, CancellationToken cancellationToken);
 
 
@@ -18,11 +22,7 @@ namespace HouseBuildingBlog.Domain.Images
 
 		Task<IImage> UpdateImageAsync(IImage image, CancellationToken cancellationToken);
 
-		Task<IImage> UploadImageAsync(Guid imageId, IFile file, CancellationToken cancellationToken);
-
-		Task<IImage> AssignImageToGalleryAsync(Guid imageId, Guid galleryId, CancellationToken cancellationToken);
-
-		Task<IImage> RemoveFromGalleryAsync(Guid imageId, CancellationToken cancellationToken);
+		Task<IImage> UploadImageFileAsync(Guid imageId, IFile file, CancellationToken cancellationToken);
 
 		Task<IImage> DeleteImageAsync(Guid imageId, CancellationToken cancellationToken);
 	}
