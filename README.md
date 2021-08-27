@@ -11,10 +11,10 @@ Like "Start of digging" has happend on a specific date.
 The whole concept of this application is build around "Events". Every Event has a title (brief description), a date (when it happend) and can be attached with images and documents related to this Event.
 
 ##### Possible Events
-- "Start digging for the base-plate" - <date> - (attached Images)
-- "construction site visit to check progress" - <date> - (attached Images)
-- "Incoming invocice for contract part I" - <date> - (attached document)
-- "Call with construction supervisor about some changes" - <date>
+- "Start digging for the base-plate" - 12.04.21 - (attached Images)
+- "construction site visit to check progress" - 05.06.21 - (attached Images)
+- "Incoming invocice for contract part I" - 24.05.21 - (attached document)
+- "Call with construction supervisor about some changes" - 01.07.21
 
 ### Documents
 
